@@ -7,30 +7,30 @@ public class OverlayTile : MonoBehaviour
 {
     // Start is called before the first frame update
     public Transform characterPos;
+    public SpriteRenderer arrowSprite;
 
     //Settting up Overlay Tiles as nodes for pathfinding
     public int g;
     public int h;
-    public int f{ get { return g + h; } }
-    
+    public int f { get { return g + h; } }
+
     public bool isBlocked;
     public OverlayTile previous;
     public Vector3Int gridLocation;
-    public Vector2Int gridLocation2D { get { return new Vector2Int(gridLocation.x, gridLocation.y);  } }
+    public Vector2Int gridLocation2D { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
 
     public List<Sprite> arrows = new List<Sprite>();
 
-
-    void Start()
+    private void Update()
     {
-        characterPos = GetComponentInChildren<Transform>();
-
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            HideTile();
+        }
     }
 
     public void ShowTile()
     {
-        setArrowSprite(ArrowDirections.None);
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);    //Edit this line to account for settings later
     }
 
@@ -41,16 +41,15 @@ public class OverlayTile : MonoBehaviour
 
     public void setArrowSprite(ArrowDirections direction)
     {
-        SpriteRenderer arrow = GetComponentsInChildren<SpriteRenderer>()[0];
         if (direction == ArrowDirections.None)
         {
-            arrow.color = new Color(arrow.color.r, arrow.color.g, arrow.color.b, 0);
+            arrowSprite.color = new Color(arrowSprite.color.r, arrowSprite.color.g, arrowSprite.color.b, 0);
         }
         else
         {
-            arrow.color = new Color(arrow.color.r, arrow.color.g, arrow.color.b, 1); //Edit this line to account for settings later
-            arrow.sprite = arrows[(int)direction];
-            arrow.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
+            arrowSprite.color = new Color(arrowSprite.color.r, arrowSprite.color.g, arrowSprite.color.b, 1); //Edit this line to account for settings later
+            arrowSprite.sprite = arrows[(int)direction];
+            arrowSprite.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
         }
     }
 }

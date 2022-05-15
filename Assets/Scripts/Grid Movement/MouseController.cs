@@ -22,34 +22,34 @@ public class MouseController : MonoBehaviour
 
     public bool isMoving = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         pathfinder = new Pathfinder();
         rangeFinder = new RangeFinder();
         drawArrow = new DrawArrow();
+
+        path = new List<OverlayTile>();
+        isMoving = false;
+        inRangeTiles = new List<OverlayTile>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        RaycastHit2D hit = GetFocusedOnTile();
+        RaycastHit2D? hit = GetFocusedOnTile();
 
-        if (hit)
+        if (hit.HasValue)
         {
-            OverlayTile tile = hit.collider.gameObject.GetComponent<OverlayTile>();
+            OverlayTile tile = hit.Value.collider.gameObject.GetComponent<OverlayTile>();
             cursor.transform.position = tile.transform.position;
             cursor.gameObject.GetComponent<SpriteRenderer>().sortingOrder = tile.transform.GetComponent<SpriteRenderer>().sortingOrder;
-            
+
             if (inRangeTiles.Contains(tile) && !isMoving && character != null)
             {
+                path = pathfinder.FindPath(character.activeTile, tile, inRangeTiles);
 
-                path = pathfinder.FindPath(character.activeTile, overlayTile, inRangeTiles);
-                //Debug.Log("Path Length: " + path.Count());
-                
-                foreach (OverlayTile item in inRangeTiles)
+                foreach (var item in inRangeTiles)
                 {
-                    MapManager.Instance.colliderMap[item.gridLocation2D].setArrowSprite(ArrowDirections.None);
+                    item.setArrowSprite(ArrowDirections.None);
                 }
 
                 for (int i = 0; i < path.Count; i++)
@@ -57,31 +57,30 @@ public class MouseController : MonoBehaviour
                     var previousTile = i > 0 ? path[i - 1] : character.activeTile;
                     var futureTile = i < path.Count - 1 ? path[i + 1] : null;
 
-                    var arrowDirection = drawArrow.TranslateDirection(previousTile, path[i], futureTile);
-                    path[i].setArrowSprite(arrowDirection);
+                    var arrow = drawArrow.TranslateDirection(previousTile, path[i], futureTile);
+                    path[i].setArrowSprite(arrow);
                 }
-                
             }
 
             if (Input.GetMouseButtonDown(0))
             {
-                overlayTile = tile;
+                tile.ShowTile();
 
                 if (character == null)
                 {
                     character = Instantiate(characterPrefab).GetComponent<CharacterStats>();
-                    PositionCharacterOnTile(overlayTile);
+                    PositionCharacterOnLine(tile);
                     GetInRangeTiles();
                 }
                 else
                 {
                     isMoving = true;
-                    tile.HideTile();
+                    tile.gameObject.GetComponent<OverlayTile>().HideTile();
                 }
             }
         }
 
-        if(path.Count > 0 && isMoving)
+        if (path.Count > 0 && isMoving)
         {
             MoveAlongPath();
         }
@@ -91,54 +90,50 @@ public class MouseController : MonoBehaviour
             isMoving = false;
         }
     }
-    
-    private void GetInRangeTiles()
+
+    private void MoveAlongPath()
     {
-        foreach (var item in inRangeTiles)
-        {
-            item.HideTile();
-        }
-
-        inRangeTiles = rangeFinder.GetTilesinRange(character.activeTile, character.speed);
-
-        foreach (var item in inRangeTiles)
-        {
-            item.ShowTile();
-        }
-    }
-
-    void MoveAlongPath()
-    {
-        foreach (var item in inRangeTiles)
-        {
-            item.HideTile();
-        }
-
         var step = moveSpeed * Time.deltaTime;
         var zIndex = path[0].transform.position.z;
 
         character.transform.position = Vector2.MoveTowards(character.transform.position, path[0].characterPos.position, step);
         character.transform.position = new Vector3(character.transform.position.x, character.transform.position.y, zIndex);
 
-        if(Vector2.Distance(character.transform.position, path[0].characterPos.position) < 0.0001f)
+        if (Vector2.Distance(character.transform.position, path[0].characterPos.position) < 0.0001f)
         {
-            PositionCharacterOnTile(path[0]);
+            PositionCharacterOnLine(path[0]);
             path.RemoveAt(0);
         }
     }
 
-    public RaycastHit2D GetFocusedOnTile()
+    private void PositionCharacterOnLine(OverlayTile tile)
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hits = Physics2D.Raycast(mousePos, Vector2.zero);
-        Debug.DrawRay(mousePos, Vector2.zero, Color.red);
-
-        return hits;
+        character.transform.position = tile.characterPos.position;
+        character.activeTile = tile;
     }
 
-    private void PositionCharacterOnTile(OverlayTile overlayTile)
+    private static RaycastHit2D? GetFocusedOnTile()
     {
-        character.transform.position = overlayTile.GetComponent<OverlayTile>().characterPos.position;
-        character.GetComponent<CharacterStats>().activeTile = overlayTile;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos2D, Vector2.zero);
+
+        if (hits.Length > 0)
+        {
+            return hits.OrderByDescending(i => i.collider.transform.position.z).First();
+        }
+
+        return null;
+    }
+
+    private void GetInRangeTiles()
+    {
+        inRangeTiles = rangeFinder.GetTilesinRange(character.activeTile, character.speed);
+
+        foreach (var item in inRangeTiles)
+        {
+            item.ShowTile();
+        }
     }
 }

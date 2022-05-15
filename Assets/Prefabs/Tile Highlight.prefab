@@ -210,7 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c88bd01d1a03444b7ba1cee1384459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPos: {fileID: 0}
+  characterPos: {fileID: 6985829405057100678}
+  arrowSprite: {fileID: 5196061912863960398}
   g: 0
   h: 0
   isBlocked: 0

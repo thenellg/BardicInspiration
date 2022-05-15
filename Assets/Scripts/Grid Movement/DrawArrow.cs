@@ -29,6 +29,11 @@ public class DrawArrow
         Vector2Int futureDirection = futureTile != null ? futureTile.gridLocation2D - currentTile.gridLocation2D : new Vector2Int(0, 0);
         Vector2Int actualDirection = pastDirection != futureDirection ? pastDirection + futureDirection : futureDirection;
 
+        if(previousTile == currentTile)
+        {
+            return ArrowDirections.None;
+        }
+
         if (actualDirection == new Vector2Int(0, 1) && !isFinal)
         {
             return ArrowDirections.Up;
