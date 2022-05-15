@@ -123,6 +123,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &20231882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 20231884}
+  - component: {fileID: 20231883}
+  m_Layer: 0
+  m_Name: Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &20231883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20231882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22154ec370448994ca67e86c7df524ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanMoveHighlight: {r: 255, g: 255, b: 255, a: 1}
+  directionArrow: {r: 1, g: 0.9708817, b: 0.495283, a: 1}
+  TargetHighlight: {r: 188, g: 12, b: 21, a: 1}
+  cursor: {r: 255, g: 122, b: 0, a: 1}
+--- !u!4 &20231884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20231882}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.89951247, y: 0.59027547, z: -1.0573981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &81593421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -627,6 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanMoveHighlight: {r: 1, g: 1, b: 1, a: 1}
+  directionArrow: {r: 255, g: 255, b: 255, a: 1}
   TargetHighlight: {r: 188, g: 12, b: 21, a: 1}
   cursor: {r: 255, g: 122, b: 0, a: 1}
 --- !u!4 &1267232538
@@ -860,6 +908,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2138875657}
+  - component: {fileID: 2138875658}
   m_Layer: 0
   m_Name: Battle Manager
   m_TagString: Untagged
@@ -881,3 +930,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2138875658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138875656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2f91b7ec6dbccd41af9083e66f0fefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnOrder: []
+  playerTeam: []
+  EnemyTeam: []
