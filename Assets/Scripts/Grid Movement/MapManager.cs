@@ -12,6 +12,7 @@ public class MapManager : MonoBehaviour
     public GameObject highlightContainer;
 
     public Dictionary<Vector2, OverlayTile> colliderMap;
+    public float halfStepAdjustment = 0.0799f;
 
     private void Awake()
     {
@@ -48,12 +49,22 @@ public class MapManager : MonoBehaviour
                             if (map.HasTile(tileLocation) && !colliderMap.ContainsKey(tileKey))
                             {
                                 var highlightTile = Instantiate(highlightTilePrefab, highlightContainer.transform);
+
                                 var cellWorldPosition = map.GetCellCenterWorld(tileLocation);
 
 
                                 highlightTile.transform.position = new Vector3(cellWorldPosition.x + 0.1604f, cellWorldPosition.y + 0.1599f, cellWorldPosition.z);
                                 highlightTile.GetComponent<SpriteRenderer>().sortingOrder = map.GetComponent<TilemapRenderer>().sortingOrder;
                                 highlightTile.gridLocation = tileLocation;
+
+                                if (map.tag == "Level - Half Step")
+                                {
+                                    highlightTile.transform.position = new Vector3(
+                                        highlightTile.transform.position.x,
+                                        highlightTile.transform.position.y - halfStepAdjustment,
+                                        highlightTile.transform.position.z);
+                                }
+
                                 colliderMap.Add(tileKey, highlightTile);
                             }
                         }
