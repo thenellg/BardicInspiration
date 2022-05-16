@@ -28,11 +28,15 @@ public class MapManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int numLayer = 0;
+
         colliderMap = new Dictionary<Vector2, OverlayTile>();
         foreach (var map in gameObject.GetComponentsInChildren<Tilemap>())
         {
             if (map.tag != "Level - No Grid")
-            {
+            { 
+            
+                numLayer = map.GetComponent<TilemapRenderer>().sortingOrder;
                 BoundsInt bounds = map.cellBounds;
 
                 //looping through all tiles in each layer
@@ -43,7 +47,7 @@ public class MapManager : MonoBehaviour
                         for (int x = bounds.min.x; x < bounds.max.x; x++)
                         {
                             var tileLocation = new Vector3Int(x, y, z);
-                            Vector2 tileKey = new Vector2(x, y);
+                            Vector2Int tileKey = new Vector2Int(x, y);// - new Vector2Int(numLayer, numLayer);
 
                             if (map.HasTile(tileLocation) && !colliderMap.ContainsKey(tileKey))
                             {
@@ -53,10 +57,12 @@ public class MapManager : MonoBehaviour
 
                                 highlightTile.transform.position = new Vector3(cellWorldPosition.x + 0.1604f, cellWorldPosition.y + 0.1599f, cellWorldPosition.z);
                                 highlightTile.GetComponent<SpriteRenderer>().sortingOrder = map.GetComponent<TilemapRenderer>().sortingOrder;
-                                highlightTile.gridLocation = tileLocation;
+                                highlightTile.gridLocation = tileLocation;// - new Vector3Int(numLayer, numLayer, 0);
+                                //highlightTile.gridLocation.z = numLayer;
                                 colliderMap.Add(tileKey, highlightTile);
                             }
                         }
+
                     }
                 }
             }
@@ -86,7 +92,7 @@ public class MapManager : MonoBehaviour
         locationToCheck = new Vector2(currentTile.gridLocation.x, currentTile.gridLocation.y + 1);
         if (map.ContainsKey(locationToCheck)) 
         {
-            if(Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) < 1)
+            if(Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= 1)
                 neighbors.Add(map[locationToCheck]);
         }
 
@@ -94,7 +100,7 @@ public class MapManager : MonoBehaviour
         locationToCheck = new Vector2(currentTile.gridLocation.x, currentTile.gridLocation.y - 1);
         if (map.ContainsKey(locationToCheck))
         {
-            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) < 1)
+            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= 1)
                 neighbors.Add(map[locationToCheck]);
         }
 
@@ -102,7 +108,7 @@ public class MapManager : MonoBehaviour
         locationToCheck = new Vector2(currentTile.gridLocation.x + 1, currentTile.gridLocation.y);
         if (map.ContainsKey(locationToCheck))
         {
-            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) < 1)
+            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= 1)
                 neighbors.Add(map[locationToCheck]);
         }
 
@@ -110,7 +116,7 @@ public class MapManager : MonoBehaviour
         locationToCheck = new Vector2(currentTile.gridLocation.x - 1, currentTile.gridLocation.y);
         if (map.ContainsKey(locationToCheck))
         {
-            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) < 1)
+            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= 1)
                 neighbors.Add(map[locationToCheck]);
         }
 

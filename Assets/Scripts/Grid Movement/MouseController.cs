@@ -40,14 +40,12 @@ public class MouseController : MonoBehaviour
             OverlayTile tile = hit.collider.gameObject.GetComponent<OverlayTile>();
             cursor.transform.position = tile.transform.position;
             cursor.gameObject.GetComponent<SpriteRenderer>().sortingOrder = tile.transform.GetComponent<SpriteRenderer>().sortingOrder;
-            
-            if (inRangeTiles.Contains(tile) && !isMoving && character != null)
-            {
 
-                path = pathfinder.FindPath(character.activeTile, overlayTile, inRangeTiles);
-                //Debug.Log("Path Length: " + path.Count());
-                
-                foreach (OverlayTile item in inRangeTiles)
+            if (inRangeTiles.Contains(tile) && !isMoving)
+            {
+                path = pathfinder.FindPath(character.activeTile, tile, inRangeTiles);
+
+                foreach (var item in inRangeTiles)
                 {
                     MapManager.Instance.colliderMap[item.gridLocation2D].setArrowSprite(ArrowDirections.None);
                 }
@@ -57,38 +55,37 @@ public class MouseController : MonoBehaviour
                     var previousTile = i > 0 ? path[i - 1] : character.activeTile;
                     var futureTile = i < path.Count - 1 ? path[i + 1] : null;
 
-                    var arrowDirection = drawArrow.TranslateDirection(previousTile, path[i], futureTile);
-                    path[i].setArrowSprite(arrowDirection);
+                    var arrow = drawArrow.TranslateDirection(previousTile, path[i], futureTile);
+                    path[i].setArrowSprite(arrow);
                 }
-                
             }
 
             if (Input.GetMouseButtonDown(0))
             {
-                overlayTile = tile;
+                tile.ShowTile();
 
                 if (character == null)
                 {
                     character = Instantiate(characterPrefab).GetComponent<CharacterStats>();
-                    PositionCharacterOnTile(overlayTile);
+                    PositionCharacterOnTile(tile);
                     GetInRangeTiles();
                 }
                 else
                 {
                     isMoving = true;
-                    tile.HideTile();
+                    tile.gameObject.GetComponent<OverlayTile>().HideTile();
                 }
             }
         }
 
-        if(path.Count > 0 && isMoving)
+        if (path.Count > 0 && isMoving)
         {
             MoveAlongPath();
         }
         else if (path.Count == 0 && character != null)
         {
-            GetInRangeTiles();
             isMoving = false;
+            GetInRangeTiles();
         }
     }
     
