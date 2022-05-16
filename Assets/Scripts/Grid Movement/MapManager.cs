@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -29,9 +30,10 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         int numLayer = 0;
+        var tileMaps = gameObject.transform.GetComponentsInChildren<Tilemap>().OrderByDescending(x => x.GetComponent<TilemapRenderer>().sortingOrder);
 
         colliderMap = new Dictionary<Vector2, OverlayTile>();
-        foreach (var map in gameObject.GetComponentsInChildren<Tilemap>())
+        foreach (var map in tileMaps)
         {
             if (map.tag != "Level - No Grid")
             { 
@@ -54,11 +56,22 @@ public class MapManager : MonoBehaviour
                                 var highlightTile = Instantiate(highlightTilePrefab, highlightContainer.transform);
                                 var cellWorldPosition = map.GetCellCenterWorld(tileLocation);
 
-
                                 highlightTile.transform.position = new Vector3(cellWorldPosition.x + 0.1604f, cellWorldPosition.y + 0.1599f, cellWorldPosition.z);
                                 highlightTile.GetComponent<SpriteRenderer>().sortingOrder = map.GetComponent<TilemapRenderer>().sortingOrder;
                                 highlightTile.gridLocation = tileLocation;// - new Vector3Int(numLayer, numLayer, 0);
                                 //highlightTile.gridLocation.z = numLayer;
+
+                                if (map.tag == "Level - Half Step")
+                                {
+                                    highlightTile.isHalfTile = true;
+                                    //highlightTile.GetComponent<SpriteRenderer>().sortingOrder -= 1;
+                                    highlightTile.transform.position = new Vector3(highlightTile.transform.position.x, highlightTile.transform.position.y - 0.0799f, 0);
+                                }
+                                else
+                                {
+                                    highlightTile.transform.position = new Vector3(highlightTile.transform.position.x, highlightTile.transform.position.y, 0);
+                                }
+
                                 colliderMap.Add(tileKey, highlightTile);
                             }
                         }
