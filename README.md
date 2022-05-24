@@ -1,3 +1,5 @@
+Figure out a new name at some point!
+
 # BardicInspiration
 Trying my hand at an isometric tactics game with D&amp;D rolling elements. Proper description to come eventually.
 
