@@ -6,36 +6,28 @@ using UnityEngine.Tilemaps;
 public class CharacterSetUp : MonoBehaviour
 {
     public CharacterStats stats;
-
+    public Vector2 startingLocation = new Vector3();
 
     private void Start()
     {
         stats = GetComponent<CharacterStats>();
     }
 
-    public void placeCharacter()
+    public void placeCharacter(Dictionary<Vector2, OverlayTile> colliderMap)
     {
         if(stats.activeTile == null)
         {
-            OverlayTile tile = GetFocusedOnTile();
-
-            //PositionCharacterOnTile(tile);
+            OverlayTile tile = GetFocusedOnTile(colliderMap);
+            Debug.Log(tile.gameObject);
+            PositionCharacterOnTile(tile);
         }
     }
 
-    public OverlayTile GetFocusedOnTile()
+    public OverlayTile GetFocusedOnTile(Dictionary<Vector2, OverlayTile> colliderMap)
     {
-        RaycastHit [] hits;
-        hits = Physics.RaycastAll(transform.position, transform.forward, 5f);
-        Debug.DrawRay(transform.position, transform.forward, Color.red);
-
-        foreach (RaycastHit hit in hits)
+        if (colliderMap.ContainsKey(startingLocation))
         {
-            if (hit.collider.GetComponent<OverlayTile>())
-            {
-                Debug.Log("I did it!");
-                return hit.collider.GetComponent<OverlayTile>();
-            }
+            return colliderMap[startingLocation];
         }
 
         Debug.Log("ERROR: No Tile Found");
@@ -47,5 +39,10 @@ public class CharacterSetUp : MonoBehaviour
         this.transform.position = overlayTile.characterPos.position;
         stats.activeTile = overlayTile;
         overlayTile.isBlocked = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("collision!");
     }
 }

@@ -95,7 +95,7 @@ public class MapManager : MonoBehaviour
         //Set Up Characters
         foreach(var hero in playerTeam.GetComponentsInChildren<CharacterSetUp>())
         {
-            hero.placeCharacter();
+            hero.placeCharacter(colliderMap);
             //FindObjectOfType<MouseController>().character = hero.GetComponent<CharacterStats>();
         }
 
