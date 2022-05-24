@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955583945743065988}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.025000095, y: 0.142, z: 0.77060705}
+  m_LocalPosition: {x: 0.017, y: 0.134, z: 0.77060705}
   m_LocalScale: {x: 0.8993, y: 0.8993, z: 0.8993}
   m_Children: []
   m_Father: {fileID: 1955583946479312228}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 16558bf5f4256664a93f7809ee470d78, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54321f6acfef8bd48a2cfdaa0f9a2738, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -92,8 +92,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1955583946479312228}
   - component: {fileID: 1955583946479312229}
+  - component: {fileID: 8577116171866360218}
+  - component: {fileID: 1494756996235597960}
   m_Layer: 0
-  m_Name: Player Character
+  m_Name: Lyn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955583946479312231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.815, y: -0.632, z: -0.77060705}
+  m_LocalPosition: {x: -0.815, y: -0.632, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1955583945743065989}
@@ -132,3 +134,32 @@ MonoBehaviour:
   defense: 0
   special: 0
   activeTile: {fileID: 0}
+--- !u!114 &8577116171866360218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955583946479312231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00f482a90b578249bc98434d5728fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+--- !u!58 &1494756996235597960
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955583946479312231}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.01

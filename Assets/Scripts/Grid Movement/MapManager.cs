@@ -12,9 +12,11 @@ public class MapManager : MonoBehaviour
     public OverlayTile highlightTilePrefab;
     public GameObject highlightContainer;
 
+    public GameObject playerTeam;
+
     public Dictionary<Vector2, OverlayTile> colliderMap;
 
-    private Color settingsColor = new Color(1, 1, 1, 1);
+    public Color settingsColor = new Color(1, 1, 1, 1);
 
     private void Awake()
     {
@@ -64,6 +66,7 @@ public class MapManager : MonoBehaviour
 
                                 //Commented out version includes adjustments for using Tiled.
                                 //highlightTile.transform.position = new Vector3(cellWorldPosition.x + 0.1604f, cellWorldPosition.y + 0.1599f, cellWorldPosition.z);
+                                
                                 highlightTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z);
                                 highlightTile.GetComponent<SpriteRenderer>().sortingOrder = map.GetComponent<TilemapRenderer>().sortingOrder;
                                 highlightTile.gridLocation = tileLocation;
@@ -88,6 +91,20 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
+
+        //Set Up Characters
+        foreach(var hero in playerTeam.GetComponentsInChildren<CharacterSetUp>())
+        {
+            hero.placeCharacter();
+            //FindObjectOfType<MouseController>().character = hero.GetComponent<CharacterStats>();
+        }
+
+        //Set Up Enemies
+
+        //Set Up Turn Order
+
+        //Set Up Cursor
+        //FindObjectOfType<MouseController>().character = turnOrder[0].GetComponent<CharacterStats>();
     }
 
     public List<OverlayTile> GetNeighborTiles(OverlayTile currentTile, List<OverlayTile> searchableTiles)

@@ -29,9 +29,13 @@ public class OverlayTile : MonoBehaviour
 
     public void ShowTile()
     {
-        setArrowSprite(ArrowDirections.None);
-        Color color = gameObject.GetComponent<SpriteRenderer>().color;
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
+        if (!isBlocked)
+        {
+            setArrowSprite(ArrowDirections.None);
+            Color color = gameObject.GetComponent<SpriteRenderer>().color;
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
+        }
+        // Add and else here that changes colors based on what is blocking (if player, playerBlock, if enemy enemyBlock)
     }
 
     public void HideTile()
