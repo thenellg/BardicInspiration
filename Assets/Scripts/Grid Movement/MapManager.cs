@@ -14,6 +14,8 @@ public class MapManager : MonoBehaviour
 
     public Dictionary<Vector2, OverlayTile> colliderMap;
 
+    private Color settingsColor = new Color(1, 1, 1, 1);
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -29,10 +31,14 @@ public class MapManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Get Settings and update information
+
         int numLayer = 0;
-        var tileMaps = gameObject.transform.GetComponentsInChildren<Tilemap>().OrderByDescending(x => x.GetComponent<TilemapRenderer>().sortingOrder);
+        //var tileMaps = gameObject.transform.GetComponentsInChildren<Tilemap>().OrderByDescending(x => x.GetComponent<TilemapRenderer>().sortingOrder);
+        var tileMaps = gameObject.transform.GetComponentsInChildren<Tilemap>();
 
         colliderMap = new Dictionary<Vector2, OverlayTile>();
+
         foreach (var map in tileMaps)
         {
             if (map.tag != "Level - No Grid")
@@ -49,22 +55,24 @@ public class MapManager : MonoBehaviour
                         for (int x = bounds.min.x; x < bounds.max.x; x++)
                         {
                             var tileLocation = new Vector3Int(x, y, z);
-                            Vector2Int tileKey = new Vector2Int(x, y);// - new Vector2Int(numLayer, numLayer);
+                            Vector2Int tileKey = new Vector2Int(x, y);
 
                             if (map.HasTile(tileLocation) && !colliderMap.ContainsKey(tileKey))
                             {
                                 var highlightTile = Instantiate(highlightTilePrefab, highlightContainer.transform);
                                 var cellWorldPosition = map.GetCellCenterWorld(tileLocation);
 
-                                highlightTile.transform.position = new Vector3(cellWorldPosition.x + 0.1604f, cellWorldPosition.y + 0.1599f, cellWorldPosition.z);
+                                //Commented out version includes adjustments for using Tiled.
+                                //highlightTile.transform.position = new Vector3(cellWorldPosition.x + 0.1604f, cellWorldPosition.y + 0.1599f, cellWorldPosition.z);
+                                highlightTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z);
                                 highlightTile.GetComponent<SpriteRenderer>().sortingOrder = map.GetComponent<TilemapRenderer>().sortingOrder;
-                                highlightTile.gridLocation = tileLocation;// - new Vector3Int(numLayer, numLayer, 0);
-                                //highlightTile.gridLocation.z = numLayer;
+                                highlightTile.gridLocation = tileLocation;
+
+                                //highlightTile.SetColor(settingsColor);
 
                                 if (map.tag == "Level - Half Step")
                                 {
                                     highlightTile.isHalfTile = true;
-                                    //highlightTile.GetComponent<SpriteRenderer>().sortingOrder -= 1;
                                     highlightTile.transform.position = new Vector3(highlightTile.transform.position.x, highlightTile.transform.position.y - 0.0799f, 0);
                                 }
                                 else

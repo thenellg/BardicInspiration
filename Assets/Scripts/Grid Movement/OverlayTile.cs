@@ -22,16 +22,23 @@ public class OverlayTile : MonoBehaviour
     public bool isHalfTile = false;
     public List<Sprite> arrows = new List<Sprite>();
 
+    public void SetColor(Color color)
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 0);
+    }
+
     public void ShowTile()
     {
         setArrowSprite(ArrowDirections.None);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);    //Edit this line to account for settings later
+        Color color = gameObject.GetComponent<SpriteRenderer>().color;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
     }
 
     public void HideTile()
     {
         setArrowSprite(ArrowDirections.None);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        Color color = gameObject.GetComponent<SpriteRenderer>().color;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 0);
     }
 
     public void setArrowSprite(ArrowDirections direction)
