@@ -16,6 +16,7 @@ public class MapManager : MonoBehaviour
 
     public Dictionary<Vector2, OverlayTile> colliderMap;
 
+    public BattleManager battleManager;
     public Color settingsColor = new Color(1, 1, 1, 1);
 
     private void Awake()
@@ -34,6 +35,7 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         //Get Settings and update information
+
 
         int numLayer = 0;
         //var tileMaps = gameObject.transform.GetComponentsInChildren<Tilemap>().OrderByDescending(x => x.GetComponent<TilemapRenderer>().sortingOrder);
@@ -97,8 +99,11 @@ public class MapManager : MonoBehaviour
         {
             hero.placeCharacter(colliderMap);
             FindObjectOfType<MouseController>().character = hero.GetComponent<CharacterStats>();
-            //Add to player team in battle manager
-            //Add to turn order in battle manager
+            battleManager.playerTeam.Add(hero.gameObject);
+
+            battleManager.turnOrder.Add(hero.gameObject);
+            List<GameObject> sortedList = battleManager.turnOrder.OrderByDescending(o => o.GetComponent<CharacterStats>().speed).ToList();
+            battleManager.turnOrder = sortedList;
         }
 
         //Set Up Enemies
@@ -110,7 +115,19 @@ public class MapManager : MonoBehaviour
         //}
 
         //Set Up Cursor
-        //FindObjectOfType<MouseController>().character = turnOrder[0].GetComponent<CharacterStats>();
+        FindObjectOfType<MouseController>().character = battleManager.turnOrder[0].GetComponent<CharacterStats>();
+    }
+
+    int getSpot(CharacterStats hero)
+    {
+        for (int i = 0; i < battleManager.turnOrder.Count; i++)
+        {
+            if (battleManager.turnOrder[i].GetComponent<CharacterStats>().speed < hero.speed)
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 
     public List<OverlayTile> GetNeighborTiles(OverlayTile currentTile, List<OverlayTile> searchableTiles)

@@ -7,6 +7,7 @@ public class BattleManager : MonoBehaviour
     public List<GameObject> turnOrder;
     public List<GameObject> playerTeam;
     public List<GameObject> EnemyTeam;
+    public int turnNumber = 0;
 
     // Start is called before the first frame update
     void Start()

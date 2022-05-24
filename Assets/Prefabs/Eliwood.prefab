@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8577116171866360218}
   m_Layer: 0
   m_Name: Eliwood
-  m_TagString: Untagged
+  m_TagString: Player Team
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Eliwood
-  speed: 10
+  speed: 6
   attack: 0
   defense: 0
   special: 0
@@ -146,3 +146,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
+  startingLocation: {x: 0, y: 0}

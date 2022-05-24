@@ -587,6 +587,7 @@ MonoBehaviour:
   highlightTilePrefab: {fileID: 7233898508251833769, guid: 7393521c9504c5f4089d6ff6e0a08fdd, type: 3}
   highlightContainer: {fileID: 1267232536}
   playerTeam: {fileID: 0}
+  battleManager: {fileID: 0}
   settingsColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &159464524
 PrefabInstance:
@@ -926,6 +927,7 @@ MonoBehaviour:
   highlightTilePrefab: {fileID: 7233898508251833769, guid: 7393521c9504c5f4089d6ff6e0a08fdd, type: 3}
   highlightContainer: {fileID: 1267232536}
   playerTeam: {fileID: 278536586}
+  battleManager: {fileID: 2138875658}
   settingsColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!156049354 &223707383
 Grid:
@@ -2920,6 +2922,7 @@ MonoBehaviour:
   highlightTilePrefab: {fileID: 7233898508251833769, guid: 7393521c9504c5f4089d6ff6e0a08fdd, type: 3}
   highlightContainer: {fileID: 1267232536}
   playerTeam: {fileID: 0}
+  battleManager: {fileID: 0}
   settingsColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!156049354 &1150375525
 Grid:
@@ -3160,6 +3163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 1924265896}
   moveSpeed: 1
+  battleManager: {fileID: 2138875658}
   characterPrefab: {fileID: 1955583946479312231, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
   character: {fileID: 0}
   overlayTile: {fileID: 0}
@@ -4747,3 +4751,4 @@ MonoBehaviour:
   turnOrder: []
   playerTeam: []
   EnemyTeam: []
+  turnNumber: 0

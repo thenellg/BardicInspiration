@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Level - No Grid
   - Level - Half Step
+  - Player Team
+  - Enemy Team
   layers:
   - Default
   - TransparentFX

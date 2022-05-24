@@ -9,6 +9,8 @@ public class MouseController : MonoBehaviour
     public GameObject cursor;
     public float moveSpeed;
 
+    public BattleManager battleManager;
+
     public GameObject characterPrefab;
     public CharacterStats character;
 
@@ -62,19 +64,8 @@ public class MouseController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                tile.ShowTile();
-
-                if (character == null)
-                {
-                    character = Instantiate(characterPrefab).GetComponent<CharacterStats>();
-                    PositionCharacterOnTile(tile);
-                    GetInRangeTiles();
-                }
-                else
-                {
-                    isMoving = true;
-                    tile.gameObject.GetComponent<OverlayTile>().HideTile();
-                }
+                isMoving = true;
+                tile.gameObject.GetComponent<OverlayTile>().HideTile();
             }
         }
 
@@ -82,11 +73,22 @@ public class MouseController : MonoBehaviour
         {
             MoveAlongPath();
         }
-        else if (path.Count == 0 && character != null)
+        else if (path.Count == 0 && isMoving)
         {
             isMoving = false;
-            GetInRangeTiles();
+
+            //Moving to next turn
+            battleManager.turnNumber++;
+            if (battleManager.turnNumber == battleManager.turnOrder.Count)
+                battleManager.turnNumber = 0;
+
+            character = battleManager.turnOrder[battleManager.turnNumber].GetComponent<CharacterStats>();
+
+            if (character.tag == "Player Team")
+                GetInRangeTiles();
         }
+
+
     }
     
     private void GetInRangeTiles()
@@ -135,7 +137,11 @@ public class MouseController : MonoBehaviour
 
     private void PositionCharacterOnTile(OverlayTile overlayTile)
     {
+        character.activeTile.isBlocked = false;
+
         character.transform.position = overlayTile.GetComponent<OverlayTile>().characterPos.position;
-        character.GetComponent<CharacterStats>().activeTile = overlayTile;
+
+        character.activeTile = overlayTile;
+        overlayTile.isBlocked = true;
     }
 }
