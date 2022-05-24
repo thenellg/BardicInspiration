@@ -96,12 +96,18 @@ public class MapManager : MonoBehaviour
         foreach(var hero in playerTeam.GetComponentsInChildren<CharacterSetUp>())
         {
             hero.placeCharacter(colliderMap);
-            //FindObjectOfType<MouseController>().character = hero.GetComponent<CharacterStats>();
+            FindObjectOfType<MouseController>().character = hero.GetComponent<CharacterStats>();
+            //Add to player team in battle manager
+            //Add to turn order in battle manager
         }
 
         //Set Up Enemies
-
-        //Set Up Turn Order
+        //foreach (var enemy in enemyTeam.GetComponentsInChildren<CharacterSetUp>())
+        //{
+        //    enemy.placeCharacter(colliderMap);
+            //Add to player team in battle manager
+            //Add to turn order in battle manager
+        //}
 
         //Set Up Cursor
         //FindObjectOfType<MouseController>().character = turnOrder[0].GetComponent<CharacterStats>();

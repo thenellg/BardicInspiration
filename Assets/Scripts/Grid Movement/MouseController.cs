@@ -10,7 +10,7 @@ public class MouseController : MonoBehaviour
     public float moveSpeed;
 
     public GameObject characterPrefab;
-    [SerializeField] private CharacterStats character;
+    public CharacterStats character;
 
     [SerializeField] private OverlayTile overlayTile = null;
     private Pathfinder pathfinder;
