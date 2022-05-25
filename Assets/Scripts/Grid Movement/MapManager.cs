@@ -13,6 +13,7 @@ public class MapManager : MonoBehaviour
     public GameObject highlightContainer;
 
     public GameObject playerTeam;
+    public GameObject enemyTeam;
 
     public Dictionary<Vector2, OverlayTile> colliderMap;
 
@@ -102,19 +103,21 @@ public class MapManager : MonoBehaviour
             battleManager.playerTeam.Add(hero.gameObject);
 
             battleManager.turnOrder.Add(hero.gameObject);
-            List<GameObject> sortedList = battleManager.turnOrder.OrderByDescending(o => o.GetComponent<CharacterStats>().speed).ToList();
-            battleManager.turnOrder = sortedList;
         }
 
         //Set Up Enemies
-        //foreach (var enemy in enemyTeam.GetComponentsInChildren<CharacterSetUp>())
-        //{
-        //    enemy.placeCharacter(colliderMap);
-            //Add to player team in battle manager
-            //Add to turn order in battle manager
-        //}
+        foreach (var enemy in enemyTeam.GetComponentsInChildren<CharacterSetUp>())
+        {
+            enemy.placeCharacter(colliderMap);
+            battleManager.enemyTeam.Add(enemy.gameObject);
+
+            battleManager.turnOrder.Add(enemy.gameObject);
+        }
 
         //Set Up Cursor
+        List<GameObject> sortedList = battleManager.turnOrder.OrderByDescending(o => o.GetComponent<CharacterStats>().speed).ToList();
+        battleManager.turnOrder = sortedList;
+
         FindObjectOfType<MouseController>().character = battleManager.turnOrder[0].GetComponent<CharacterStats>();
     }
 

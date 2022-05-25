@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    [Header("Vitals")]
     public string characterName;
+    public OverlayTile activeTile;
+    public int health;
 
+    [Header("Stats")]
     public int speed;
     public int attack;
     public int defense;
     public int special;
 
-    public OverlayTile activeTile;
-
-    // Need to figure out a script that automatically places characters to tiles
 }

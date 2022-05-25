@@ -32,6 +32,12 @@ public class MouseController : MonoBehaviour
         drawArrow = new DrawArrow();
     }
 
+    void beginRound()
+    {
+        battleManager.onTurnSwap();
+        GetInRangeTiles();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -83,15 +89,27 @@ public class MouseController : MonoBehaviour
                 battleManager.turnNumber = 0;
 
             character = battleManager.turnOrder[battleManager.turnNumber].GetComponent<CharacterStats>();
+            battleManager.onTurnSwap();
 
             if (character.tag == "Player Team")
+            {
                 GetInRangeTiles();
+            }
+            else if (character.tag == "Enemy Team")
+            {
+                Invoke("enemyMove", 2f);
+            }
         }
 
 
     }
     
-    private void GetInRangeTiles()
+    void enemyMove()
+    {
+        isMoving = true;
+    }
+
+    public void GetInRangeTiles()
     {
         foreach (var item in inRangeTiles)
         {
@@ -126,7 +144,7 @@ public class MouseController : MonoBehaviour
         }
     }
 
-    public RaycastHit2D GetFocusedOnTile()
+    private RaycastHit2D GetFocusedOnTile()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hits = Physics2D.Raycast(mousePos, Vector2.zero);
