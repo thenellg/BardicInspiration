@@ -9,7 +9,12 @@ public class BattleManager : MonoBehaviour
     public List<GameObject> enemyTeam;
     public int turnNumber = 0;
     public ActionMenu actionMenu;
+    public MouseController cursor;
 
+    private void Start()
+    {
+        MouseController temp = FindObjectOfType<MouseController>();
+    }
     public void isRoundOver()
     {
         if (enemyTeam.Count == 0)

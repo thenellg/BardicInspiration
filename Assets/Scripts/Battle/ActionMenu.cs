@@ -13,7 +13,13 @@ public class ActionMenu : MonoBehaviour
     public TextMeshProUGUI turnName;
     public TextMeshProUGUI turnNumber;
 
+    public Transform menuLocation;
+    public Camera cam;
 
+    private void Start()
+    {
+        cam = FindObjectOfType<Camera>();
+    }
 
     public void updateInfo()
     {
@@ -27,6 +33,12 @@ public class ActionMenu : MonoBehaviour
             turnName.color = Color.red;
         else
             turnName.color = Color.yellow;
-    }
+
+        if (character.tag == "Player Team")
+        {
+            Debug.Log(character.returnMenuLocation());
+            visibleActionMenu.transform.position = cam.WorldToScreenPoint(character.returnMenuLocation().position);
+        }
+     }
 
 }
