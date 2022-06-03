@@ -128,10 +128,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Eliwood
+<<<<<<< Updated upstream:Assets/Prefabs/Eliwood.prefab
   activeTile: {fileID: 0}
   health: 10
   speed: 3
   attack: 6
+=======
+  speed: 5
+  attack: 0
+>>>>>>> Stashed changes:Assets/Prefabs/Player Character.prefab
   defense: 0
   special: 0
 --- !u!114 &8577116171866360218
