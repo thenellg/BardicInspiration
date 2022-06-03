@@ -16,7 +16,7 @@ public class Attacks : ScriptableObject
 	
 	void Start()
 	{
-		attacker = GetComponent<characterStats>();
+		//attacker = GetComponent<characterStats>();
 	}
 	
 	void attackCheck()
@@ -26,19 +26,24 @@ public class Attacks : ScriptableObject
 		//check and show in range tiles
 		//if blocked, change the color of the square to account for team
 		
-		
 		foreach(var character in charactersInRange){
 			if(playerAttack && character.tag == "Player Team")
 			{
-					charactersInRange.remove(character);
+				charactersInRange.Remove(character);
 			}
 			else if(!playerAttack && character.tag == "Enemy Team")
 			{
-					charactersInRange.remove(character);
+				charactersInRange.Remove(character);
 			} 
 		}
+
+		if(charactersInRange.Count == 0)
+        {
+			Debug.Log("No enemies within range");
+        }
 	}
 	
+	/*
 	public List<OverlayTile> GetTilesinRange(OverlayTile startTile, int range)
     {
         List<OverlayTile> inRangeTiles = new List<OverlayTile>();
@@ -65,4 +70,5 @@ public class Attacks : ScriptableObject
 
         return inRangeTiles.Distinct().ToList();
     }
+	*/
 }
