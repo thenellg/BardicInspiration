@@ -19,6 +19,7 @@ public class ActionMenu : MonoBehaviour
     private void Start()
     {
         cam = FindObjectOfType<Camera>();
+        visibleActionMenu.SetActive(false);
     }
 
     public void updateInfo()
@@ -34,11 +35,12 @@ public class ActionMenu : MonoBehaviour
         else
             turnName.color = Color.yellow;
 
-        if (character.tag == "Player Team")
-        {
-            Debug.Log(character.returnMenuLocation());
-            visibleActionMenu.transform.position = cam.WorldToScreenPoint(character.returnMenuLocation().position);
-        }
-     }
+        visibleActionMenu.SetActive(false);
+    }
+
+    public void setActionMenuLocation(CharacterStats character)
+    {
+        visibleActionMenu.transform.position = cam.WorldToScreenPoint(character.returnMenuLocation().position);
+    }
 
 }

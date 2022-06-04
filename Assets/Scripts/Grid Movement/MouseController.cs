@@ -23,6 +23,7 @@ public class MouseController : MonoBehaviour
     private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
 
     public bool isMoving = false;
+    public bool activeMovement = true;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +50,7 @@ public class MouseController : MonoBehaviour
             cursor.transform.position = tile.transform.position;
             cursor.gameObject.GetComponent<SpriteRenderer>().sortingOrder = tile.transform.GetComponent<SpriteRenderer>().sortingOrder;
 
-            if (inRangeTiles.Contains(tile) && !isMoving)
+            if (inRangeTiles.Contains(tile) && !isMoving && activeMovement)
             {
                 path = pathfinder.FindPath(character.activeTile, tile, inRangeTiles);
 
@@ -83,30 +84,18 @@ public class MouseController : MonoBehaviour
         {
             isMoving = false;
 
-            //Moving to next turn
-            battleManager.turnNumber++;
-            if (battleManager.turnNumber == battleManager.turnOrder.Count)
-                battleManager.turnNumber = 0;
-
-            character = battleManager.turnOrder[battleManager.turnNumber].GetComponent<CharacterStats>();
-            battleManager.onTurnSwap();
-
             if (character.tag == "Player Team")
             {
-                GetInRangeTiles();
+                activeMovement = false;
+                battleManager.actionMenu.setActionMenuLocation(character);
+                battleManager.actionMenu.visibleActionMenu.SetActive(true);
             }
-            else if (character.tag == "Enemy Team")
-            {
-                Invoke("enemyMove", 2f);
-            }
+
+            //Set to turn abilities in battle manager if player
+            //Run enemy idea if an enemy
         }
 
 
-    }
-    
-    void enemyMove()
-    {
-        isMoving = true;
     }
 
     public void GetInRangeTiles()
