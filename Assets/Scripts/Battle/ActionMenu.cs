@@ -25,7 +25,7 @@ public class ActionMenu : MonoBehaviour
     public void updateInfo()
     {
         CharacterStats character = cursor.character;
-        turnName.text = "Turn " + (cursor.battleManager.turnNumber + 1).ToString(); ;
+        turnNumber.text = "Turn " + (cursor.battleManager.turnNumber + 1).ToString();
 
         turnName.text = character.name;
         if (character.tag == "Player Team")

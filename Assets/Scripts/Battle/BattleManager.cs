@@ -14,6 +14,14 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         MouseController temp = FindObjectOfType<MouseController>();
+
+        //play battle start animation
+        //Invoke startSequence at end of animation
+        startSequence();
+    }
+
+    void startSequence()
+    {
         onTurnSwap();
 
         if (turnOrder[0].GetComponent<CharacterStats>().tag == "Player Team")
@@ -22,16 +30,21 @@ public class BattleManager : MonoBehaviour
             cursor.GetInRangeTiles();
         }
     }
-    public void isRoundOver()
+
+    public bool isRoundOver()
     {
         if (enemyTeam.Count == 0)
         {
             //Game Over Win
+            return true;
         }
         else if (playerTeam.Count == 0)
         {
             //Game Over Lose
+            return true;
         }
+
+        return false;
     }
 
     public void endTurn()
