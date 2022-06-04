@@ -40,6 +40,15 @@ public class ActionMenu : MonoBehaviour
 
     public void setActionMenuLocation(CharacterStats character)
     {
+        if (cam.WorldToScreenPoint(character.transform.position).x > Screen.width / 2)
+        {
+            character.menuLocation.localPosition = new Vector3(Mathf.Abs(character.menuLocation.localPosition.x), character.menuLocation.localPosition.y, character.menuLocation.localPosition.z);
+        }
+        else
+        {
+            character.menuLocation.localPosition = new Vector3(-1 * Mathf.Abs(character.menuLocation.localPosition.x), character.menuLocation.localPosition.y, character.menuLocation.localPosition.z);
+        }
+
         visibleActionMenu.transform.position = cam.WorldToScreenPoint(character.returnMenuLocation().position);
     }
 
