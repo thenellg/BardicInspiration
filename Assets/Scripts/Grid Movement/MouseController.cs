@@ -71,8 +71,19 @@ public class MouseController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                isMoving = true;
-                tile.gameObject.GetComponent<OverlayTile>().HideTile();
+                if (battleManager.attacking)
+                {
+                    //charcter attacks
+                    battleManager.attack(character, tile.currentChar);
+
+                    battleManager.attacking = false;
+                    isMoving = true;
+                }
+                else
+                {
+                    isMoving = true;
+                    tile.gameObject.GetComponent<OverlayTile>().HideTile();
+                }
             }
         }
 

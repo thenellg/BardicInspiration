@@ -22,13 +22,32 @@ public class Attacks : MonoBehaviour
 		rangeFinder = new RangeFinder();
 	}
 
-	public void attackCheck()
+	public bool attackCheck()
 	{
 		List<CharacterStats> charactersInRange = GetTilesinRange(characterStats.activeTile, characterStats.attackRangeMin, characterStats.attackRangeMax);
-		
+		foreach (CharacterStats character in charactersInRange)
+        {
+			if(playerAttack && character.tag == "Player Team")
+            {
+				character.activeTile.HideTile();
+				charactersInRange.Remove(character);
+            }
+			else if(!playerAttack && character.tag == "Enemy Team")
+			{
+				character.activeTile.HideTile();
+				charactersInRange.Remove(character);
+			}
+            else
+            {
+				character.activeTile.ShowTile(true);
+			}
+		}
+
+
 		if (charactersInRange.Count == 0)
         {
 			Debug.Log("No enemies within range");
+			return false;
         }
         else
         {
@@ -43,6 +62,7 @@ public class Attacks : MonoBehaviour
 			if (tiles != null)
 				cursor.inRangeTiles = tiles;
 		}
+		return true;
 	}
 	
 	
@@ -51,7 +71,6 @@ public class Attacks : MonoBehaviour
 		List<CharacterStats> enemies = new List<CharacterStats>();
 		foreach(OverlayTile tile in rangeFinder.GetEnemiesinRange(startTile, minRange, maxRange))
         {
-			tile.ShowTile();
 			if(tile.isBlocked && tile.currentChar.tag == "Enemy Team" && playerAttack)
             {
 				enemies.Add(tile.currentChar);

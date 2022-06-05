@@ -6,7 +6,8 @@ public class GameSettings : MonoBehaviour
 {
     public Color CanMoveHighlight = new Color(255, 255, 255);
     public Color directionArrow = new Color(255, 246, 115);
-    public Color TargetHighlight = new Color(188, 12, 21);
+    public Color targetHighlight = new Color(253, 45, 55);
+    public Color TeammateHighlight = new Color(14, 119, 191);
     public Color cursor = new Color(255, 122, 0);
 
 }

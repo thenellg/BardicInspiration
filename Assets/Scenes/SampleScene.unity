@@ -154,7 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanMoveHighlight: {r: 255, g: 255, b: 255, a: 1}
   directionArrow: {r: 1, g: 0.9708817, b: 0.495283, a: 1}
-  TargetHighlight: {r: 188, g: 12, b: 21, a: 1}
+  targetHighlight: {r: 253, g: 45, b: 55, a: 1}
+  TeammateHighlight: {r: 0.050980404, g: 0.45251158, b: 0.7490196, a: 1}
   cursor: {r: 255, g: 122, b: 0, a: 1}
 --- !u!4 &20231884
 Transform:
@@ -381,8 +382,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
+      propertyPath: attack
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: attackRangeMax
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: attackRangeMin
@@ -1552,7 +1557,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanMoveHighlight: {r: 1, g: 1, b: 1, a: 1}
   directionArrow: {r: 255, g: 255, b: 255, a: 1}
-  TargetHighlight: {r: 188, g: 12, b: 21, a: 1}
+  targetHighlight: {r: 253, g: 45, b: 55, a: 1}
+  TeammateHighlight: {r: 188, g: 12, b: 21, a: 1}
   cursor: {r: 255, g: 122, b: 0, a: 1}
 --- !u!4 &1267232538
 Transform:
@@ -2293,6 +2299,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
         m_MethodName: findAttackTargets
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 937048386}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3944,6 +3962,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1087345549}
     m_Modifications:
+    - target: {fileID: 3408716145935409800, guid: ee51e69b28c954b409b032dfb6ba7174, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3408716145935409801, guid: ee51e69b28c954b409b032dfb6ba7174, type: 3}
       propertyPath: m_RootOrder
       value: 0

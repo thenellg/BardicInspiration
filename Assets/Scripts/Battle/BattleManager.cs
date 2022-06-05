@@ -12,6 +12,7 @@ public class BattleManager : MonoBehaviour
     public MouseController cursor;
 
     public bool attacking = false;
+    private bool attackedOnTurn = false;
 
     private void Start()
     {
@@ -51,9 +52,38 @@ public class BattleManager : MonoBehaviour
 
     public void findAttackTargets()
     {
-        cursor.character.GetComponent<Attacks>().attackCheck();
+        if (!attackedOnTurn)
+        {
+            attacking = cursor.character.GetComponent<Attacks>().attackCheck();
+            attackedOnTurn = true;
+        }
+        else
+        {
+            endTurn();
+        }
     }
 
+    public void attack(CharacterStats attacker, CharacterStats defender)
+    {
+        //Add stuff here to actually make the attack cool;
+        defender.health -= attacker.attack;
+        defender.activeTile.HideTile();
+
+        //if health <= 0, kill character
+        if (defender.health <= 0)
+        {
+            turnOrder.Remove(defender.gameObject);
+
+            if (playerTeam.Contains(defender.gameObject))
+                playerTeam.Remove(defender.gameObject);
+            else if (enemyTeam.Contains(defender.gameObject))
+                enemyTeam.Remove(defender.gameObject);
+
+            turnNumber = turnOrder.IndexOf(attacker.gameObject);
+
+            defender.gameObject.SetActive(false);
+        }
+    }
 
 
     public void endTurn()
@@ -66,6 +96,7 @@ public class BattleManager : MonoBehaviour
             turnNumber = 0;
 
         cursor.character = turnOrder[turnNumber].GetComponent<CharacterStats>();
+        attackedOnTurn = false;
 
         Debug.Log(cursor.character);
         onTurnSwap();
