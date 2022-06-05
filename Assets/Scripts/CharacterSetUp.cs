@@ -39,6 +39,7 @@ public class CharacterSetUp : MonoBehaviour
         this.transform.position = overlayTile.characterPos.position;
         stats.activeTile = overlayTile;
         overlayTile.isBlocked = true;
+        overlayTile.currentChar = GetComponent<CharacterStats>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -11,6 +11,8 @@ public class BattleManager : MonoBehaviour
     public ActionMenu actionMenu;
     public MouseController cursor;
 
+    public bool attacking = false;
+
     private void Start()
     {
         MouseController temp = FindObjectOfType<MouseController>();
@@ -46,6 +48,13 @@ public class BattleManager : MonoBehaviour
 
         return false;
     }
+
+    public void findAttackTargets()
+    {
+        cursor.character.GetComponent<Attacks>().attackCheck();
+    }
+
+
 
     public void endTurn()
     {

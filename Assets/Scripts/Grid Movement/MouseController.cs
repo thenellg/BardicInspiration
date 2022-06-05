@@ -20,7 +20,7 @@ public class MouseController : MonoBehaviour
     private DrawArrow drawArrow;
 
     public List<OverlayTile> path = new List<OverlayTile>();
-    private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
+    public List<OverlayTile> inRangeTiles = new List<OverlayTile>();
 
     public bool isMoving = false;
     public bool activeMovement = true;
@@ -145,10 +145,13 @@ public class MouseController : MonoBehaviour
     private void PositionCharacterOnTile(OverlayTile overlayTile)
     {
         character.activeTile.isBlocked = false;
+        character.activeTile.currentChar = null;
 
         character.transform.position = overlayTile.GetComponent<OverlayTile>().characterPos.position;
 
+        overlayTile.isBlocked = true;        
+
         character.activeTile = overlayTile;
-        overlayTile.isBlocked = true;
+        overlayTile.currentChar = character;
     }
 }

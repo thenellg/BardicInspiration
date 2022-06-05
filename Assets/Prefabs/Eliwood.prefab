@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 1955583946479312228}
   - component: {fileID: 1955583946479312229}
   - component: {fileID: 8577116171866360218}
+  - component: {fileID: 1050470116309734514}
   m_Layer: 0
   m_Name: Eliwood
   m_TagString: Player Team
@@ -162,7 +163,7 @@ MonoBehaviour:
   activeTile: {fileID: 0}
   health: 10
   attackRangeMin: 1
-  attackRangeMax: 1
+  attackRangeMax: 3
   menuLocation: {fileID: 7154764948117643132}
   speed: 3
   attack: 6
@@ -182,3 +183,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
   startingLocation: {x: 0, y: 0}
+--- !u!114 &1050470116309734514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955583946479312231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebdca8a0b68c2124b8bcfc22134d8c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterStats: {fileID: 0}
+  powerAttack: 1
+  magicAttack: 0
+  playerAttack: 1
+  healingAbility: 0

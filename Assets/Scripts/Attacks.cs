@@ -2,73 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attacks : ScriptableObject
+public class Attacks : MonoBehaviour
 {
 	public CharacterStats characterStats;
 	
-    public int range; //1 is next to player, etc.
     public bool powerAttack = false;
     public bool magicAttack = false;
 
     public bool playerAttack = true;
 	public bool healingAbility = false;
-    //Will need to determine if an enemy is range
-	
+	//Will need to determine if an enemy is range
+	private RangeFinder rangeFinder;
+	private MouseController cursor;
+
 	void Start()
 	{
-		//attacker = GetComponent<characterStats>();
+		characterStats = GetComponent<CharacterStats>();
+		cursor = FindObjectOfType<MouseController>();
+		rangeFinder = new RangeFinder();
 	}
-	
-	void attackCheck()
-	{
-		List<GameObject> charactersInRange = new List<GameObject>();
-		
-		//check and show in range tiles
-		//if blocked, change the color of the square to account for team
-		
-		foreach(var character in charactersInRange){
-			if(playerAttack && character.tag == "Player Team")
-			{
-				charactersInRange.Remove(character);
-			}
-			else if(!playerAttack && character.tag == "Enemy Team")
-			{
-				charactersInRange.Remove(character);
-			} 
-		}
 
-		if(charactersInRange.Count == 0)
+	public void attackCheck()
+	{
+		List<CharacterStats> charactersInRange = GetTilesinRange(characterStats.activeTile, characterStats.attackRangeMin, characterStats.attackRangeMax);
+		
+		if (charactersInRange.Count == 0)
         {
 			Debug.Log("No enemies within range");
         }
+        else
+        {
+			List<OverlayTile> tiles = new List<OverlayTile>();
+			foreach (CharacterStats character in charactersInRange)
+			{
+				Debug.Log(character);
+				tiles.Add(character.activeTile);
+			}
+			cursor.inRangeTiles = tiles;
+
+			if (tiles != null)
+				cursor.inRangeTiles = tiles;
+		}
 	}
 	
-	/*
-	public List<OverlayTile> GetTilesinRange(OverlayTile startTile, int range)
-    {
-        List<OverlayTile> inRangeTiles = new List<OverlayTile>();
-        inRangeTiles.Add(startTile);
-
-        int stepCount = 0;
-
-        List<OverlayTile> tileForPreviousStep = new List<OverlayTile>();
-        tileForPreviousStep.Add(startTile);
-
-        while(stepCount < range)
+	
+	public List<CharacterStats> GetTilesinRange(OverlayTile startTile, int minRange, int maxRange)
+	{
+		List<CharacterStats> enemies = new List<CharacterStats>();
+		foreach(OverlayTile tile in rangeFinder.GetEnemiesinRange(startTile, minRange, maxRange))
         {
-            List<OverlayTile> surroundingTiles = new List<OverlayTile>();
-
-            foreach(OverlayTile item in tileForPreviousStep)
+			tile.ShowTile();
+			if(tile.isBlocked && tile.currentChar.tag == "Enemy Team" && playerAttack)
             {
-                surroundingTiles.AddRange(MapManager.Instance.GetNeighborTiles(item, new List<OverlayTile>()));
+				enemies.Add(tile.currentChar);
             }
-
-            inRangeTiles.AddRange(surroundingTiles);
-            tileForPreviousStep = surroundingTiles.Distinct().ToList();
-            stepCount++;
+			else if (tile.isBlocked && tile.currentChar.tag == "Player Team" && !playerAttack)
+			{
+				enemies.Add(tile.currentChar);
+			}
         }
-
-        return inRangeTiles.Distinct().ToList();
+		return enemies;
     }
-	*/
+	
 }

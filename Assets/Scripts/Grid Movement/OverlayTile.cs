@@ -15,12 +15,15 @@ public class OverlayTile : MonoBehaviour
     public int f{ get { return g + h; } }
     
     public bool isBlocked;
+    public CharacterStats currentChar;
+
     public OverlayTile previous;
     public Vector3Int gridLocation;
     public Vector2Int gridLocation2D { get { return new Vector2Int(gridLocation.x, gridLocation.y);  } }
 
     public bool isHalfTile = false;
     public List<Sprite> arrows = new List<Sprite>();
+
 
     public void SetColor(Color color)
     {

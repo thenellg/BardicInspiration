@@ -342,11 +342,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312228, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.371
+      value: 1.01
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312228, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.04
+      value: -0.084
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312228, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -380,17 +380,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
+      propertyPath: attackRangeMax
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
+      propertyPath: attackRangeMin
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312231, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: m_Name
       value: Eliwood
       objectReference: {fileID: 0}
     - target: {fileID: 8577116171866360218, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: startingLocation.x
-      value: -6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8577116171866360218, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: startingLocation.y
-      value: -1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
@@ -2193,6 +2201,7 @@ MonoBehaviour:
   character: {fileID: 0}
   overlayTile: {fileID: 0}
   path: []
+  inRangeTiles: []
   isMoving: 0
   activeMovement: 1
 --- !u!1 &1976923726
@@ -2279,7 +2288,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1976923729}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2138875658}
+        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
+        m_MethodName: findAttackTargets
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1976923729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3915,6 +3936,7 @@ MonoBehaviour:
   turnNumber: 0
   actionMenu: {fileID: 1366546101}
   cursor: {fileID: 1924265899}
+  attacking: 0
 --- !u!1001 &1150870651958757186
 PrefabInstance:
   m_ObjectHideFlags: 0
