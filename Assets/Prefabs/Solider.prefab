@@ -131,9 +131,11 @@ MonoBehaviour:
   characterName: Soldier
   activeTile: {fileID: 0}
   health: 0
+  maxHealth: 0
   attackRangeMin: 2
   attackRangeMax: 2
   menuLocation: {fileID: 1820701852117774650}
+  characterPicture: {fileID: 21300000, guid: e1c91ed92a1360b439430d1dd5f963f6, type: 3}
   speed: 4
   attack: 6
   defense: 5

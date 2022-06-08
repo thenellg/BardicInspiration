@@ -21,6 +21,7 @@ public class BattleManager : MonoBehaviour
         //play battle start animation
         //Invoke startSequence at end of animation
         startSequence();
+        Debug.Log(turnOrder.Count);
     }
 
     void startSequence()
@@ -82,7 +83,14 @@ public class BattleManager : MonoBehaviour
             turnNumber = turnOrder.IndexOf(attacker.gameObject);
 
             defender.gameObject.SetActive(false);
+
+            GameObject temp = actionMenu.visibleTurns[actionMenu.visibleTurns.Count - 1].gameObject;
+            actionMenu.visibleTurns.RemoveAt(actionMenu.visibleTurns.Count - 1);
+            temp.SetActive(false);
         }
+
+        actionMenu.updateTurnInfo();
+
     }
 
 
