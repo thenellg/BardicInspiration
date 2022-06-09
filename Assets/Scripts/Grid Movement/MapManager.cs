@@ -133,7 +133,7 @@ public class MapManager : MonoBehaviour
         return 0;
     }
 
-    public List<OverlayTile> GetNeighborTiles(OverlayTile currentTile, List<OverlayTile> searchableTiles)
+    public List<OverlayTile> GetNeighborTiles(OverlayTile currentTile, List<OverlayTile> searchableTiles, int distance = 1)
     {
         Dictionary<Vector2, OverlayTile> map = new Dictionary<Vector2, OverlayTile>();
         if(searchableTiles.Count > 0)
@@ -153,18 +153,18 @@ public class MapManager : MonoBehaviour
         Vector2 locationToCheck;
 
         //Top
-        locationToCheck = new Vector2(currentTile.gridLocation.x, currentTile.gridLocation.y + 1);
+        locationToCheck = new Vector2(currentTile.gridLocation.x, currentTile.gridLocation.y + distance);
         if (map.ContainsKey(locationToCheck)) 
         {
-            if(Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= 1)
+            if(Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= distance)
                 neighbors.Add(map[locationToCheck]);
         }
 
         //Bottom
-        locationToCheck = new Vector2(currentTile.gridLocation.x, currentTile.gridLocation.y - 1);
+        locationToCheck = new Vector2(currentTile.gridLocation.x, currentTile.gridLocation.y - distance);
         if (map.ContainsKey(locationToCheck))
         {
-            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= 1)
+            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= distance)
                 neighbors.Add(map[locationToCheck]);
         }
 
@@ -172,7 +172,7 @@ public class MapManager : MonoBehaviour
         locationToCheck = new Vector2(currentTile.gridLocation.x + 1, currentTile.gridLocation.y);
         if (map.ContainsKey(locationToCheck))
         {
-            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= 1)
+            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= distance)
                 neighbors.Add(map[locationToCheck]);
         }
 
@@ -180,7 +180,7 @@ public class MapManager : MonoBehaviour
         locationToCheck = new Vector2(currentTile.gridLocation.x - 1, currentTile.gridLocation.y);
         if (map.ContainsKey(locationToCheck))
         {
-            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= 1)
+            if (Mathf.Abs(currentTile.gridLocation.z - map[locationToCheck].gridLocation.z) <= distance)
                 neighbors.Add(map[locationToCheck]);
         }
 
