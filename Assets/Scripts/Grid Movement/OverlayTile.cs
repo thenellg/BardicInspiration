@@ -70,7 +70,7 @@ public class OverlayTile : MonoBehaviour
         }
         else
         {
-            arrowImage.color = new Color(arrowImage.color.r, arrowImage.color.g, arrowImage.color.b, 1); //Edit this line to account for settings later
+            arrowImage.color = settings.directionArrow; //Edit this line to account for settings later
             arrowImage.sprite = arrows[(int)direction];
             arrowImage.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
         }

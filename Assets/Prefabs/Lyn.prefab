@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 1955583946479312228}
   - component: {fileID: 1955583946479312229}
   - component: {fileID: 8577116171866360218}
+  - component: {fileID: -1547694837068907422}
   m_Layer: 0
   m_Name: Lyn
   m_TagString: Player Team
@@ -154,6 +155,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
   startingLocation: {x: 0, y: 0}
+--- !u!114 &-1547694837068907422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955583946479312231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebdca8a0b68c2124b8bcfc22134d8c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterStats: {fileID: 0}
+  powerAttack: 1
+  magicAttack: 0
+  playerAttack: 1
+  healingAbility: 0
 --- !u!1 &7322383092532104664
 GameObject:
   m_ObjectHideFlags: 0

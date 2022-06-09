@@ -95,6 +95,11 @@ public class MouseController : MonoBehaviour
         {
             isMoving = false;
 
+            foreach (var item in inRangeTiles)
+            {
+                item.HideTile();
+            }
+
             if (character.tag == "Player Team")
             {
                 activeMovement = false;
@@ -122,6 +127,7 @@ public class MouseController : MonoBehaviour
         {
             item.ShowTile();
         }
+        character.activeTile.ShowTile(true);
     }
 
     void MoveAlongPath()
