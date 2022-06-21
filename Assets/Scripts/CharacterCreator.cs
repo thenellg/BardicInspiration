@@ -10,7 +10,7 @@ public class CharacterCreator : MonoBehaviour
     private DiceFunctionality roll;
     private int rolledNum = 0;
     public string nextLevel;
-
+    
     [Header("Text")]
     public TextMeshProUGUI visName;
     public TextMeshProUGUI visSpeed;
@@ -28,12 +28,14 @@ public class CharacterCreator : MonoBehaviour
 
 
     public CharStat character = new CharStat();
-
+    public int characterID = 0;
+    private GameSettings settings;
 
     // Start is called before the first frame update
     void Start()
     {
         roll = FindObjectOfType<DiceFunctionality>();
+        settings = FindObjectOfType<GameSettings>();
     }
 
     void setExtra()
@@ -100,6 +102,9 @@ public class CharacterCreator : MonoBehaviour
 
     public void loadLevel()
     {
+        settings.customCharacterID = characterID;
+        settings.character = character;
+
         SceneManager.LoadScene(nextLevel);//, LoadSceneMode.Additive);
     }
 

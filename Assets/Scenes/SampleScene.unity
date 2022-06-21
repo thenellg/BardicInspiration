@@ -1237,7 +1237,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1267232538}
-  - component: {fileID: 1267232537}
   m_Layer: 0
   m_Name: Highlights Container
   m_TagString: Untagged
@@ -1245,23 +1244,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1267232537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1267232536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22154ec370448994ca67e86c7df524ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanMoveHighlight: {r: 1, g: 1, b: 1, a: 1}
-  directionArrow: {r: 255, g: 255, b: 255, a: 1}
-  targetHighlight: {r: 253, g: 45, b: 55, a: 1}
-  TeammateHighlight: {r: 188, g: 12, b: 21, a: 1}
-  cursor: {r: 255, g: 122, b: 0, a: 1}
 --- !u!4 &1267232538
 Transform:
   m_ObjectHideFlags: 0

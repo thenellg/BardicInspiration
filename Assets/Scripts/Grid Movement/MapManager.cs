@@ -19,6 +19,7 @@ public class MapManager : MonoBehaviour
 
     public BattleManager battleManager;
     public Color settingsColor = new Color(1, 1, 1, 1);
+    public GameSettings settings;
 
     private void Awake()
     {
@@ -36,7 +37,8 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         //Get Settings and update information
-
+        settings = FindObjectOfType<GameSettings>();
+        settingsColor = settings.directionArrow;
 
         int numLayer = 0;
         //var tileMaps = gameObject.transform.GetComponentsInChildren<Tilemap>().OrderByDescending(x => x.GetComponent<TilemapRenderer>().sortingOrder);
@@ -101,6 +103,10 @@ public class MapManager : MonoBehaviour
             hero.placeCharacter(colliderMap);
             FindObjectOfType<MouseController>().character = hero.GetComponent<CharacterStats>();
             battleManager.playerTeam.Add(hero.gameObject);
+            if (hero.GetComponent<CharacterStats>().characterID == settings.customCharacterID)
+            {
+                hero.GetComponent<CharacterStats>().customized = true;
+            }
 
             battleManager.turnOrder.Add(hero.gameObject);
         }

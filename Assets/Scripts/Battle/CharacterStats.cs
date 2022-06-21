@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    public bool customized = false;
+    public int characterID;
+
     [Header("Vitals")]
     public string characterName;
     public OverlayTile activeTile;
@@ -23,26 +26,26 @@ public class CharacterStats : MonoBehaviour
 
     private void Start()
     {
-        maxHealth = health;
-
         GameSettings settings = FindObjectOfType<GameSettings>();
-        setStats(settings);
+        if(customized)
+            setStats(settings);
+
+        maxHealth = health;
     }
 
     void setStats(GameSettings settings)
     {
-        /*
-        public string characterName;
-    public int health;
-    public int attackRangeMin;
-    public int attackRangeMax;
-    public Sprite characterPicture;
-    public int speed;
-    public int attack;
-    public int defense;
-    public int special;
-    */
-}
+        characterName = settings.character.characterName;
+        health = settings.character.health;
+        attackRangeMin = settings.character.attackRangeMin;
+        attackRangeMax = settings.character.attackRangeMax;
+        speed = settings.character.speed;
+        attack = settings.character.attack;
+        defense = settings.character.defense;
+        special = settings.character.special;
+        characterPicture = settings.character.characterPicture;
+
+    }
 
     public Transform returnMenuLocation()
     {

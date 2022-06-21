@@ -128,6 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b884194c16fc2ac4ea1073bf7a390d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customized: 0
+  characterID: 2
   characterName: Soldier
   activeTile: {fileID: 0}
   health: 0

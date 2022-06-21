@@ -12,7 +12,8 @@ public class GameSettings : MonoBehaviour
     public Color cursor = new Color(255, 122, 0);
 
     [Header("Player Stats")]
-    public CharStat character = new CharStat();
+    public CharStat character;
+    public int customCharacterID;
 
     void Awake()
     {
