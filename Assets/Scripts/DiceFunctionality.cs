@@ -9,12 +9,12 @@ public class DiceFunctionality : MonoBehaviour
     //spawn in a dice for the animation of this for the player and then send back the actual number.
     //Once the animation is finished, the dice will fade and then the object will be deleted from the heirarchy.
 
-    public void getRandomNumber(int diceType, bool isPlayer)
+    public int getRandomNumber(int diceType, bool isPlayer)
     {
         if (diceType <= 0)
             diceType = 1;
 
-        int randNum = Random.Range(1, diceType);
+        int randNum = (Random.Range(1, diceType) + Random.Range(1, diceType))/2;
         
         if (isPlayer)
         {
@@ -33,6 +33,6 @@ public class DiceFunctionality : MonoBehaviour
         }
         
         Debug.Log(randNum);
-        //return randNum;
+        return randNum;
     }
 }

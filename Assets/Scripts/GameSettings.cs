@@ -11,8 +11,18 @@ public class GameSettings : MonoBehaviour
     public Color TeammateHighlight = new Color(14, 119, 191);
     public Color cursor = new Color(255, 122, 0);
 
-    //[Header("Player Stats")]
-    //public CharacterStats playerStats = new CharacterStats();
+    [Header("Player Stats")]
+    public CharStat character = new CharStat();
 
+    void Awake()
+    {
+        GameSettings[] objs = FindObjectsOfType<GameSettings>();
 
+        if (objs.Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+    }
 }

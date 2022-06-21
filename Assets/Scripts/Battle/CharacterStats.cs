@@ -24,7 +24,25 @@ public class CharacterStats : MonoBehaviour
     private void Start()
     {
         maxHealth = health;
+
+        GameSettings settings = FindObjectOfType<GameSettings>();
+        setStats(settings);
     }
+
+    void setStats(GameSettings settings)
+    {
+        /*
+        public string characterName;
+    public int health;
+    public int attackRangeMin;
+    public int attackRangeMax;
+    public Sprite characterPicture;
+    public int speed;
+    public int attack;
+    public int defense;
+    public int special;
+    */
+}
 
     public Transform returnMenuLocation()
     {
