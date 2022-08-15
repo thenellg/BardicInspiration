@@ -114,14 +114,17 @@ public class MouseController : MonoBehaviour
 
     }
 
-    public void GetInRangeTiles()
+    public void GetInRangeTiles(bool overrideChar = false)
     {
         foreach (var item in inRangeTiles)
         {
             item.HideTile();
         }
 
-        inRangeTiles = rangeFinder.GetTilesinRange(character.activeTile, character.speed);
+        if (overrideChar)
+            inRangeTiles = rangeFinder.GetTilesinRange(character.activeTile, 100);
+        else
+            inRangeTiles = rangeFinder.GetTilesinRange(character.activeTile, character.speed);
 
         foreach (var item in inRangeTiles)
         {
@@ -143,7 +146,7 @@ public class MouseController : MonoBehaviour
         character.transform.position = Vector2.MoveTowards(character.transform.position, path[0].characterPos.position, step);
         character.transform.position = new Vector3(character.transform.position.x, character.transform.position.y, zIndex);
 
-        if(Vector2.Distance(character.transform.position, path[0].characterPos.position) < 0.0001f)
+        if (Vector2.Distance(character.transform.position, path[0].characterPos.position) < 0.0001f)
         {
             PositionCharacterOnTile(path[0]);
             path.RemoveAt(0);
@@ -168,14 +171,38 @@ public class MouseController : MonoBehaviour
 
         overlayTile.isBlocked = true;
 
-        if(character.tag == "Player Team")
+        if (character.tag == "Player Team")
             battleManager.playerLocations.Remove(character.activeTile);
-        
+
         character.activeTile = overlayTile;
-        
+
         if (character.tag == "Player Team")
             battleManager.playerLocations.Add(character.activeTile);
 
         overlayTile.currentChar = character;
+    }
+
+    public void enemyMove()
+    {
+        int check = pathfinder.GetGridDistance(character.activeTile, battleManager.playerLocations[0]);
+        OverlayTile nearestCharacter = battleManager.playerLocations[0];
+
+        GetInRangeTiles(true);
+        foreach (OverlayTile newTile in battleManager.playerLocations)
+        {
+            //Go through battleManager.playerLocations to find the closest player
+            int test = pathfinder.GetGridDistance(character.activeTile, newTile);
+            if (test < check)
+            {
+                check = test;
+                nearestCharacter = newTile;
+            }
+        }
+
+        Debug.Log("RANGE: " + check + " - ENEMY: " + nearestCharacter.currentChar.characterName);
+        GetInRangeTiles();
+
+        //move as close to them as possible
+        //if in range, attack
     }
 }

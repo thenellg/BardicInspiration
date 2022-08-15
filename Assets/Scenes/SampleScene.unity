@@ -305,11 +305,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312228, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.01
+      value: 1.151
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312228, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.084
+      value: -0.654
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312228, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -361,11 +361,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8577116171866360218, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: startingLocation.x
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8577116171866360218, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: startingLocation.y
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
@@ -405,6 +405,7 @@ MonoBehaviour:
   enemyTeam: {fileID: 1087345548}
   battleManager: {fileID: 2138875658}
   settingsColor: {r: 1, g: 1, b: 1, a: 0}
+  settings: {fileID: 0}
 --- !u!156049354 &223707383
 Grid:
   m_ObjectHideFlags: 0
@@ -3639,6 +3640,7 @@ MonoBehaviour:
   actionMenu: {fileID: 1366546101}
   cursor: {fileID: 1924265899}
   attacking: 0
+  playerLocations: []
 --- !u!1001 &1150870651958757186
 PrefabInstance:
   m_ObjectHideFlags: 0

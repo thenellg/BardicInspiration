@@ -117,6 +117,7 @@ public class BattleManager : MonoBehaviour
         }
         else if (cursor.character.tag == "Enemy Team")
         {
+            cursor.enemyMove();
             Invoke("enemyMove", 2f);
         }
 

@@ -65,7 +65,7 @@ public class Pathfinder
         return finishedList;
     }
 
-    private int GetGridDistance(OverlayTile start, OverlayTile neighbor)
+    public int GetGridDistance(OverlayTile start, OverlayTile neighbor)
     {
         return Mathf.Abs(start.gridLocation.x - neighbor.gridLocation.x) + Mathf.Abs(start.gridLocation.y - neighbor.gridLocation.y);
     }
