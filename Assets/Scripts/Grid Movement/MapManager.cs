@@ -106,9 +106,11 @@ public class MapManager : MonoBehaviour
             if (hero.GetComponent<CharacterStats>().characterID == settings.customCharacterID)
             {
                 hero.GetComponent<CharacterStats>().customized = true;
+                //settings.setUp(hero.GetComponent<CharacterStats>());
             }
 
             battleManager.turnOrder.Add(hero.gameObject);
+            battleManager.playerLocations.Add(hero.GetComponent<CharacterStats>().activeTile);
         }
 
         //Set Up Enemies

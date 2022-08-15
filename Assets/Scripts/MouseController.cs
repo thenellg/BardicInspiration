@@ -166,9 +166,16 @@ public class MouseController : MonoBehaviour
 
         character.transform.position = overlayTile.GetComponent<OverlayTile>().characterPos.position;
 
-        overlayTile.isBlocked = true;        
+        overlayTile.isBlocked = true;
 
+        if(character.tag == "Player Team")
+            battleManager.playerLocations.Remove(character.activeTile);
+        
         character.activeTile = overlayTile;
+        
+        if (character.tag == "Player Team")
+            battleManager.playerLocations.Add(character.activeTile);
+
         overlayTile.currentChar = character;
     }
 }

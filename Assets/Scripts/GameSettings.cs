@@ -12,8 +12,8 @@ public class GameSettings : MonoBehaviour
     public Color cursor = new Color(255, 122, 0);
 
     [Header("Player Stats")]
-    public CharStat character;
     public int customCharacterID;
+    public CharStat character;
 
     void Awake()
     {
@@ -25,5 +25,18 @@ public class GameSettings : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void setUp(CharacterStats hero)
+    {
+        hero.characterName = character.characterName;
+        hero.health = character.health;
+        hero.attackRangeMin = character.attackRangeMin;
+        hero.attackRangeMax = character.attackRangeMax;
+        hero.speed = character.speed;
+        hero.attack = character.attack;
+        hero.defense = character.defense;
+        hero.special = character.special;
+        hero.characterPicture = character.characterPicture;
     }
 }

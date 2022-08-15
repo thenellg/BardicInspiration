@@ -13,6 +13,7 @@ public class BattleManager : MonoBehaviour
 
     public bool attacking = false;
     private bool attackedOnTurn = false;
+    public List<OverlayTile> playerLocations;
 
     private void Start()
     {
