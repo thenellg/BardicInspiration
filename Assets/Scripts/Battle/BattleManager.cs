@@ -112,7 +112,6 @@ public class BattleManager : MonoBehaviour
 
         if (cursor.character.tag == "Player Team")
         {
-            cursor.GetInRangeTiles();
             cursor.activeMovement = true;
         }
         else if (cursor.character.tag == "Enemy Team")
@@ -131,5 +130,6 @@ public class BattleManager : MonoBehaviour
     public void onTurnSwap()
     {
         actionMenu.updateInfo();
+        cursor.GetInRangeTiles();
     }
 }

@@ -101,15 +101,19 @@ public class MouseController : MonoBehaviour
                 item.HideTile();
             }
 
+            //Set to turn abilities in battle manager if player
+            //Run enemy idea if an enemy
             if (character.tag == "Player Team")
             {
                 activeMovement = false;
                 battleManager.actionMenu.setActionMenuLocation(character);
                 battleManager.actionMenu.visibleActionMenu.SetActive(true);
             }
+            else if (character.tag == "Enemy Team")
+            {
+                enemyAttackCheck();
+            }
 
-            //Set to turn abilities in battle manager if player
-            //Run enemy idea if an enemy
         }
 
 
@@ -188,50 +192,42 @@ public class MouseController : MonoBehaviour
 
     public void enemyMove()
     {
-        GetInRangeTiles();
-
-        int check = pathfinder.GetGridDistance(character.activeTile, battleManager.playerLocations[0]);
+        //Go through battleManager.playerLocations to find the closest player
+        int checkA = pathfinder.GetGridDistance(character.activeTile, battleManager.playerLocations[0]);
         OverlayTile nearestCharacter = battleManager.playerLocations[0];
 
         foreach (OverlayTile newTile in battleManager.playerLocations)
         {
-            //Go through battleManager.playerLocations to find the closest player
-            int test = pathfinder.GetGridDistance(character.activeTile, newTile);
-            if (test < check)
+            int testA = pathfinder.GetGridDistance(character.activeTile, newTile);
+            if (testA < checkA)
             {
-                check = test;
+                checkA = testA;
                 nearestCharacter = newTile;
             }
         }
 
         //move as close to them as possible
         OverlayTile closestTile = inRangeTiles[0];
-        List<OverlayTile> neighborTiles = MapManager.Instance.GetNeighborTiles(nearestCharacter, inRangeTiles);
+        int checkB = pathfinder.GetGridDistance(nearestCharacter, inRangeTiles[0]);
 
-        if (neighborTiles[0]){
-            //Get neighbor and set closestTile to first neighbor within range
-            closestTile = neighborTiles[0];
-        }
-        else
+        foreach (OverlayTile closest in inRangeTiles)
         {
-            //Find closest tile and move to it
-            check = pathfinder.GetGridDistance(nearestCharacter, inRangeTiles[0]);
-
-            Debug.Log("Checking\nChecking\nChecking\nChecking");
-            foreach (OverlayTile closest in inRangeTiles)
+            int testB = pathfinder.GetGridDistance(nearestCharacter, closest);
+            if (testB < checkB && testB != 0)
             {
-                int test = pathfinder.GetGridDistance(nearestCharacter, closest);
-                Debug.Log(test + " vs " + check);
-                if (test < check)
-                {
-                    check = test;
-                    closestTile = closest;
-                }
+                Debug.Log(testB + " vs " + checkB);
+                checkB = testB;
+                closestTile = closest;
             }
         }
-
         path = pathfinder.FindPath(character.activeTile, closestTile, inRangeTiles);
         isMoving = true;
+
+    }
+
+    public void enemyAttackCheck()
+    {
+        List<OverlayTile> neighborTiles = MapManager.Instance.GetNeighborTiles(character.activeTile, inRangeTiles);
 
     }
 }
