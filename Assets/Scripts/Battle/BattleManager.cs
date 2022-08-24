@@ -116,7 +116,9 @@ public class BattleManager : MonoBehaviour
         }
         else if (cursor.character.tag == "Enemy Team")
         {
-            cursor.enemyMove();
+            //Eventually set this up for account for different types of Enemy AIs
+            cursor.character.GetComponent<BasicEnemy>().moveTowardsClosestPlayer();
+
             Invoke("enemyMove", 2f);
         }
 

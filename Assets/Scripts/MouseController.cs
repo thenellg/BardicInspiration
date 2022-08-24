@@ -15,7 +15,7 @@ public class MouseController : MonoBehaviour
     public CharacterStats character;
 
     [SerializeField] private OverlayTile overlayTile = null;
-    private Pathfinder pathfinder;
+    public Pathfinder pathfinder;
     private RangeFinder rangeFinder;
     private DrawArrow drawArrow;
 
@@ -202,6 +202,9 @@ public class MouseController : MonoBehaviour
             if (testA < checkA)
             {
                 checkA = testA;
+
+                //if both are in range, check which is the weaker enemy or if the enemy has a type advantage
+
                 nearestCharacter = newTile;
             }
         }
