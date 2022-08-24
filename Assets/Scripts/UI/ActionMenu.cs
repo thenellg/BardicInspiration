@@ -64,7 +64,8 @@ public class ActionMenu : MonoBehaviour
             else
                 visibleTurns[i].setName(temp.characterName, Color.yellow);
 
-            characterIndex++;
+            if(cursor.gameActive)
+                characterIndex++;
         }
 
     }

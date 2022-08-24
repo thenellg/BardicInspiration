@@ -26,6 +26,8 @@ public class MouseController : MonoBehaviour
     public bool activeMovement = true;
     private bool enemyMoving = false;
 
+    public bool gameActive = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,86 +45,87 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hit = GetFocusedOnTile();
-
-        if (hit)
+        if (gameActive)
         {
-            OverlayTile tile = hit.collider.gameObject.GetComponent<OverlayTile>();
-            cursor.transform.position = tile.transform.position;
-            cursor.gameObject.GetComponent<SpriteRenderer>().sortingOrder = tile.transform.GetComponent<SpriteRenderer>().sortingOrder;
+            RaycastHit2D hit = GetFocusedOnTile();
 
-            if (inRangeTiles.Contains(tile) && !isMoving && activeMovement)
+            if (hit)
             {
-                path = pathfinder.FindPath(character.activeTile, tile, inRangeTiles);
+                OverlayTile tile = hit.collider.gameObject.GetComponent<OverlayTile>();
+                cursor.transform.position = tile.transform.position;
+                cursor.gameObject.GetComponent<SpriteRenderer>().sortingOrder = tile.transform.GetComponent<SpriteRenderer>().sortingOrder;
+
+                if (inRangeTiles.Contains(tile) && !isMoving && activeMovement)
+                {
+                    path = pathfinder.FindPath(character.activeTile, tile, inRangeTiles);
+
+                    foreach (var item in inRangeTiles)
+                    {
+                        MapManager.Instance.colliderMap[item.gridLocation2D].setArrowSprite(ArrowDirections.None);
+                    }
+
+                    for (int i = 0; i < path.Count; i++)
+                    {
+                        var previousTile = i > 0 ? path[i - 1] : character.activeTile;
+                        var futureTile = i < path.Count - 1 ? path[i + 1] : null;
+
+                        var arrow = drawArrow.TranslateDirection(previousTile, path[i], futureTile);
+                        path[i].setArrowSprite(arrow);
+                    }
+                }
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (battleManager.attacking)
+                    {
+                        //charcter attacks
+                        battleManager.attack(character, tile.currentChar);
+
+                        battleManager.attacking = false;
+                        isMoving = true;
+                    }
+                    else
+                    {
+                        isMoving = true;
+                        tile.gameObject.GetComponent<OverlayTile>().HideTile();
+                    }
+                }
+            }
+
+            if (path.Count > 0 && isMoving)
+            {
+                MoveAlongPath();
+            }
+            else if (path.Count == 0 && isMoving)
+            {
+                isMoving = false;
 
                 foreach (var item in inRangeTiles)
                 {
-                    MapManager.Instance.colliderMap[item.gridLocation2D].setArrowSprite(ArrowDirections.None);
+                    item.HideTile();
                 }
 
-                for (int i = 0; i < path.Count; i++)
+                //Set to turn abilities in battle manager if player
+                //Run enemy idea if an enemy
+                if (character.tag == "Player Team")
                 {
-                    var previousTile = i > 0 ? path[i - 1] : character.activeTile;
-                    var futureTile = i < path.Count - 1 ? path[i + 1] : null;
-
-                    var arrow = drawArrow.TranslateDirection(previousTile, path[i], futureTile);
-                    path[i].setArrowSprite(arrow);
+                    activeMovement = false;
+                    battleManager.actionMenu.setActionMenuLocation(character);
+                    battleManager.actionMenu.visibleActionMenu.SetActive(true);
                 }
-            }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (battleManager.attacking)
+                else if (character.tag == "Enemy Team")
                 {
-                    //charcter attacks
-                    battleManager.attack(character, tile.currentChar);
+                    OverlayTile defender = character.GetComponent<BasicEnemy>().enemyAttackCheck();
+                    if (defender)
+                    {
+                        Debug.Log("Player is in range");
+                        //Eventually adjust this for possible special attacks?
+                        battleManager.attack(character, defender.currentChar);
+                    }
+                }
 
-                    battleManager.attacking = false;
-                    isMoving = true;
-                }
-                else
-                {
-                    isMoving = true;
-                    tile.gameObject.GetComponent<OverlayTile>().HideTile();
-                }
             }
         }
-
-        if (path.Count > 0 && isMoving)
-        {
-            MoveAlongPath();
-        }
-        else if (path.Count == 0 && isMoving)
-        {
-            isMoving = false;
-
-            foreach (var item in inRangeTiles)
-            {
-                item.HideTile();
-            }
-
-            //Set to turn abilities in battle manager if player
-            //Run enemy idea if an enemy
-            if (character.tag == "Player Team")
-            {
-                activeMovement = false;
-                battleManager.actionMenu.setActionMenuLocation(character);
-                battleManager.actionMenu.visibleActionMenu.SetActive(true);
-            }
-            else if (character.tag == "Enemy Team")
-            {
-                OverlayTile defender = character.GetComponent<BasicEnemy>().enemyAttackCheck();
-                if (defender)
-                {
-                    Debug.Log("Player is in range");
-                    //Eventually adjust this for possible special attacks?
-                    battleManager.attack(character, defender.currentChar);
-                }
-            }
-
-        }
-
-
     }
 
     public void GetInRangeTiles(bool overrideChar = false)

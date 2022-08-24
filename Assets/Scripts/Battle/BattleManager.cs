@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BattleManager : MonoBehaviour
 {
@@ -10,19 +11,25 @@ public class BattleManager : MonoBehaviour
     public int turnNumber = 0;
     public ActionMenu actionMenu;
     public MouseController cursor;
+    public TextMeshProUGUI resultsText;
+
 
     public bool attacking = false;
     private bool attackedOnTurn = false;
     public List<OverlayTile> playerLocations;
+    public GameSettings settings;
+    public GameObject gameUI;
 
     private void Start()
     {
         MouseController temp = FindObjectOfType<MouseController>();
+        settings = FindObjectOfType<GameSettings>();
 
         //play battle start animation
         //Invoke startSequence at end of animation
         startSequence();
         Debug.Log(turnOrder.Count);
+        resultsText.text = " ";
     }
 
     void startSequence()
@@ -76,6 +83,9 @@ public class BattleManager : MonoBehaviour
         //if health <= 0, kill character
         if (defender.health <= 0)
         {
+            defender.activeTile.isBlocked = false;
+            defender.activeTile.currentChar = null;
+
             turnOrder.Remove(defender.gameObject);
 
             if (playerTeam.Contains(defender.gameObject))
@@ -92,8 +102,26 @@ public class BattleManager : MonoBehaviour
             temp.SetActive(false);
         }
 
-        actionMenu.updateTurnInfo();
-
+        if (playerTeam.Count == 0)
+        {
+            resultsText.color = settings.targetHighlight;
+            resultsText.text = "YOU LOSE";
+            cursor.gameActive = false;
+            gameUI.SetActive(false);
+            actionMenu.enabled = false;
+        }
+        else if (enemyTeam.Count == 0)
+        {
+            resultsText.color = settings.TeammateHighlight;
+            resultsText.text = "YOU WIN";
+            cursor.gameActive = false;
+            gameUI.SetActive(false);
+            actionMenu.enabled = false;
+        }
+        else
+        {
+            actionMenu.updateTurnInfo();
+        }
     }
 
 
