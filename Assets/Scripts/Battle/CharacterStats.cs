@@ -6,6 +6,7 @@ public class CharacterStats : MonoBehaviour
 {
     public bool customized = false;
     public int characterID;
+    public SpriteRenderer characterSprite;
 
     [Header("Vitals")]
     public string characterName;
@@ -27,6 +28,7 @@ public class CharacterStats : MonoBehaviour
     private void Start() 
     { 
         maxHealth = health;
+        characterSprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     public Transform returnMenuLocation()
