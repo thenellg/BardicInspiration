@@ -6,6 +6,9 @@ public class BasicEnemy : MonoBehaviour
 {
     public MouseController cursor;
     private BattleManager battleManager;
+    public CharacterStats character;
+
+    public List<OverlayTile> attackRange = new List<OverlayTile>();
 
     // Start is called before the first frame update
     void Start()
@@ -37,14 +40,30 @@ public class BasicEnemy : MonoBehaviour
         OverlayTile closestTile = cursor.inRangeTiles[0];
         int checkB = cursor.pathfinder.GetGridDistance(nearestCharacter, cursor.inRangeTiles[0]);
 
-        foreach (OverlayTile closest in cursor.inRangeTiles)
+        if (checkB > character.attackRangeMin)
         {
-            int testB = cursor.pathfinder.GetGridDistance(nearestCharacter, closest);
-            if (testB < checkB && testB != 0)
+            foreach (OverlayTile closest in cursor.inRangeTiles)
             {
-                Debug.Log(testB + " vs " + checkB);
-                checkB = testB;
-                closestTile = closest;
+                int testB = cursor.pathfinder.GetGridDistance(nearestCharacter, closest);
+                if (testB < checkB && testB != 0 && testB >= character.attackRangeMin)
+                {
+                    //Debug.Log(testB + " vs " + checkB);
+                    checkB = testB;
+                    closestTile = closest;
+                }
+            }
+        }
+        else
+        {
+            foreach (OverlayTile closest in cursor.inRangeTiles)
+            {
+                int testB = cursor.pathfinder.GetGridDistance(nearestCharacter, closest);
+                if (testB > checkB && testB != 0 && testB <= character.attackRangeMax)
+                {
+                    //Debug.Log(testB + " vs " + checkB);
+                    checkB = testB;
+                    closestTile = closest;
+                }
             }
         }
         cursor.path = cursor.pathfinder.FindPath(cursor.character.activeTile, closestTile, cursor.inRangeTiles);
@@ -52,9 +71,19 @@ public class BasicEnemy : MonoBehaviour
 
     }
 
-    public void enemyAttackCheck()
+    public OverlayTile enemyAttackCheck()
     {
-        List<OverlayTile> neighborTiles = MapManager.Instance.GetNeighborTiles(cursor.character.activeTile, cursor.inRangeTiles);
+        //Check if enemy is in range
+        attackRange = cursor.rangeFinder.GetTilesinRange(character.activeTile,character.attackRangeMax);
+        foreach(OverlayTile tile in attackRange)
+        {
+            int range = cursor.pathfinder.GetGridDistance(character.activeTile, tile);
+            if (tile.isBlocked && tile.currentChar.tag == "Player Team" && range >= character.attackRangeMin)
+            {
+                return tile;
+            }
+        }
 
+        return null;
     }
 }

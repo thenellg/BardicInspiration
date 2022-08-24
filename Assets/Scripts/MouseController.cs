@@ -16,7 +16,7 @@ public class MouseController : MonoBehaviour
 
     [SerializeField] private OverlayTile overlayTile = null;
     public Pathfinder pathfinder;
-    private RangeFinder rangeFinder;
+    public RangeFinder rangeFinder;
     private DrawArrow drawArrow;
 
     public List<OverlayTile> path = new List<OverlayTile>();
@@ -111,7 +111,13 @@ public class MouseController : MonoBehaviour
             }
             else if (character.tag == "Enemy Team")
             {
-                enemyAttackCheck();
+                OverlayTile defender = character.GetComponent<BasicEnemy>().enemyAttackCheck();
+                if (defender)
+                {
+                    Debug.Log("Player is in range");
+                    //Eventually adjust this for possible special attacks?
+                    battleManager.attack(character, defender.currentChar);
+                }
             }
 
         }

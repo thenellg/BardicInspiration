@@ -67,6 +67,8 @@ public class BattleManager : MonoBehaviour
 
     public void attack(CharacterStats attacker, CharacterStats defender)
     {
+        //make an animation and show damage numbers
+
         //Add stuff here to actually make the attack cool;
         defender.health -= attacker.attack;
         defender.activeTile.HideTile();
