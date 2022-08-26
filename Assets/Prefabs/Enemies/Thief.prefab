@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099203572295526716}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.795, y: -0.269, z: 0.77060705}
+  m_LocalPosition: {x: 0, y: 0.14, z: 0}
   m_LocalScale: {x: -0.8993, y: 0.8993, z: 0.8993}
   m_Children: []
   m_Father: {fileID: 2696457712678485992}
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2696457712678485995}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6206417, y: 0.55947894, z: -0.79169786}
+  m_LocalPosition: {x: 0.6206417, y: 0.581, z: -0.79169786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1396645809359842395}
@@ -132,16 +132,16 @@ MonoBehaviour:
   customized: 0
   characterID: 2
   characterSprite: {fileID: 0}
-  characterName: Soldier
+  characterName: Thief
   activeTile: {fileID: 0}
   health: 10
   maxHealth: 0
-  attackRangeMin: 2
-  attackRangeMax: 2
+  attackRangeMin: 1
+  attackRangeMax: 1
   menuLocation: {fileID: 1396645809359842395}
   characterPicture: {fileID: 21300000, guid: 6578a6d783d32ae498be1782f3d19a77, type: 3}
-  speed: 3
-  attack: 6
+  speed: 7
+  attack: 2
   defense: 5
   special: 0
 --- !u!114 &5278243548780653334
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
   character: {fileID: 2696457712678485993}
+  m_enemyType: 0
   attackRange: []
 --- !u!1 &7380385706202963001
 GameObject:
