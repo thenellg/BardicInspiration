@@ -144,6 +144,7 @@ Transform:
   m_Children:
   - {fileID: 7154764948117643132}
   - {fileID: 1955583945743065989}
+  - {fileID: 5700962565709800838}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -159,6 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b884194c16fc2ac4ea1073bf7a390d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customized: 0
+  characterID: 0
+  characterSprite: {fileID: 0}
   characterName: Eliwood
   activeTile: {fileID: 0}
   health: 10
@@ -166,6 +170,7 @@ MonoBehaviour:
   attackRangeMin: 1
   attackRangeMax: 3
   menuLocation: {fileID: 7154764948117643132}
+  damageLocation: {fileID: 5700962565709800838}
   characterPicture: {fileID: 21300000, guid: 16558bf5f4256664a93f7809ee470d78, type: 3}
   speed: 3
   attack: 4
@@ -202,3 +207,33 @@ MonoBehaviour:
   magicAttack: 0
   playerAttack: 1
   healingAbility: 0
+--- !u!1 &2107367565639551186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5700962565709800838}
+  m_Layer: 0
+  m_Name: Damage Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5700962565709800838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107367565639551186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.254, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1955583946479312228}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

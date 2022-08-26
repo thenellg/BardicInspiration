@@ -10,6 +10,7 @@ public class GameSettings : MonoBehaviour
     public Color targetHighlight = new Color(253, 45, 55);
     public Color TeammateHighlight = new Color(14, 119, 191);
     public Color cursor = new Color(255, 122, 0);
+    public Color damageColor = new Color(253, 45, 55);
 
     [Header("Player Stats")]
     public int customCharacterID;

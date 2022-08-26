@@ -145,7 +145,6 @@ GameObject:
   - component: {fileID: 77512213}
   - component: {fileID: 77512212}
   - component: {fileID: 77512211}
-  - component: {fileID: 77512210}
   m_Layer: 5
   m_Name: Out of Game UI
   m_TagString: Untagged
@@ -173,25 +172,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &77512210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77512208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17087f78265324647880039c0bb07625, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cursor: {fileID: 1924265899}
-  battleManager: {fileID: 0}
-  visibleActionMenu: {fileID: 0}
-  menuLocation: {fileID: 0}
-  cam: {fileID: 0}
-  TurnOrderParent: {fileID: 0}
-  visibleTurns: []
 --- !u!114 &77512211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1351,7 +1331,7 @@ Transform:
   - {fileID: 1845413666}
   - {fileID: 101319001}
   m_Father: {fileID: 1366546100}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &978924311 stripped
 Transform:
@@ -1514,8 +1494,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 69048617}
   - {fileID: 937048387}
+  - {fileID: 69048617}
   m_Father: {fileID: 252543700}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1710,7 +1690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825630797498355756, guid: e1fa8f572968b304e9ac92468a89a887, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4825630797498355759, guid: e1fa8f572968b304e9ac92468a89a887, type: 3}
       propertyPath: m_RootOrder
@@ -4016,6 +3996,7 @@ MonoBehaviour:
   playerLocations: []
   settings: {fileID: 0}
   gameUI: {fileID: 1366546096}
+  damageNumbers: {fileID: 8184869586627814647, guid: e0fb45cb60badcb4082c86b50be23034, type: 3}
 --- !u!4 &811177208957008287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2696457712678485992, guid: 24a02a4b17ca9274cbccff7634e52a7d, type: 3}
@@ -4148,7 +4129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2696457712678485995, guid: 24a02a4b17ca9274cbccff7634e52a7d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5278243548780653334, guid: 24a02a4b17ca9274cbccff7634e52a7d, type: 3}
       propertyPath: startingLocation.x
@@ -4186,7 +4167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3787828762385236669, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3787828762385236669, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4327,7 +4308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8886872343236361358, guid: a2ae1a9421333e147940bd31ed5d568d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2ae1a9421333e147940bd31ed5d568d, type: 3}
@@ -4341,6 +4322,18 @@ PrefabInstance:
     - target: {fileID: 8768531583899352072, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
       propertyPath: m_Name
       value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768531583899352073, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
+      propertyPath: damageColor.b
+      value: 0.16470589
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768531583899352073, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
+      propertyPath: damageColor.g
+      value: 0.13333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768531583899352073, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
+      propertyPath: damageColor.r
+      value: 0.49019608
       objectReference: {fileID: 0}
     - target: {fileID: 8768531583899352078, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
       propertyPath: m_RootOrder

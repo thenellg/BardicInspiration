@@ -112,6 +112,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!1 &6278296150559914979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3808132624866279503}
+  m_Layer: 0
+  m_Name: Damage Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3808132624866279503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6278296150559914979}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.014999986, y: 0.216, z: 1.7916979}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8886872343236361357}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8886872343236361358
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +174,7 @@ Transform:
   m_Children:
   - {fileID: 5575136079434411838}
   - {fileID: 6403256628031510014}
+  - {fileID: 3808132624866279503}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -161,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customized: 0
   characterID: 4
+  characterSprite: {fileID: 0}
   characterName: Archer
   activeTile: {fileID: 0}
   health: 5
@@ -168,6 +200,7 @@ MonoBehaviour:
   attackRangeMin: 3
   attackRangeMax: 4
   menuLocation: {fileID: 5575136079434411838}
+  damageLocation: {fileID: 3808132624866279503}
   characterPicture: {fileID: 21300000, guid: 5abde8090529de8469561b04344e8676, type: 3}
   speed: 6
   attack: 2
@@ -201,4 +234,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
   character: {fileID: 8886872343236361356}
+  m_enemyType: 0
   attackRange: []

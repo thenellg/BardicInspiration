@@ -114,6 +114,7 @@ Transform:
   m_Children:
   - {fileID: 1396645809359842395}
   - {fileID: 496472059941181083}
+  - {fileID: 1161794695363585800}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -139,6 +140,7 @@ MonoBehaviour:
   attackRangeMin: 1
   attackRangeMax: 1
   menuLocation: {fileID: 1396645809359842395}
+  damageLocation: {fileID: 1161794695363585800}
   characterPicture: {fileID: 21300000, guid: 6578a6d783d32ae498be1782f3d19a77, type: 3}
   speed: 7
   attack: 2
@@ -174,6 +176,36 @@ MonoBehaviour:
   character: {fileID: 2696457712678485993}
   m_enemyType: 0
   attackRange: []
+--- !u!1 &4882058619289412199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1161794695363585800}
+  m_Layer: 0
+  m_Name: Damage Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1161794695363585800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882058619289412199}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.009, y: 0.251, z: 1.7916979}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2696457712678485992}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7380385706202963001
 GameObject:
   m_ObjectHideFlags: 0

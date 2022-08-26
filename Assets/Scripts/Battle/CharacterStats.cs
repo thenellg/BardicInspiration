@@ -17,6 +17,7 @@ public class CharacterStats : MonoBehaviour
     public int attackRangeMin;
     public int attackRangeMax;
     public Transform menuLocation;
+    public Transform damageLocation;
     public Sprite characterPicture;
 
     [Header("Stats")]

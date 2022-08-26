@@ -19,6 +19,11 @@ public class BattleManager : MonoBehaviour
     public List<OverlayTile> playerLocations;
     public GameSettings settings;
     public GameObject gameUI;
+    public GameObject damageNumbers;
+    
+    private TextMeshProUGUI damage;
+    private CharacterStats attacker;
+    private CharacterStats defender;
 
     private void Start()
     {
@@ -72,15 +77,10 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void attack(CharacterStats attacker, CharacterStats defender)
+    public void doDamage()
     {
-        //make an animation and show damage numbers
-
-        //Add stuff here to actually make the attack cool;
         defender.health -= attacker.attack;
-        defender.activeTile.HideTile();
 
-        //if health <= 0, kill character
         if (defender.health <= 0)
         {
             defender.activeTile.isBlocked = false;
@@ -120,10 +120,39 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
+            attacker = null;
+            defender = null;
             actionMenu.updateTurnInfo();
         }
     }
 
+    public void attack(CharacterStats m_Attacker, CharacterStats m_Defender)
+    {
+        attacker = m_Attacker; defender = m_Defender;
+        //make an animation and show damage numbers
+
+        //Add stuff here to actually make the attack cool;
+        defender.activeTile.HideTile();
+        showDamage();
+
+    }
+
+    public void showDamage()
+    {
+        string info = "-" + attacker.attack.ToString();
+        damage = Instantiate(damageNumbers).GetComponent<TextMeshProUGUI>();
+        //Set info
+        damage.enabled = false;
+        damage.gameObject.transform.parent = gameUI.transform;
+        damage.text = info;
+        damage.color = settings.damageColor;
+        damage.gameObject.transform.position = actionMenu.cam.WorldToScreenPoint(defender.damageLocation.position);
+
+        //Show and animate
+        damage.enabled = true;
+        damage.GetComponent<damageNumbers>().move = true;
+        Invoke("doDamage", 1f);
+    }
 
     public void endTurn()
     {
@@ -164,4 +193,5 @@ public class BattleManager : MonoBehaviour
         actionMenu.updateInfo();
         cursor.GetInRangeTiles();
     }
+
 }
