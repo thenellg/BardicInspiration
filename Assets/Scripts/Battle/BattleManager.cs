@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class BattleManager : MonoBehaviour
 {
@@ -45,6 +46,12 @@ public class BattleManager : MonoBehaviour
         {
             cursor.activeMovement = true;
             cursor.GetInRangeTiles();
+        }
+        else if (turnOrder[0].GetComponent<CharacterStats>().tag == "Enemy Team")
+        {
+            cursor.character.GetComponent<BasicEnemy>().enemyMove();
+
+            Invoke("enemyMove", 2f);
         }
     }
 
@@ -124,17 +131,47 @@ public class BattleManager : MonoBehaviour
             defender = null;
             actionMenu.updateTurnInfo();
         }
+        Invoke("setAttacking", 1f);
+    }
+
+    void setAttacking()
+    {
+        attacking = false;
     }
 
     public void attack(CharacterStats m_Attacker, CharacterStats m_Defender)
     {
         attacker = m_Attacker; defender = m_Defender;
+        attacking = true;
         //make an animation and show damage numbers
 
         //Add stuff here to actually make the attack cool;
         defender.activeTile.HideTile();
+
+        //Get vector between attacker and defender
+        //Turn defender red and move them
+        m_Defender.characterSprite.color = settings.damageColor;
+        
+        Vector3 direction =  m_Defender.transform.position - m_Attacker.transform.position;
+        direction.Normalize();
+        direction = new Vector3(direction.x * 0.0005f, direction.y * 0.0005f, direction.z * 0.0005f);
+
+        m_Defender.GetComponent<CharacterAnimationHandler>().setDamageMove(direction.x, direction.y);
+
+        Invoke("resetDefender", 0.2f);
+
+    }
+
+    void resetDefender()
+    {
+        defender.characterSprite.color = Color.white;
         showDamage();
 
+        defender.GetComponent<CharacterAnimationHandler>().setDamageMoveBack(defender.activeTile.characterPos.position);
+
+
+        //if(defender)
+        //move character back to position
     }
 
     public void showDamage()

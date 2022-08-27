@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 3408716145935409800}
   - component: {fileID: 4856456875943605879}
   - component: {fileID: 2076892704965713972}
+  - component: {fileID: 3786217770874333293}
   m_Layer: 0
   m_Name: Solider
   m_TagString: Enemy Team
@@ -176,6 +177,24 @@ MonoBehaviour:
   character: {fileID: 3408716145935409800}
   m_enemyType: 0
   attackRange: []
+--- !u!114 &3786217770874333293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3408716145935409802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038a2399c09df704ea756cf131e355de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moving: 0
+  moveBack: 0
+  AddX: 0
+  AddY: 0
+  MoveBackSpeed: 0.1
+  tileLocation: {x: 0, y: 0, z: 0}
 --- !u!1 &7803026167335174488
 GameObject:
   m_ObjectHideFlags: 0

@@ -1261,6 +1261,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
+      propertyPath: speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955583946479312229, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: attack
       value: 10
       objectReference: {fileID: 0}
@@ -1690,7 +1694,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825630797498355756, guid: e1fa8f572968b304e9ac92468a89a887, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825630797498355758, guid: e1fa8f572968b304e9ac92468a89a887, type: 3}
+      propertyPath: speed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4825630797498355759, guid: e1fa8f572968b304e9ac92468a89a887, type: 3}
       propertyPath: m_RootOrder
@@ -1698,11 +1706,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825630797498355759, guid: e1fa8f572968b304e9ac92468a89a887, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.193
+      value: -0.185
       objectReference: {fileID: 0}
     - target: {fileID: 4825630797498355759, guid: e1fa8f572968b304e9ac92468a89a887, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.306
+      value: 0.147
       objectReference: {fileID: 0}
     - target: {fileID: 4825630797498355759, guid: e1fa8f572968b304e9ac92468a89a887, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4089,7 +4097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2696457712678485992, guid: 24a02a4b17ca9274cbccff7634e52a7d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.772
+      value: -0.809
       objectReference: {fileID: 0}
     - target: {fileID: 2696457712678485992, guid: 24a02a4b17ca9274cbccff7634e52a7d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4308,7 +4316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8886872343236361358, guid: a2ae1a9421333e147940bd31ed5d568d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2ae1a9421333e147940bd31ed5d568d, type: 3}

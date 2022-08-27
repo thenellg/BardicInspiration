@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 8886872343236361356}
   - component: {fileID: 1693120113141213299}
   - component: {fileID: 5244486711703125552}
+  - component: {fileID: 6964365579511556698}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Enemy Team
@@ -236,3 +237,21 @@ MonoBehaviour:
   character: {fileID: 8886872343236361356}
   m_enemyType: 0
   attackRange: []
+--- !u!114 &6964365579511556698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886872343236361358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038a2399c09df704ea756cf131e355de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moving: 0
+  moveBack: 0
+  AddX: 0
+  AddY: 0
+  MoveBackSpeed: 0.1
+  tileLocation: {x: 0, y: 0, z: 0}

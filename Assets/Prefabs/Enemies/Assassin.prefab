@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4825630797498355758}
   - component: {fileID: 3374248553664890065}
   - component: {fileID: 8170864580971041426}
+  - component: {fileID: -3647772472999724261}
   m_Layer: 0
   m_Name: Assassin
   m_TagString: Enemy Team
@@ -87,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4825630797498355756}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.952, y: -0.558, z: -0.79169786}
+  m_LocalPosition: {x: -0.091, y: -0.415, z: -0.79169786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8426879572937360284}
@@ -154,6 +155,24 @@ MonoBehaviour:
   character: {fileID: 4825630797498355758}
   m_enemyType: 0
   attackRange: []
+--- !u!114 &-3647772472999724261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4825630797498355756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038a2399c09df704ea756cf131e355de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moving: 0
+  moveBack: 0
+  AddX: 0
+  AddY: 0
+  MoveBackSpeed: 0.1
+  tileLocation: {x: 0, y: 0, z: 0}
 --- !u!1 &7553253969737336571
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7553253969737336571}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.028, z: 0}
+  m_LocalPosition: {x: 0, y: 0.135, z: 0}
   m_LocalScale: {x: -0.8993, y: 0.8993, z: 0.8993}
   m_Children: []
   m_Father: {fileID: 4825630797498355759}
