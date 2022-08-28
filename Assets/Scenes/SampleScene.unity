@@ -1335,7 +1335,7 @@ Transform:
   - {fileID: 1845413666}
   - {fileID: 101319001}
   m_Father: {fileID: 1366546100}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &978924311 stripped
 Transform:
@@ -1498,8 +1498,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 937048387}
   - {fileID: 69048617}
+  - {fileID: 937048387}
   m_Father: {fileID: 252543700}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4001,6 +4001,7 @@ MonoBehaviour:
   cursor: {fileID: 1924265899}
   resultsText: {fileID: 1988990444}
   attacking: 0
+  visAttacking: 0
   playerLocations: []
   settings: {fileID: 0}
   gameUI: {fileID: 1366546096}
@@ -4175,7 +4176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3787828762385236669, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3787828762385236669, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4231,11 +4232,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3787828762385236669, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -52.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3787828762385236669, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 174
       objectReference: {fileID: 0}
     - target: {fileID: 3787828762385236669, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
