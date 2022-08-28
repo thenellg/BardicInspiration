@@ -47,4 +47,10 @@ public class CharacterAnimationHandler : MonoBehaviour
         tileLocation = tile;
         moveBack = true;
     }
+
+    public void stopDamageMove()
+    {
+        moving = false;
+        this.GetComponentsInChildren<SpriteRenderer>()[0].enabled = false;
+    }
 }

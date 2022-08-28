@@ -16,6 +16,7 @@ public class BattleManager : MonoBehaviour
 
 
     public bool attacking = false;
+    public bool visAttacking = false;
     private bool attackedOnTurn = false;
     public List<OverlayTile> playerLocations;
     public GameSettings settings;
@@ -131,18 +132,20 @@ public class BattleManager : MonoBehaviour
             defender = null;
             actionMenu.updateTurnInfo();
         }
-        Invoke("setAttacking", 1f);
+        attacking = false;
+        Invoke("setAttacking", 3);
     }
 
     void setAttacking()
     {
-        attacking = false;
+        visAttacking = false;
     }
 
     public void attack(CharacterStats m_Attacker, CharacterStats m_Defender)
     {
         attacker = m_Attacker; defender = m_Defender;
         attacking = true;
+        visAttacking = true;
         //make an animation and show damage numbers
 
         //Add stuff here to actually make the attack cool;
@@ -164,14 +167,18 @@ public class BattleManager : MonoBehaviour
 
     void resetDefender()
     {
-        defender.characterSprite.color = Color.white;
-        showDamage();
+        if (defender.health - attacker.attack > 0)
+        {
+            defender.characterSprite.color = Color.white;
+            showDamage();
 
-        defender.GetComponent<CharacterAnimationHandler>().setDamageMoveBack(defender.activeTile.characterPos.position);
-
-
-        //if(defender)
-        //move character back to position
+            defender.GetComponent<CharacterAnimationHandler>().setDamageMoveBack(defender.activeTile.characterPos.position);
+        }
+        else
+        {
+            showDamage();
+            defender.GetComponent<CharacterAnimationHandler>().stopDamageMove();
+        }
     }
 
     public void showDamage()

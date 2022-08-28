@@ -107,7 +107,7 @@ public class MouseController : MonoBehaviour
 
                 //Set to turn abilities in battle manager if player
                 //Run enemy idea if an enemy
-                if (character.tag == "Player Team" && !battleManager.attacking)
+                if (character.tag == "Player Team")// && !battleManager.attacking)
                 {
                     activeMovement = false;
                     battleManager.actionMenu.setActionMenuLocation(character);

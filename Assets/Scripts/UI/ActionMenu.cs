@@ -58,9 +58,9 @@ public class ActionMenu : MonoBehaviour
             visibleTurns[i].setHealth(temp.health, temp.maxHealth);
 
             if (temp.tag == "Player Team")
-                visibleTurns[i].setName(temp.characterName, Color.blue);
+                visibleTurns[i].setName(temp.characterName, battleManager.settings.TeammateHighlight);
             else if (temp.tag == "Enemy Team")
-                visibleTurns[i].setName(temp.characterName, Color.red);
+                visibleTurns[i].setName(temp.characterName, battleManager.settings.targetHighlight);
             else
                 visibleTurns[i].setName(temp.characterName, Color.yellow);
 
