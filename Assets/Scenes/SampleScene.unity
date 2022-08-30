@@ -4162,6 +4162,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1366546100}
     m_Modifications:
+    - target: {fileID: 2419404144794339968, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
+      propertyPath: constantX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3787828762385236668, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
       propertyPath: m_Name
       value: Turn Order UI

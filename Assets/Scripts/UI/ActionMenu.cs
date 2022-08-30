@@ -23,6 +23,8 @@ public class ActionMenu : MonoBehaviour
         visibleActionMenu.SetActive(false);
         battleManager = FindObjectOfType<BattleManager>();
 
+
+        TurnOrderParent.GetComponent<SetUpTurnInfo>().createUI(battleManager.turnOrder.Count);
         int j = 0;
         foreach (ShowTurnInfo turn in TurnOrderParent.GetComponentsInChildren<ShowTurnInfo>())
         {
