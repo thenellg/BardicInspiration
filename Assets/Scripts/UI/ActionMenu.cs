@@ -16,13 +16,14 @@ public class ActionMenu : MonoBehaviour
 
     public GameObject TurnOrderParent;
     public List<ShowTurnInfo> visibleTurns = new List<ShowTurnInfo>();
+    public SetUpTurnInfo turnMenu;
 
     private void Start()
     {
         cam = FindObjectOfType<Camera>();
         visibleActionMenu.SetActive(false);
         battleManager = FindObjectOfType<BattleManager>();
-
+        turnMenu = GetComponentInChildren<SetUpTurnInfo>();
 
         TurnOrderParent.GetComponent<SetUpTurnInfo>().createUI(battleManager.turnOrder.Count);
         int j = 0;
@@ -49,6 +50,10 @@ public class ActionMenu : MonoBehaviour
     public void updateTurnInfo()
     {
         int characterIndex = battleManager.turnNumber;
+
+        /*
+         * Original way of adjusting stuff
+        
         for(int i = 0; i < visibleTurns.Count; i++)
         {
             if (characterIndex >= battleManager.turnOrder.Count)
@@ -69,6 +74,26 @@ public class ActionMenu : MonoBehaviour
             if(cursor.gameActive)
                 characterIndex++;
         }
+        */
+
+        foreach (ShowTurnInfo playerInfo in visibleTurns)
+        {
+            if(playerInfo.transform.GetSiblingIndex() == 0) 
+            {
+                playerInfo.newY = playerInfo.transform.position.y - ((turnMenu.generalMove * (visibleTurns.Count - 2)) + turnMenu.largerMove);
+                playerInfo.newSize = turnMenu.generalScale;
+            }
+            else if(playerInfo.transform.GetSiblingIndex() == 1)
+            {
+                playerInfo.newY = playerInfo.transform.position.y + turnMenu.largerMovement;
+                playerInfo.newSize = turnMenu.largerScale;
+            }
+            else 
+            {
+                playerInfo.newY = playerInfo.transform.position.y + turnMenu.generalMove;
+            }
+            playerInfo.moving = true;
+        } 
 
     }
 
