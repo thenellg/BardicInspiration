@@ -215,6 +215,12 @@ public class BattleManager : MonoBehaviour
         Debug.Log(cursor.character);
         onTurnSwap();
 
+        Invoke("finishEndTurn", 0.5f);
+
+    }
+
+    void finishEndTurn()
+    {
         if (cursor.character.tag == "Player Team")
         {
             cursor.activeMovement = true;
@@ -226,7 +232,6 @@ public class BattleManager : MonoBehaviour
 
             Invoke("enemyMove", 2f);
         }
-
     }
 
     void enemyMove()

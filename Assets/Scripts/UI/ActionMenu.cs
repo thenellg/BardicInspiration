@@ -49,13 +49,9 @@ public class ActionMenu : MonoBehaviour
 
     public void setUpInfo()
     {
-        int characterIndex = battleManager.turnNumber;
         for (int i = 0; i < visibleTurns.Count; i++)
         {
-            if (characterIndex >= battleManager.turnOrder.Count)
-                characterIndex = 0;
-
-            CharacterStats temp = battleManager.turnOrder[characterIndex].GetComponent<CharacterStats>();
+            CharacterStats temp = battleManager.turnOrder[i].GetComponent<CharacterStats>();
 
             visibleTurns[i].setImage(temp.characterPicture);
             visibleTurns[i].setHealth(temp.health, temp.maxHealth);
@@ -66,9 +62,6 @@ public class ActionMenu : MonoBehaviour
                 visibleTurns[i].setName(temp.characterName, battleManager.settings.targetHighlight);
             else
                 visibleTurns[i].setName(temp.characterName, Color.yellow);
-
-            if (cursor.gameActive)
-                characterIndex++;
         }
     }
 
@@ -106,6 +99,7 @@ public class ActionMenu : MonoBehaviour
             else
             {
                 playerInfo.newY = playerInfo.transform.localPosition.y + turnInfo.generalMovement;
+                playerInfo.sizeChanging = false;
             }
 
             playerInfo.moving = true;
