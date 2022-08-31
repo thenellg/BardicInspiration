@@ -76,9 +76,11 @@ public class ActionMenu : MonoBehaviour
     {
         //foreach (ShowTurnInfo playerInfo in visibleTurns
 
-        int characterIndex = battleManager.turnNumber - 1;
+        int characterIndex = battleManager.turnNumber;
         if (characterIndex < 0)
             characterIndex = 0;
+
+        Debug.Log("Character Index: " + characterIndex);
 
         ShowTurnInfo playerInfo;
 
@@ -89,12 +91,12 @@ public class ActionMenu : MonoBehaviour
 
             playerInfo = visibleTurns[characterIndex];
 
-            if (characterIndex == battleManager.turnNumber - 1)
+            if (characterIndex == battleManager.turnNumber - 1 || (battleManager.turnNumber == 0 && characterIndex == battleManager.turnOrder.Count - 1))
             {
                 playerInfo.newY = playerInfo.transform.localPosition.y - ((turnInfo.generalMovement * (visibleTurns.Count - 2)) + turnInfo.largerMovement);
                 playerInfo.newSize = turnInfo.generalScale;
             }
-            else if (characterIndex - 1 == battleManager.turnNumber)
+            else if (characterIndex == battleManager.turnNumber || (characterIndex == 0 && battleManager.turnNumber == battleManager.turnOrder.Count) )
             {
                 playerInfo.newY = playerInfo.transform.localPosition.y + turnInfo.largerMovement;
                 playerInfo.newSize = turnInfo.largerScale;
@@ -103,6 +105,7 @@ public class ActionMenu : MonoBehaviour
             {
                 playerInfo.newY = playerInfo.transform.localPosition.y + turnInfo.generalMovement;
             }
+
             playerInfo.moving = true;
 
             characterIndex++;
