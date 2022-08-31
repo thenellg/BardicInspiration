@@ -4171,6 +4171,10 @@ PrefabInstance:
       propertyPath: constantX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2419404144794339968, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
+      propertyPath: generalScale
+      value: 0.66
+      objectReference: {fileID: 0}
     - target: {fileID: 3787828762385236668, guid: b933d84abd662c54e8149db077cfa9cf, type: 3}
       propertyPath: m_Name
       value: Turn Order UI
@@ -4326,7 +4330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8886872343236361358, guid: a2ae1a9421333e147940bd31ed5d568d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2ae1a9421333e147940bd31ed5d568d, type: 3}

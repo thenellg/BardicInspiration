@@ -5,7 +5,7 @@ using UnityEngine;
 public class SetUpTurnInfo : MonoBehaviour
 {
     public GameObject turnInfo;
-    public float generalScale = 0.6622f;
+    public float generalScale = 0.66f;
     public float generalMovement = 54;
 
     public float largerScale = 0.86f;

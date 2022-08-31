@@ -95,11 +95,13 @@ public class ActionMenu : MonoBehaviour
             {
                 playerInfo.newY = playerInfo.transform.localPosition.y - ((turnInfo.generalMovement * (visibleTurns.Count - 2)) + turnInfo.largerMovement);
                 playerInfo.newSize = turnInfo.generalScale;
+                playerInfo.sizeChanging = true;
             }
             else if (characterIndex == battleManager.turnNumber || (characterIndex == 0 && battleManager.turnNumber == battleManager.turnOrder.Count) )
             {
                 playerInfo.newY = playerInfo.transform.localPosition.y + turnInfo.largerMovement;
                 playerInfo.newSize = turnInfo.largerScale;
+                playerInfo.sizeChanging = true;
             }
             else
             {

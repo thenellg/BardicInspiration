@@ -131,8 +131,9 @@ public class BattleManager : MonoBehaviour
         {
             attacker = null;
             defender = null;
-            actionMenu.updateTurnInfo();
+            actionMenu.setUpInfo();
         }
+
         attacking = false;
         Invoke("setAttacking", 3);
     }

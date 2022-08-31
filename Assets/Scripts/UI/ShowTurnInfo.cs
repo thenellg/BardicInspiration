@@ -26,7 +26,7 @@ public class ShowTurnInfo : MonoBehaviour
 
     void Update()
     {
-        if(moving = true)
+        if(moving == true)
         {
             if (turnInfoPosition.localPosition.y != newY)
             {
@@ -39,10 +39,15 @@ public class ShowTurnInfo : MonoBehaviour
             }
         }
 
-        //if(currentSize != newSize)
-        //{
-
-        //}
+        if(sizeChanging)
+        {
+            turnInfoPosition.localScale = Vector3.MoveTowards(turnInfoPosition.localScale, new Vector3(newSize, newSize, newSize), 0.1f);
+        }
+        else
+        {
+            turnInfoPosition.localScale = new Vector3(newSize, newSize, newSize);
+            sizeChanging = false;
+        }
     }
 
     public void setImage(Sprite newImage)
