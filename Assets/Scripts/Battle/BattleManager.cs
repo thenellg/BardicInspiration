@@ -106,9 +106,29 @@ public class BattleManager : MonoBehaviour
 
             defender.gameObject.SetActive(false);
 
-            GameObject temp = actionMenu.visibleTurns[actionMenu.visibleTurns.Count - 1].gameObject;
-            actionMenu.visibleTurns.RemoveAt(actionMenu.visibleTurns.Count - 1);
-            temp.SetActive(false);
+
+            int index = 0;
+            float height = 0;
+            for (int i = 0; i < actionMenu.visibleTurns.Count; i++)
+            {
+                if (actionMenu.visibleTurns[i].characterName.text == defender.characterName)
+                    index = i;
+            }
+            height = actionMenu.visibleTurns[index].newY;
+
+            Debug.Log("Delete index = " + index);
+
+            GameObject temp = actionMenu.visibleTurns[index].gameObject;
+            actionMenu.visibleTurns.RemoveAt(index);
+            Destroy(temp);
+
+            actionMenu.updateTurnsDeath(height);
+
+            //Get Player Turn UI element
+            //Delete it
+            //Move all showing below it
+
+            //temp.SetActive(false);
         }
 
         if (playerTeam.Count == 0)

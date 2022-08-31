@@ -65,6 +65,29 @@ public class ActionMenu : MonoBehaviour
         }
     }
 
+    public void updateTurnsDeath(float height)
+    {
+        int characterIndex = battleManager.turnNumber;
+        if (characterIndex < 0)
+            characterIndex = 0;
+
+        Debug.Log("Character Index: " + characterIndex);
+
+        ShowTurnInfo playerInfo;
+
+        for (int i = 0; i < visibleTurns.Count; i++)
+        {
+
+            playerInfo = visibleTurns[i];
+
+            if(playerInfo.newY < height)
+            {
+                playerInfo.newY = playerInfo.transform.localPosition.y + turnInfo.generalMovement;
+                playerInfo.moving = true;
+            }
+        }
+    }
+
     public void updateTurnInfo()
     {
         //foreach (ShowTurnInfo playerInfo in visibleTurns
