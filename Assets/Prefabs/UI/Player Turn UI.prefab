@@ -265,6 +265,12 @@ MonoBehaviour:
   characterImage: {fileID: 8821964129486103112}
   characterName: {fileID: 8821964129288644946}
   characterHealth: {fileID: 8821964130697105248}
+  turnInfoPosition: {fileID: 8821964130004316641}
+  newY: 0
+  moving: 0
+  sizeChanging: 0
+  newSize: 0
+  currentSize: 0
 --- !u!1 &8821964130319970708
 GameObject:
   m_ObjectHideFlags: 0

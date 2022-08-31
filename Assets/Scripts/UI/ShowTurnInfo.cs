@@ -9,30 +9,32 @@ public class ShowTurnInfo : MonoBehaviour
     public Image characterImage;
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI characterHealth;
+    public RectTransform turnInfoPosition;
 
-    public float newY = 0;
     public bool moving = false;
     public bool sizeChanging = false;
+    public float newY = 0;
     public float newSize;
     public float currentSize;
-    private RectTransform turnInfoPosition;
 
     void Start()
     {
         currentSize = this.gameObject.transform.localScale.x;
         newSize = currentSize;
+        newY = turnInfoPosition.localPosition.y;
     }
 
     void Update()
     {
         if(moving = true)
         {
-            if (turnInfoPosition.position.y != newY)
+            if (turnInfoPosition.localPosition.y != newY)
             {
-                turnInfoPosition.position = Vector3.MoveTowards(turnInfoPosition.position, new Vector3(turnInfoPosition.positon.x, newY, turnInfoPosition.position.z), 1);
+                turnInfoPosition.localPosition = Vector3.MoveTowards(turnInfoPosition.localPosition, new Vector3(turnInfoPosition.localPosition.x, newY, turnInfoPosition.localPosition.z), 1);
             }
             else
             {
+                turnInfoPosition.localPosition = new Vector3(turnInfoPosition.localPosition.x, newY, turnInfoPosition.localPosition.z);
                 moving = false;
             }
         }

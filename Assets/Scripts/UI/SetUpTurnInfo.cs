@@ -32,7 +32,7 @@ public class SetUpTurnInfo : MonoBehaviour
             turn.transform.localScale = new Vector3(generalScale, generalScale, generalScale);
 
             yLocation -= generalMovement;
-            turn.transform.SetSiblingIndex(1);
+            //turn.transform.SetSiblingIndex(1);
         }
     }
 }

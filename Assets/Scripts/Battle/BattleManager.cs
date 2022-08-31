@@ -41,6 +41,7 @@ public class BattleManager : MonoBehaviour
 
     void startSequence()
     {
+        actionMenu.setUpInfo();
         onTurnSwap();
 
         if (turnOrder[0].GetComponent<CharacterStats>().tag == "Player Team")

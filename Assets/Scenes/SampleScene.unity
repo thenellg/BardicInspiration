@@ -459,6 +459,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Eliwood
       objectReference: {fileID: 0}
+    - target: {fileID: 1955583946479312231, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8577116171866360218, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: startingLocation.x
       value: -1
@@ -1527,6 +1531,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   TurnOrderParent: {fileID: 69048616}
   visibleTurns: []
+  turnInfo: {fileID: 0}
 --- !u!1 &1387686696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,7 +1699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825630797498355756, guid: e1fa8f572968b304e9ac92468a89a887, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4825630797498355758, guid: e1fa8f572968b304e9ac92468a89a887, type: 3}
       propertyPath: speed
@@ -4321,7 +4326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8886872343236361358, guid: a2ae1a9421333e147940bd31ed5d568d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2ae1a9421333e147940bd31ed5d568d, type: 3}

@@ -16,14 +16,14 @@ public class ActionMenu : MonoBehaviour
 
     public GameObject TurnOrderParent;
     public List<ShowTurnInfo> visibleTurns = new List<ShowTurnInfo>();
-    public SetUpTurnInfo turnMenu;
+    public SetUpTurnInfo turnInfo;
 
     private void Start()
     {
         cam = FindObjectOfType<Camera>();
         visibleActionMenu.SetActive(false);
         battleManager = FindObjectOfType<BattleManager>();
-        turnMenu = GetComponentInChildren<SetUpTurnInfo>();
+        turnInfo = GetComponentInChildren<SetUpTurnInfo>();
 
         TurnOrderParent.GetComponent<SetUpTurnInfo>().createUI(battleManager.turnOrder.Count);
         int j = 0;
@@ -47,20 +47,16 @@ public class ActionMenu : MonoBehaviour
         visibleActionMenu.SetActive(false);
     }
 
-    public void updateTurnInfo()
+    public void setUpInfo()
     {
         int characterIndex = battleManager.turnNumber;
-
-        /*
-         * Original way of adjusting stuff
-        
-        for(int i = 0; i < visibleTurns.Count; i++)
+        for (int i = 0; i < visibleTurns.Count; i++)
         {
             if (characterIndex >= battleManager.turnOrder.Count)
                 characterIndex = 0;
 
             CharacterStats temp = battleManager.turnOrder[characterIndex].GetComponent<CharacterStats>();
-            
+
             visibleTurns[i].setImage(temp.characterPicture);
             visibleTurns[i].setHealth(temp.health, temp.maxHealth);
 
@@ -71,29 +67,46 @@ public class ActionMenu : MonoBehaviour
             else
                 visibleTurns[i].setName(temp.characterName, Color.yellow);
 
-            if(cursor.gameActive)
+            if (cursor.gameActive)
                 characterIndex++;
         }
-        */
+    }
 
-        foreach (ShowTurnInfo playerInfo in visibleTurns)
+    public void updateTurnInfo()
+    {
+        //foreach (ShowTurnInfo playerInfo in visibleTurns
+
+        int characterIndex = battleManager.turnNumber - 1;
+        if (characterIndex < 0)
+            characterIndex = 0;
+
+        ShowTurnInfo playerInfo;
+
+        for (int i = 0; i < visibleTurns.Count; i++)
         {
-            if(playerInfo.transform.GetSiblingIndex() == 0) 
+            if (characterIndex >= battleManager.turnOrder.Count)
+                characterIndex = 0;
+
+            playerInfo = visibleTurns[characterIndex];
+
+            if (characterIndex == battleManager.turnNumber - 1)
             {
-                playerInfo.newY = playerInfo.transform.position.y - ((turnMenu.generalMove * (visibleTurns.Count - 2)) + turnMenu.largerMove);
-                playerInfo.newSize = turnMenu.generalScale;
+                playerInfo.newY = playerInfo.transform.localPosition.y - ((turnInfo.generalMovement * (visibleTurns.Count - 2)) + turnInfo.largerMovement);
+                playerInfo.newSize = turnInfo.generalScale;
             }
-            else if(playerInfo.transform.GetSiblingIndex() == 1)
+            else if (characterIndex - 1 == battleManager.turnNumber)
             {
-                playerInfo.newY = playerInfo.transform.position.y + turnMenu.largerMovement;
-                playerInfo.newSize = turnMenu.largerScale;
+                playerInfo.newY = playerInfo.transform.localPosition.y + turnInfo.largerMovement;
+                playerInfo.newSize = turnInfo.largerScale;
             }
-            else 
+            else
             {
-                playerInfo.newY = playerInfo.transform.position.y + turnMenu.generalMove;
+                playerInfo.newY = playerInfo.transform.localPosition.y + turnInfo.generalMovement;
             }
             playerInfo.moving = true;
-        } 
+
+            characterIndex++;
+        }
 
     }
 
