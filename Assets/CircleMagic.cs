@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class CircleMagic : MonoBehaviour
@@ -25,6 +24,7 @@ public class CircleMagic : MonoBehaviour
 
     void setCircle()
     {
+        minSize = goalCircle.localScale.x;
         float rand = Random.Range(minSize, maxSize);
         activeCircle.localScale = new Vector3(rand, rand, rand);
         actualSize = rand;
@@ -57,11 +57,33 @@ public class CircleMagic : MonoBehaviour
             {
                 succeeded++;
 
-                //if (succeeded >= 3)
-                //    end = true;
-                //else
+                if (succeeded >= 3)
+                {
+                    end = true;
+                    Destroy(gameObject);
+                }
+                else
+                {
                     setCircle();
+                }
             }
         }
+    }
+
+    IEnumerator circleReact()
+    {
+        while (end == false)
+        {
+            yield return null;
+        }
+
+        Debug.Log("Success");
+    }
+
+    public int playCircleReact()
+    {
+        StartCoroutine(circleReact());
+
+        return succeeded;
     }
 }
