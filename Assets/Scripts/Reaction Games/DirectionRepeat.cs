@@ -18,13 +18,13 @@ public class DirectionRepeat : MonoBehaviour
     public List<Image> visDirections = new List<Image>();
 
     public List<Directions> randomDirections = new List<Directions>();
-    bool selection = true;
+    public bool selection = true;
     public int action = 0;
     public bool end = false;
 
     public float vertical;
     public float horizontal;
-    public Directions input = Directions.None;
+    public Directions playerInput = Directions.None;
 
     // Start is called before the first frame update
     void Start()
@@ -33,45 +33,51 @@ public class DirectionRepeat : MonoBehaviour
     }
 
     void Update()
-    {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-        
+    {     
         if (selection)
         {
-            Directions input = new Directions();
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
 
-            if ((Mathf.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f))
+            if ((Mathf.Abs(horizontal) > 0.0001f || Mathf.Abs(vertical) > 0.0001f))
             {
                 if (Mathf.Abs(horizontal) > Mathf.Abs(vertical))
                 {
                     if (horizontal > 0f)
-                        input = Directions.Right;
+                        playerInput = Directions.Right;
                     else
-                        input = Directions.Left;
+                        playerInput = Directions.Left;
                 }
                 else
                 {
                     if (vertical > 0f)
-                        input = Directions.Up;
+                        playerInput = Directions.Up;
                     else
-                        input = Directions.Down;
+                        playerInput = Directions.Down;
                 }
             }
 
+            Debug.Log(playerInput);
+
             if (horizontal != 0 || vertical != 0)
             {
-                if (randomDirections[action] == input)
+                if (randomDirections[action] == playerInput)
                 {
                     selection = false;
                     visDirections[action].color = Color.red;
                     Invoke("resetSelection", 0.4f);
+                    playerInput = Directions.None;
                     action++;
                     if (action >= 4)
                         end = true;
                 }
                 else
                 {
+                    horizontal = vertical = 0f;
+                    action = 0;
+                    playerInput = Directions.None;
+                    selection = false;
+                    Invoke("resetSelection", 0.4f);
                     resetDirections();
                 }
             }
@@ -85,10 +91,7 @@ public class DirectionRepeat : MonoBehaviour
 
     void resetDirections()
     {
-        //input = Directions.None;
         randomDirections.Clear();
-        action = 0;
-
 
         for (int i = 0; i <= 3; i++)
         {
