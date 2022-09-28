@@ -72,7 +72,7 @@ public class DirectionRepeat : MonoBehaviour
                 }
                 else
                 {
-                   resetDirections();
+                    resetDirections();
                 }
             }
         }
@@ -88,6 +88,7 @@ public class DirectionRepeat : MonoBehaviour
         //input = Directions.None;
         randomDirections.Clear();
         action = 0;
+
 
         for (int i = 0; i <= 3; i++)
         {
