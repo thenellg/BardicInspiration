@@ -10,6 +10,7 @@ public class ActionMenu : MonoBehaviour
     public BattleManager battleManager;
 
     public GameObject visibleActionMenu;
+    public GameObject visibleMagicMenu;
 
     public Transform menuLocation;
     public Camera cam;
@@ -22,6 +23,7 @@ public class ActionMenu : MonoBehaviour
     {
         cam = FindObjectOfType<Camera>();
         visibleActionMenu.SetActive(false);
+        visibleMagicMenu.SetActive(false);
         battleManager = FindObjectOfType<BattleManager>();
         turnInfo = GetComponentInChildren<SetUpTurnInfo>();
 

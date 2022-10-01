@@ -16,4 +16,6 @@ MonoBehaviour:
   spellDescription: A blast of fire burns your enemies within range
   spellIcon: {fileID: 0}
   spellType: 0
-  range: 3
+  minSpellRange: 1
+  maxSpellRange: 3
+  attackDamage: 6
