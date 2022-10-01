@@ -67,7 +67,7 @@ public class BlockGame : MonoBehaviour
     {
         if (!rotating)
         {
-            if (Input.GetKeyUp(KeyCode.LeftArrow))
+            if (Input.GetButtonDown("Left Rotate"))
             {
                 rotateDirection = -90;
 
@@ -78,7 +78,7 @@ public class BlockGame : MonoBehaviour
 
                 StartCoroutine(rotate90());
             }
-            else if (Input.GetKeyUp(KeyCode.RightArrow))
+            else if (Input.GetButtonDown("Right Rotate"))
             {
                 rotateDirection = 90;
 
@@ -89,7 +89,7 @@ public class BlockGame : MonoBehaviour
 
                 StartCoroutine(rotate90());
             }
-            else if (Input.GetKeyUp(KeyCode.Space))
+            else if (Input.GetButtonDown("Submit"))
             {
                 if (currentDirection == outerDirection)
                 {

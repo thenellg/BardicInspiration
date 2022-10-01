@@ -51,7 +51,7 @@ public class CircleMagic : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && shrinking)
+        if (Input.GetButtonDown("Submit") && shrinking)
         {
             if (actualSize > 0f && actualSize <= goalCircle.localScale.x)
             {

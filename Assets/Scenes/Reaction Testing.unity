@@ -313,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5436169857093224278, guid: f7ec1f2748baf3944a0b976b0431f86d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5436169857093224279, guid: f7ec1f2748baf3944a0b976b0431f86d, type: 3}
       propertyPath: m_Pivot.x
@@ -422,7 +422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &524883540
 Transform:
   m_ObjectHideFlags: 0
@@ -464,11 +464,12 @@ MonoBehaviour:
   - {fileID: 1517067070}
   - {fileID: 954712762}
   randomDirections: 
+  selection: 1
   action: 0
   end: 0
   vertical: 0
   horizontal: 0
-  input: 4
+  playerInput: 4
 --- !u!1 &533591726
 GameObject:
   m_ObjectHideFlags: 0
