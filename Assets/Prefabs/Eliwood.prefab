@@ -177,6 +177,10 @@ MonoBehaviour:
   attack: 4
   defense: 0
   special: 0
+  maxSpellSlots: 2
+  spellSlots: 2
+  spells:
+  - {fileID: 11400000, guid: 44d7227b6ba900c4d8ca506377752d5c, type: 2}
 --- !u!114 &8577116171866360218
 MonoBehaviour:
   m_ObjectHideFlags: 0

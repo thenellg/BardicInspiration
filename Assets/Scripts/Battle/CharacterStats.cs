@@ -26,6 +26,11 @@ public class CharacterStats : MonoBehaviour
     public int defense;
     public int special;
 
+    [Header("Spells")]
+    public int maxSpellSlots;
+    public int spellSlots;
+    public Spell[] spells;
+
     private void Start() 
     { 
         maxHealth = health;
