@@ -16,8 +16,11 @@ public class BattleManager : MonoBehaviour
 
 
     public bool attacking = false;
+    public bool magicAttacking = false;
     public bool visAttacking = false;
     private bool attackedOnTurn = false;
+
+
     public List<OverlayTile> playerLocations;
     public GameSettings settings;
     public GameObject gameUI;
@@ -78,6 +81,20 @@ public class BattleManager : MonoBehaviour
         if (!attackedOnTurn)
         {
             attacking = cursor.character.GetComponent<Attacks>().attackCheck();
+            attackedOnTurn = true;
+        }
+        else
+        {
+            endTurn();
+        }
+    }
+
+    public void findMagicTargets()
+    {
+        if (!attackedOnTurn)
+        {
+            //Will have to adjust this for magic checks
+            magicAttacking = cursor.character.GetComponent<Attacks>().attackCheck();
             attackedOnTurn = true;
         }
         else

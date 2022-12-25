@@ -84,6 +84,10 @@ public class MouseController : MonoBehaviour
                         battleManager.attacking = false;
                         isMoving = true;
                     }
+                    else if (battleManager.magicAttacking)
+                    {
+                        //Do magic attack stuff here
+                    }
                     else
                     {
                         isMoving = true;

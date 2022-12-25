@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spells : MonoBehaviour
+[CreateAssetMenu(fileName = "New Spell", menuName = "Spell")]
+public class Spell : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum spellTypes
     {
-        
+        AreaOfEffect,
+        Line,
+        Single,
+        Buff
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string spellName;
+    public string spellDescription;
+
+    public Sprite spellIcon;
+    public spellTypes spellType;
+    public int minSpellRange;
+    public int maxSpellRange;
+
+    public int attackDamage;
 }

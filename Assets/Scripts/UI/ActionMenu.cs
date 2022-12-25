@@ -11,6 +11,7 @@ public class ActionMenu : MonoBehaviour
 
     public GameObject visibleActionMenu;
     public GameObject visibleMagicMenu;
+    public GameObject spellButton;
 
     public Transform menuLocation;
     public Camera cam;
@@ -148,4 +149,23 @@ public class ActionMenu : MonoBehaviour
         visibleActionMenu.transform.position = cam.WorldToScreenPoint(character.returnMenuLocation().position);
     }
 
+    public void setMagicMenu()
+    {
+        float y = -23.5f;
+        for (int i = 0; i < mouseController.character.spells.count; i++)
+        {
+            GameObject newButton = Instantiate(spellButton);
+            newButton.transform.parent = visibleMagicMenu.transform;
+            newButton.transform.localPosition = new Vector3(95.2f, y, 0f);
+            y -= 37.2f;
+        }
+    }
+
+    public void destroyMagicMenu()
+    {
+        foreach (transform child in visibleMagicMenu.GetComponentsinChildren(transform))
+        {
+            child.gameObject.Destroy();
+        }
+    }
 }

@@ -11,15 +11,51 @@ public class Attacks : MonoBehaviour
 
     public bool playerAttack = true;
 	public bool healingAbility = false;
-	//Will need to determine if an enemy is range
+
+	// Will need to determine if an enemy is range
 	private RangeFinder rangeFinder;
 	private MouseController cursor;
+
+	public GameObject magicMenu;
 
 	void Start()
 	{
 		characterStats = GetComponent<CharacterStats>();
 		cursor = FindObjectOfType<MouseController>();
 		rangeFinder = new RangeFinder();
+	}
+
+	public bool spellCheck(Spell m_Spell)
+	{
+		/*
+		List<CharacterStats> charactersInRange;
+		if (m_Spell.spellType == m_Spell.spellTypes.AreaOfEffect)
+		{
+			charactersInRange = GetTilesinRange(characterStats.activeTile, m_Spell.minSpellRange, m_Spell.maxSpellRange);
+		}
+		else if(m_Spell.spellType == m_Spell.spellTypes.Line)
+		{
+			//Develop line finding function
+		}
+		else if(m_Spell.spellType == m_Spell.spellTypes.Single)
+		{
+            charactersInRange = GetTilesinRange(characterStats.activeTile, m_Spell.minSpellRange, m_Spell.maxSpellRange);
+        }
+
+        foreach (CharacterStats character in charactersInRange)
+		{
+            if (character.tag == "Player Team")
+            {
+                character.activeTile.HideTile();
+                charactersInRange.Remove(character);
+            }
+            else
+            {
+                character.activeTile.ShowTile(true);
+            }
+        }
+		*/
+		return true;
 	}
 
 	public bool attackCheck()
