@@ -152,20 +152,26 @@ public class ActionMenu : MonoBehaviour
     public void setMagicMenu()
     {
         float y = -23.5f;
-        for (int i = 0; i < mouseController.character.spells.count; i++)
+        for (int i = 0; i < cursor.character.spells.Length; i++)
         {
             GameObject newButton = Instantiate(spellButton);
             newButton.transform.parent = visibleMagicMenu.transform;
             newButton.transform.localPosition = new Vector3(95.2f, y, 0f);
+            newButton.transform.localScale = Vector3.one;
+
+            newButton.GetComponentInChildren<TextMeshProUGUI>().text = cursor.character.spells[i].spellName;
+            //set action to spell
             y -= 37.2f;
         }
     }
 
     public void destroyMagicMenu()
     {
-        foreach (transform child in visibleMagicMenu.GetComponentsinChildren(transform))
+        foreach (Transform child in visibleMagicMenu.GetComponentsInChildren<Transform>())
         {
-            child.gameObject.Destroy();
+            //Need to account for ignoring the back button
+            if (child.gameObject.name == "Spell Button(Clone)")
+                Destroy(child.gameObject);
         }
     }
 }
