@@ -20,6 +20,7 @@ public class ActionMenu : MonoBehaviour
     public GameObject TurnOrderParent;
     public List<ShowTurnInfo> visibleTurns = new List<ShowTurnInfo>();
     public SetUpTurnInfo turnInfo;
+    public RectTransform background;
 
     private void Start()
     {
@@ -153,6 +154,8 @@ public class ActionMenu : MonoBehaviour
     public void setMagicMenu()
     {
         float y = -23.5f;
+        float backgroundLength = 50.57f;
+
         for (int i = 0; i < cursor.character.spells.Length; i++)
         {
             GameObject newButton = Instantiate(spellButton);
@@ -163,6 +166,9 @@ public class ActionMenu : MonoBehaviour
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = cursor.character.spells[i].spellName;
             //set action to spell
             y -= 37.2f;
+
+            if (i != 0)
+                backgroundLength += 35f;
         }
 
         GameObject backButton = Instantiate(spellButton);
@@ -175,6 +181,10 @@ public class ActionMenu : MonoBehaviour
         backButton.GetComponent<Button>().onClick.AddListener(destroyMagicMenu);
         backButton.GetComponent<Button>().onClick.AddListener(setActionMenu);
         backButton.GetComponent<Button>().onClick.AddListener(delegate { actionButtonHolder.SetActive(true); });
+
+        backgroundLength += 35f;
+        background.sizeDelta = new Vector2(background.sizeDelta.x, backgroundLength);
+
     }
 
     public void destroyMagicMenu()
@@ -189,6 +199,7 @@ public class ActionMenu : MonoBehaviour
 
     public void setActionMenu()
     {
+        float backgroundLength = 50.57f;
         float y = -23.5f;
         if (cursor.character.activeTile.puzzleSpace)
         {
@@ -203,6 +214,7 @@ public class ActionMenu : MonoBehaviour
             //newButton.GetComponent<Button>().onClick.AddListener(delegate { visibleMagicMenu.SetActive(true); });
 
             y -= 37.2f;
+            backgroundLength += 35f;
         }
 
 
@@ -241,7 +253,10 @@ public class ActionMenu : MonoBehaviour
             }
 
             y -= 37.2f;
+            if(i != 0)
+                backgroundLength += 35f;
         }
+        background.sizeDelta = new Vector2(background.sizeDelta.x, backgroundLength);
     }
 
     public void destroyActionMenu()

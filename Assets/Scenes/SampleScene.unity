@@ -944,6 +944,7 @@ MonoBehaviour:
   TurnOrderParent: {fileID: 69048616}
   visibleTurns: []
   turnInfo: {fileID: 0}
+  background: {fileID: 1387686697}
 --- !u!1 &1387686696
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +957,7 @@ GameObject:
   - component: {fileID: 1387686699}
   - component: {fileID: 1387686698}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -979,7 +980,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -112.00005, y: 59.020004}
-  m_SizeDelta: {x: 190.5029, y: 131.8324}
+  m_SizeDelta: {x: 190.5029, y: 50.57}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1387686698
 MonoBehaviour:
@@ -994,7 +995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 0.06367926, g: 0.064832084, b: 0.084905684, a: 0.8156863}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
