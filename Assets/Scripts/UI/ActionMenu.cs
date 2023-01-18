@@ -164,6 +164,17 @@ public class ActionMenu : MonoBehaviour
             //set action to spell
             y -= 37.2f;
         }
+
+        GameObject backButton = Instantiate(spellButton);
+        backButton.transform.parent = visibleMagicMenu.transform;
+        backButton.transform.localPosition = new Vector3(95.2f, y, 0f);
+        backButton.transform.localScale = Vector3.one;
+
+        backButton.GetComponentInChildren<TextMeshProUGUI>().text = "Back";
+        backButton.GetComponent<Button>().onClick.AddListener(delegate { visibleMagicMenu.SetActive(false); });
+        backButton.GetComponent<Button>().onClick.AddListener(destroyMagicMenu);
+        backButton.GetComponent<Button>().onClick.AddListener(setActionMenu);
+        backButton.GetComponent<Button>().onClick.AddListener(delegate { actionButtonHolder.SetActive(true); });
     }
 
     public void destroyMagicMenu()
@@ -189,8 +200,11 @@ public class ActionMenu : MonoBehaviour
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Ruin";
             newButton.name = "Ruin Button";
             //set action
+            //newButton.GetComponent<Button>().onClick.AddListener(delegate { visibleMagicMenu.SetActive(true); });
+
             y -= 37.2f;
         }
+
 
         for (int i = 0; i < 3; i++)
         {
@@ -198,12 +212,6 @@ public class ActionMenu : MonoBehaviour
             newButton.transform.parent = actionButtonHolder.transform;
             newButton.transform.localPosition = new Vector3(95.2f, y, 0f);
             newButton.transform.localScale = Vector3.one;
-            /*
-            newButton.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                battleManager.endTurn();
-            });
-            */
             
             if(i == 0)
             {
@@ -220,6 +228,7 @@ public class ActionMenu : MonoBehaviour
 
                 newButton.GetComponent<Button>().onClick.AddListener(delegate { visibleMagicMenu.SetActive(true); });
                 newButton.GetComponent<Button>().onClick.AddListener(setMagicMenu);
+                newButton.GetComponent<Button>().onClick.AddListener(destroyActionMenu);
                 newButton.GetComponent<Button>().onClick.AddListener(delegate { actionButtonHolder.SetActive(false); });
             }
             else if(i == 2)
@@ -227,6 +236,7 @@ public class ActionMenu : MonoBehaviour
                 newButton.GetComponentInChildren<TextMeshProUGUI>().text = "End Turn";
                 newButton.name = "End Turn Button";
 
+                newButton.GetComponent<Button>().onClick.AddListener(destroyActionMenu);
                 newButton.GetComponent<Button>().onClick.AddListener(battleManager.endTurn);
             }
 
@@ -234,17 +244,12 @@ public class ActionMenu : MonoBehaviour
         }
     }
 
-    public void switchMenu()
-    {
-
-    }
-
     public void destroyActionMenu()
     {
         foreach (Transform child in actionButtonHolder.GetComponentsInChildren<Transform>())
         {
-            //if (child.gameObject.name == "Spell Button(Clone)")
-            Destroy(child.gameObject);
+            if (child.gameObject.name != "Action Menu")
+                Destroy(child.gameObject);
         }
     }
 }
