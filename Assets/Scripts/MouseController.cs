@@ -27,6 +27,7 @@ public class MouseController : MonoBehaviour
     private bool enemyMoving = false;
 
     public bool gameActive = true;
+    public bool cursorActive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +46,7 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameActive)
+        if (gameActive && cursorActive)
         {
             RaycastHit2D hit = GetFocusedOnTile();
 
@@ -83,6 +84,7 @@ public class MouseController : MonoBehaviour
 
                         battleManager.attacking = false;
                         isMoving = true;
+                        cursorActive = false;
                     }
                     else if (battleManager.magicAttacking)
                     {
@@ -116,6 +118,8 @@ public class MouseController : MonoBehaviour
                     activeMovement = false;
                     battleManager.actionMenu.setActionMenuLocation(character);
                     battleManager.actionMenu.visibleActionMenu.SetActive(true);
+                    battleManager.actionMenu.setActionMenu();
+                    cursorActive = false;
                 }
                 else if (character.tag == "Enemy Team")
                 {

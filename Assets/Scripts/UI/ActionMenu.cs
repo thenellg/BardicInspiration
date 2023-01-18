@@ -10,6 +10,7 @@ public class ActionMenu : MonoBehaviour
     public BattleManager battleManager;
 
     public GameObject visibleActionMenu;
+    public GameObject actionButtonHolder;
     public GameObject visibleMagicMenu;
     public GameObject spellButton;
 
@@ -172,6 +173,78 @@ public class ActionMenu : MonoBehaviour
             //Need to account for ignoring the back button
             if (child.gameObject.name == "Spell Button(Clone)")
                 Destroy(child.gameObject);
+        }
+    }
+
+    public void setActionMenu()
+    {
+        float y = -23.5f;
+        if (cursor.character.activeTile.puzzleSpace)
+        {
+            GameObject newButton = Instantiate(spellButton);
+            newButton.transform.parent = actionButtonHolder.transform;
+            newButton.transform.localPosition = new Vector3(95.2f, y, 0f);
+            newButton.transform.localScale = Vector3.one;
+
+            newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Ruin";
+            newButton.name = "Ruin Button";
+            //set action
+            y -= 37.2f;
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject newButton = Instantiate(spellButton);
+            newButton.transform.parent = actionButtonHolder.transform;
+            newButton.transform.localPosition = new Vector3(95.2f, y, 0f);
+            newButton.transform.localScale = Vector3.one;
+            /*
+            newButton.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                battleManager.endTurn();
+            });
+            */
+            
+            if(i == 0)
+            {
+                newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Attack";
+                newButton.name = "Attack Button";
+
+                newButton.GetComponent<Button>().onClick.AddListener(battleManager.findAttackTargets);
+                newButton.GetComponent<Button>().onClick.AddListener(delegate { visibleActionMenu.SetActive(false); });
+            }
+            else if(i == 1)
+            {
+                newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Magic";
+                newButton.name = "Magic Button";
+
+                newButton.GetComponent<Button>().onClick.AddListener(delegate { visibleMagicMenu.SetActive(true); });
+                newButton.GetComponent<Button>().onClick.AddListener(setMagicMenu);
+                newButton.GetComponent<Button>().onClick.AddListener(delegate { actionButtonHolder.SetActive(false); });
+            }
+            else if(i == 2)
+            {
+                newButton.GetComponentInChildren<TextMeshProUGUI>().text = "End Turn";
+                newButton.name = "End Turn Button";
+
+                newButton.GetComponent<Button>().onClick.AddListener(battleManager.endTurn);
+            }
+
+            y -= 37.2f;
+        }
+    }
+
+    public void switchMenu()
+    {
+
+    }
+
+    public void destroyActionMenu()
+    {
+        foreach (Transform child in actionButtonHolder.GetComponentsInChildren<Transform>())
+        {
+            //if (child.gameObject.name == "Spell Button(Clone)")
+            Destroy(child.gameObject);
         }
     }
 }

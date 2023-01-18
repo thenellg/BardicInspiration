@@ -80,6 +80,7 @@ public class BattleManager : MonoBehaviour
     {
         if (!attackedOnTurn)
         {
+            cursor.cursorActive = true;
             attacking = cursor.character.GetComponent<Attacks>().attackCheck();
             attackedOnTurn = true;
         }
@@ -251,6 +252,7 @@ public class BattleManager : MonoBehaviour
 
         Debug.Log(cursor.character);
         onTurnSwap();
+        cursor.cursorActive = true;
 
         Invoke("finishEndTurn", 0.5f);
 

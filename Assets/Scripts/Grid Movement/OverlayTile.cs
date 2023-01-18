@@ -24,6 +24,7 @@ public class OverlayTile : MonoBehaviour
     public bool isHalfTile = false;
     public List<Sprite> arrows = new List<Sprite>();
     public GameSettings settings { get { return FindObjectOfType<GameSettings>(); } }
+    public bool puzzleSpace = false;
 
     public void SetColor(Color color)
     {
