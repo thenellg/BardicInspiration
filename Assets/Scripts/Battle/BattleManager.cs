@@ -9,6 +9,7 @@ public class BattleManager : MonoBehaviour
     public List<GameObject> turnOrder;
     public List<GameObject> playerTeam;
     public List<GameObject> enemyTeam;
+    public List<GameObject> interactives;
     public int turnNumber = 0;
     public ActionMenu actionMenu;
     public MouseController cursor;
@@ -104,9 +105,12 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void doDamage()
+    public void doDamage(bool ruin = false, int damage = 0)
     {
-        defender.health -= attacker.attack;
+        if (ruin)
+            defender.health -= damage;
+        else
+            defender.health -= attacker.attack;
 
         if (defender.health <= 0)
         {

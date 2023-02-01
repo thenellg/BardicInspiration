@@ -14,6 +14,7 @@ public class MapManager : MonoBehaviour
 
     public GameObject playerTeam;
     public GameObject enemyTeam;
+    public GameObject interactives;
 
     public Dictionary<Vector2, OverlayTile> colliderMap;
 
@@ -121,6 +122,13 @@ public class MapManager : MonoBehaviour
 
             battleManager.turnOrder.Add(enemy.gameObject);
         }
+        
+        foreach(var interactive in interactives.GetComponentsInChildren<InteractiveSetUp>())
+        {
+            battleManager.interactives.Add(interactive.gameObject);
+            interactive.placeInteractive(colliderMap);
+        }
+
 
         //Set Up Cursor
         List<GameObject> sortedList = battleManager.turnOrder.OrderByDescending(o => o.GetComponent<CharacterStats>().speed).ToList();
