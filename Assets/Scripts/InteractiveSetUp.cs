@@ -6,6 +6,7 @@ public class InteractiveSetUp : MonoBehaviour
 {
     public Interactive interactive;
     public Vector2 startingLocation = new Vector2();
+    public List<Vector2> damageLocations = new List<Vector2>();
 
     private void Start()
     {
@@ -17,7 +18,8 @@ public class InteractiveSetUp : MonoBehaviour
         if (interactive.activeTile == null)
         {
             OverlayTile tile = GetFocusedOnTile(colliderMap);
-            Debug.Log(tile.gameObject);
+            GetDamageTiles(colliderMap);
+            //Debug.Log(tile.gameObject);
             PositionInteractiveOnTile(tile);
             interactive.activeTile = tile;
         }
@@ -32,6 +34,22 @@ public class InteractiveSetUp : MonoBehaviour
 
         Debug.Log("ERROR: No Tile Found");
         return null;
+    }
+
+    public void GetDamageTiles(Dictionary<Vector2, OverlayTile> colliderMap)
+    {
+        List<OverlayTile> damageTiles = new List<OverlayTile>();
+        foreach(Vector2 location in damageLocations)
+        {
+            Debug.Log(location);
+            if (colliderMap.ContainsKey(location))
+            {
+                Debug.Log("Ruin Tile Found");
+                damageTiles.Add(colliderMap[location]);
+            }
+        }
+
+        this.GetComponent<Interactive>().inRangeTiles = damageTiles;
     }
 
     private void PositionInteractiveOnTile(OverlayTile overlayTile)

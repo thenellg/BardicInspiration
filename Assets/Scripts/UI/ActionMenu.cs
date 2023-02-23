@@ -21,6 +21,7 @@ public class ActionMenu : MonoBehaviour
     public List<ShowTurnInfo> visibleTurns = new List<ShowTurnInfo>();
     public SetUpTurnInfo turnInfo;
     public RectTransform background;
+    public List<Interactive> Interactables = new List<Interactive>();
 
     private void Start()
     {
@@ -197,6 +198,18 @@ public class ActionMenu : MonoBehaviour
         }
     }
 
+    public void Interact(OverlayTile location)
+    {
+        foreach(Interactive ruin in Interactables)
+        {
+            if(ruin == location)
+            {
+                ruin.GetComponent<Interactive>().Interaction();
+                break;
+            }
+        }
+    }
+
     public void setActionMenu()
     {
         float backgroundLength = 50.57f;
@@ -211,7 +224,7 @@ public class ActionMenu : MonoBehaviour
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Ruin";
             newButton.name = "Ruin Button";
             //set action
-            //newButton.GetComponent<Button>().onClick.AddListener(delegate { visibleMagicMenu.SetActive(true); });
+            newButton.GetComponent<Button>().onClick.AddListener(delegate { Interact(cursor.character.activeTile); });
 
             y -= 37.2f;
             backgroundLength += 35f;

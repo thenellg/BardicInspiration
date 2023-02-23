@@ -982,6 +982,7 @@ MonoBehaviour:
   visibleTurns: []
   turnInfo: {fileID: 0}
   background: {fileID: 1387686697}
+  Interactables: []
 --- !u!1 &1387686696
 GameObject:
   m_ObjectHideFlags: 0
@@ -3066,6 +3067,8 @@ MonoBehaviour:
   settings: {fileID: 0}
   gameUI: {fileID: 1366546096}
   damageNumbers: {fileID: 8184869586627814647, guid: e0fb45cb60badcb4082c86b50be23034, type: 3}
+  attacker: {fileID: 0}
+  defender: {fileID: 0}
 --- !u!4 &811177208957008287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2696457712678485992, guid: 24a02a4b17ca9274cbccff7634e52a7d, type: 3}
@@ -3328,13 +3331,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 610429736}
     m_Modifications:
     - target: {fileID: 4807643948240508880, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: gate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807643948240508880, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
       propertyPath: cursor
       value: 
       objectReference: {fileID: 1924265899}
     - target: {fileID: 4807643948240508880, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: playerTeam
+      value: 
+      objectReference: {fileID: 278536586}
+    - target: {fileID: 4807643948240508880, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
       propertyPath: battleManager
       value: 
       objectReference: {fileID: 2138875658}
+    - target: {fileID: 4807643948240508880, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: damageOrHealInt
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807643948240508880, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: inRangeTiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4807643948240508881, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3378,6 +3397,34 @@ PrefabInstance:
     - target: {fileID: 4807643948240508881, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807643948240508882, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: damageLocations.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807643948240508882, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: damageLocations.Array.data[0].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807643948240508882, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: damageLocations.Array.data[0].y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807643948240508882, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: damageLocations.Array.data[1].x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807643948240508882, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: damageLocations.Array.data[1].y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807643948240508882, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: damageLocations.Array.data[2].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807643948240508882, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+      propertyPath: damageLocations.Array.data[2].y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4807643948240508883, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
       propertyPath: m_Name

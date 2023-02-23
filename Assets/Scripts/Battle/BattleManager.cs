@@ -28,8 +28,8 @@ public class BattleManager : MonoBehaviour
     public GameObject damageNumbers;
     
     private TextMeshProUGUI damage;
-    private CharacterStats attacker;
-    private CharacterStats defender;
+    public CharacterStats attacker;
+    public CharacterStats defender;
 
     private void Start()
     {
@@ -190,7 +190,6 @@ public class BattleManager : MonoBehaviour
         attacker = m_Attacker; defender = m_Defender;
         attacking = true;
         visAttacking = true;
-        //make an animation and show damage numbers
 
         //Add stuff here to actually make the attack cool;
         defender.activeTile.HideTile();
@@ -204,6 +203,7 @@ public class BattleManager : MonoBehaviour
         direction = new Vector3(direction.x * 0.0005f, direction.y * 0.0005f, direction.z * 0.0005f);
 
         m_Defender.GetComponent<CharacterAnimationHandler>().setDamageMove(direction.x, direction.y);
+        attacking = false;
 
         Invoke("resetDefender", 0.2f);
 
@@ -227,6 +227,12 @@ public class BattleManager : MonoBehaviour
 
     public void showDamage()
     {
+        showDamageNoInvoke();
+        Invoke("doDamage", 1f);
+    }
+
+    public void showDamageNoInvoke()
+    {
         string info = "-" + attacker.attack.ToString();
         damage = Instantiate(damageNumbers).GetComponent<TextMeshProUGUI>();
         //Set info
@@ -239,7 +245,6 @@ public class BattleManager : MonoBehaviour
         //Show and animate
         damage.enabled = true;
         damage.GetComponent<damageNumbers>().move = true;
-        Invoke("doDamage", 1f);
     }
 
     public void endTurn()
