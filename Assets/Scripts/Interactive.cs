@@ -20,6 +20,7 @@ public class Interactive : MonoBehaviour
     public bool gate = true;
     public int damageOrHealInt;
     public GameObject playerTeam;
+    public float intModifier = 0f;
 
     public BlockGame m_blockGame;
 
@@ -53,7 +54,7 @@ public class Interactive : MonoBehaviour
             if(reaction == reactionType.damage)
             {
                 if(m_blockGame.succeeded >= 3)
-                    damageOrHealInt *= 2;
+                    damageOrHealInt = (int)((float)damageOrHealInt * intModifier);
 
                 Destroy(m_blockGame.gameObject);
                 doDamage();
@@ -65,6 +66,7 @@ public class Interactive : MonoBehaviour
     {
         m_blockGame = Instantiate(minigame).GetComponent<BlockGame>();
         m_blockGame.transform.parent = gameUI;
+        m_blockGame.transform.localScale = Vector3.one;
         m_blockGame.transform.localPosition = Vector3.zero;
         m_blockGame.ruin = this;
         yield return null;
