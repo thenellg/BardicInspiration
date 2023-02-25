@@ -29,6 +29,9 @@ public class BlockGame : MonoBehaviour
 
     public float spellDistance = 105f;
 
+    public bool endGame = false;
+    public Interactive ruin;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -96,6 +99,9 @@ public class BlockGame : MonoBehaviour
                     succeeded++;
                     resetDirection();
                 }
+                else{
+                    endGame = true;
+                }
             }
         }
     }
@@ -118,12 +124,12 @@ public class BlockGame : MonoBehaviour
 
     IEnumerator blockGameplay()
     {
-        while(succeeded < 3)
+        while(succeeded < 3 || endGame)
         {
             yield return null;
         }
 
-        Debug.Log("Success");
+        Debug.Log("Game - Success");
     }
 
     public bool playBlockGame()
@@ -132,6 +138,8 @@ public class BlockGame : MonoBehaviour
 
         if (succeeded == 3)
             return true;
+        else if (endGame)
+            return false;
         else
             return false;
     }

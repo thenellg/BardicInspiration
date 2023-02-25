@@ -415,6 +415,7 @@ MonoBehaviour:
   succeeded: 0
   rotating: 0
   spellDistance: 105
+  endGame: 0
 --- !u!1 &5513133973737071957
 GameObject:
   m_ObjectHideFlags: 0

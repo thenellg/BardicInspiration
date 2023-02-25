@@ -9,7 +9,8 @@ public class Interactive : MonoBehaviour
     public List<OverlayTile> inRangeTiles = new List<OverlayTile>();
     public BattleManager battleManager;
     public MouseController cursor;
-
+    public Transform gameUI;
+    public bool gameFinished = false;
     //[Header("Reaction")]
     public enum reactionType
     {
@@ -19,6 +20,8 @@ public class Interactive : MonoBehaviour
     public bool gate = true;
     public int damageOrHealInt;
     public GameObject playerTeam;
+
+    public BlockGame m_blockGame;
 
     // Start is called before the first frame update
     void Start()
@@ -43,15 +46,35 @@ public class Interactive : MonoBehaviour
         }
     }
 
-    
-    public void damageEnemies()
+    private void Update()
     {
-        battleManager.actionMenu.visibleActionMenu.SetActive(false);
-        battleManager.actionMenu.destroyActionMenu();
+        if (m_blockGame && (m_blockGame.succeeded >= 3 || m_blockGame.endGame))
+        {
+            if(reaction == reactionType.damage)
+            {
+                if(m_blockGame.succeeded >= 3)
+                    damageOrHealInt *= 2;
 
+                Destroy(m_blockGame.gameObject);
+                doDamage();
+            }
+        }
+    }
+
+    IEnumerator damageMinigame()
+    {
+        m_blockGame = Instantiate(minigame).GetComponent<BlockGame>();
+        m_blockGame.transform.parent = gameUI;
+        m_blockGame.transform.localPosition = Vector3.zero;
+        m_blockGame.ruin = this;
+        yield return null;
+    }
+
+    void doDamage()
+    {
         Debug.Log("got to damageEnemies()");
         List<CharacterStats> characters = new List<CharacterStats>();
-        foreach(OverlayTile tile in inRangeTiles)
+        foreach (OverlayTile tile in inRangeTiles)
         {
             //tile animation
             if (tile.currentChar != null && tile.currentChar.tag == "Enemy Team")
@@ -67,6 +90,13 @@ public class Interactive : MonoBehaviour
         activeTile.puzzleSpace = false;
 
         Invoke("endSet", 0.8f);
+    }
+
+    public void damageEnemies()
+    {
+        battleManager.actionMenu.visibleActionMenu.SetActive(false);
+        battleManager.actionMenu.destroyActionMenu();
+        StartCoroutine(damageMinigame());
     }
 
 
