@@ -109,7 +109,7 @@ public class MouseController : MonoBehaviour
                     {
                         //Do magic attack stuff here
                     }
-                    else
+                    else if (inRangeTiles.Contains(tile) && (!tile.isBlocked || tile.currentChar == character))
                     {
                         isMoving = true;
                         tile.gameObject.GetComponent<OverlayTile>().HideTile();
@@ -172,6 +172,8 @@ public class MouseController : MonoBehaviour
                     {
                         Debug.Log("Player is in range");
                         //Eventually adjust this for possible special attacks?
+                        battleManager.onRuin = false;
+                        battleManager.damageAmount = character.attack;
                         battleManager.attack(character, defender.currentChar);
                     }
                 }
