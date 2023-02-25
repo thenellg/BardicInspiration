@@ -228,6 +228,8 @@ public class BattleManager : MonoBehaviour
         foreach (CharacterStats enemy in defenders)
         {
             defender = enemy;
+
+            showDamageNoInvoke();
             doDamage();
         }
 
