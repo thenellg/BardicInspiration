@@ -14,7 +14,8 @@ public class BattleManager : MonoBehaviour
     public ActionMenu actionMenu;
     public MouseController cursor;
     public TextMeshProUGUI resultsText;
-
+    public int damageAmount = 0;
+    public bool onRuin = false;
 
     public bool attacking = false;
     public bool magicAttacking = false;
@@ -39,7 +40,7 @@ public class BattleManager : MonoBehaviour
         //play battle start animation
         //Invoke startSequence at end of animation
         startSequence();
-        Debug.Log(turnOrder.Count);
+        //Debug.Log(turnOrder.Count);
         resultsText.text = " ";
     }
 
@@ -105,12 +106,9 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void doDamage(bool ruin = false, int damage = 0)
+    public void doDamage()
     {
-        if (ruin)
-            defender.health -= damage;
-        else
-            defender.health -= attacker.attack;
+        defender.health -= damageAmount;
 
         if (defender.health <= 0)
         {
@@ -205,13 +203,16 @@ public class BattleManager : MonoBehaviour
         m_Defender.GetComponent<CharacterAnimationHandler>().setDamageMove(direction.x, direction.y);
         attacking = false;
 
-        Invoke("resetDefender", 0.2f);
+        if (onRuin)
+            resetDefender();
+        else
+            Invoke("resetDefender", 0.2f);
 
     }
 
     void resetDefender()
     {
-        if (defender.health - attacker.attack > 0)
+        if (defender.health - damageAmount > 0)
         {
             defender.characterSprite.color = Color.white;
             showDamage();
@@ -233,7 +234,7 @@ public class BattleManager : MonoBehaviour
 
     public void showDamageNoInvoke()
     {
-        string info = "-" + attacker.attack.ToString();
+        string info = "-" + damageAmount.ToString();
         damage = Instantiate(damageNumbers).GetComponent<TextMeshProUGUI>();
         //Set info
         damage.enabled = false;

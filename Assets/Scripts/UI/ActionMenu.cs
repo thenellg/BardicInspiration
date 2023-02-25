@@ -102,7 +102,7 @@ public class ActionMenu : MonoBehaviour
         if (characterIndex < 0)
             characterIndex = 0;
 
-        Debug.Log("Character Index: " + characterIndex);
+        //Debug.Log("Character Index: " + characterIndex);
 
         ShowTurnInfo playerInfo;
 
@@ -200,14 +200,18 @@ public class ActionMenu : MonoBehaviour
 
     public void Interact(OverlayTile location)
     {
+        Debug.Log("Interact()");
+        Debug.Log("LOCATION: " + location.gridLocation2D);
         foreach(Interactive ruin in Interactables)
         {
-            if(ruin == location)
+            Debug.Log("CHECKED LOCATION: " + ruin.activeTile.gridLocation2D);
+            if (ruin.activeTile.gridLocation2D == location.gridLocation2D)
             {
                 ruin.GetComponent<Interactive>().Interaction();
                 break;
             }
         }
+        Debug.Log("No tiles found");
     }
 
     public void setActionMenu()

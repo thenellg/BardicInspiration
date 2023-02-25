@@ -28,6 +28,7 @@ public class Interactive : MonoBehaviour
 
     public void Interaction()
     {
+        Debug.Log("got to Interaction()");
         if(reaction == reactionType.damage)
         {
             damageEnemies();
@@ -45,22 +46,34 @@ public class Interactive : MonoBehaviour
     
     public void damageEnemies()
     {
+        battleManager.actionMenu.visibleActionMenu.SetActive(false);
+        battleManager.actionMenu.destroyActionMenu();
+
+        Debug.Log("got to damageEnemies()");
         List<CharacterStats> characters = new List<CharacterStats>();
         foreach(OverlayTile tile in inRangeTiles)
         {
             //tile animation
             if (tile.currentChar != null && tile.currentChar.tag == "Enemy Team")
             {
+                battleManager.damageAmount = damageOrHealInt;
+                Debug.Log("found enemy at " + tile.gridLocation2D);
+                battleManager.onRuin = true;
                 battleManager.attack(cursor.character, tile.currentChar);
-                battleManager.showDamageNoInvoke();
-                battleManager.doDamage(cursor.character, damageOrHealInt);
+                //battleManager.showDamageNoInvoke();
+                //battleManager.doDamage();
             }
         }
+        activeTile.puzzleSpace = false;
+
+        Invoke("endSet", 0.8f);
     }
 
 
     public void heal()
     {
+        battleManager.actionMenu.visibleActionMenu.SetActive(false);
+        battleManager.actionMenu.destroyActionMenu();
         foreach (CharacterStats character in playerTeam.GetComponentsInChildren<CharacterStats>())
         {
             if ((character.health + damageOrHealInt) <= character.maxHealth)
@@ -75,6 +88,14 @@ public class Interactive : MonoBehaviour
                 character.health += healthAdd;
             }
         }
+        activeTile.puzzleSpace = false;
+        Invoke("endSet", 0.8f);
+    }
+
+    void endSet()
+    {
+        battleManager.actionMenu.setActionMenu();
+        battleManager.actionMenu.visibleActionMenu.SetActive(true);
     }
 
     public void removeGate()

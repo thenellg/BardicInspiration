@@ -302,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: attack
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: attackRangeMax
@@ -705,7 +705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: attack
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: health
@@ -826,6 +826,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1193548456 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4807643948240508880, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
+  m_PrefabInstance: {fileID: 4807643947699868163}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd3384943eddbd04481e77f7bf8ea2d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1267232536
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,7 +993,8 @@ MonoBehaviour:
   visibleTurns: []
   turnInfo: {fileID: 0}
   background: {fileID: 1387686697}
-  Interactables: []
+  Interactables:
+  - {fileID: 1193548456}
 --- !u!1 &1387686696
 GameObject:
   m_ObjectHideFlags: 0
@@ -3060,6 +3072,8 @@ MonoBehaviour:
   actionMenu: {fileID: 1366546101}
   cursor: {fileID: 1924265899}
   resultsText: {fileID: 1988990444}
+  damageAmount: 0
+  onRuin: 0
   attacking: 0
   magicAttacking: 0
   visAttacking: 0
@@ -3348,7 +3362,7 @@ PrefabInstance:
       objectReference: {fileID: 2138875658}
     - target: {fileID: 4807643948240508880, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
       propertyPath: damageOrHealInt
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4807643948240508880, guid: 93ba86fdbb476d74e823eaf0a6691b69, type: 3}
       propertyPath: inRangeTiles.Array.size

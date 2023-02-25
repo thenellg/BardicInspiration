@@ -41,10 +41,10 @@ public class InteractiveSetUp : MonoBehaviour
         List<OverlayTile> damageTiles = new List<OverlayTile>();
         foreach(Vector2 location in damageLocations)
         {
-            Debug.Log(location);
+            //Debug.Log(location);
             if (colliderMap.ContainsKey(location))
             {
-                Debug.Log("Ruin Tile Found");
+                //Debug.Log("Ruin Tile Found");
                 damageTiles.Add(colliderMap[location]);
             }
         }

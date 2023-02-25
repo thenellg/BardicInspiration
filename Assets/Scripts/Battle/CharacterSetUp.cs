@@ -18,7 +18,7 @@ public class CharacterSetUp : MonoBehaviour
         if(stats.activeTile == null)
         {
             OverlayTile tile = GetFocusedOnTile(colliderMap);
-            Debug.Log(tile.gameObject);
+            //Debug.Log(tile.gameObject);
             PositionCharacterOnTile(tile);
         }
     }
