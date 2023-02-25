@@ -62,6 +62,23 @@ public class Interactive : MonoBehaviour
         }
     }
 
+    public void showTiles()
+    {
+        foreach(OverlayTile tile in inRangeTiles)
+        {
+            tile.SetColor(battleManager.settings.ruinHighlight);
+            tile.ShowTile(true);
+        }
+    }
+
+    public void hideTiles()
+    {
+        foreach(OverlayTile tile in inRangeTiles)
+        {
+            tile.HideTile();
+        }
+    }
+
     IEnumerator damageMinigame()
     {
         m_blockGame = Instantiate(minigame).GetComponent<BlockGame>();
@@ -96,6 +113,7 @@ public class Interactive : MonoBehaviour
 
     public void damageEnemies()
     {
+        hideTiles();
         battleManager.actionMenu.visibleActionMenu.SetActive(false);
         battleManager.actionMenu.destroyActionMenu();
         StartCoroutine(damageMinigame());

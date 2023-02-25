@@ -63,9 +63,15 @@ public class ActionMenu : MonoBehaviour
             visibleTurns[i].setHealth(temp.health, temp.maxHealth);
 
             if (temp.tag == "Player Team")
+            {
                 visibleTurns[i].setName(temp.characterName, battleManager.settings.TeammateHighlight);
+                visibleTurns[i].setSpellSlots(true, temp.spellSlots);
+            }
             else if (temp.tag == "Enemy Team")
+            {
                 visibleTurns[i].setName(temp.characterName, battleManager.settings.targetHighlight);
+                visibleTurns[i].setSpellSlots(false, temp.spellSlots);
+            }
             else
                 visibleTurns[i].setName(temp.characterName, Color.yellow);
         }

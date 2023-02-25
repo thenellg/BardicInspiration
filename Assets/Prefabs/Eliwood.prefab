@@ -178,7 +178,7 @@ MonoBehaviour:
   defense: 0
   special: 0
   maxSpellSlots: 2
-  spellSlots: 2
+  spellSlots: 1
   spells:
   - {fileID: 11400000, guid: 44d7227b6ba900c4d8ca506377752d5c, type: 2}
 --- !u!114 &8577116171866360218
@@ -212,6 +212,7 @@ MonoBehaviour:
   magicAttack: 0
   playerAttack: 1
   healingAbility: 0
+  magicMenu: {fileID: 0}
 --- !u!114 &4634330553572755679
 MonoBehaviour:
   m_ObjectHideFlags: 0

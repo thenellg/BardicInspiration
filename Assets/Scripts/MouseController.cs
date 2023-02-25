@@ -75,6 +75,25 @@ public class MouseController : MonoBehaviour
                     }
                 }
 
+                if(tile.puzzleSpace == true)
+                {
+                    foreach (GameObject ruin in battleManager.interactives)
+                    {
+                        if(ruin.GetComponent<Interactive>().activeTile == tile)
+                        {
+                            ruin.GetComponent<Interactive>().showTiles();
+                        }
+
+                    }
+                }
+                else
+                {
+                    foreach(GameObject ruin in battleManager.interactives)
+                    {
+                        ruin.GetComponent<Interactive>().hideTiles();
+                    }
+                }
+
                 if (Input.GetMouseButtonDown(0))
                 {
                     if (battleManager.attacking)
@@ -94,6 +113,19 @@ public class MouseController : MonoBehaviour
                     {
                         isMoving = true;
                         tile.gameObject.GetComponent<OverlayTile>().HideTile();
+
+                        if (tile.puzzleSpace == true)
+                        {
+                            foreach (GameObject ruin in battleManager.interactives)
+                            {
+                                if (ruin.GetComponent<Interactive>().activeTile == tile)
+                                {
+                                    ruin.GetComponent<Interactive>().showTiles();
+                                    break;
+                                }
+                            }
+                        }
+
                     }
                 }
             }
@@ -109,6 +141,18 @@ public class MouseController : MonoBehaviour
                 foreach (var item in inRangeTiles)
                 {
                     item.HideTile();
+                }
+
+                if (character.activeTile.puzzleSpace == true)
+                {
+                    foreach (GameObject ruin in battleManager.interactives)
+                    {
+                        if (ruin.GetComponent<Interactive>().activeTile == character.activeTile)
+                        {
+                            ruin.GetComponent<Interactive>().showTiles();
+                            break;
+                        }
+                    }
                 }
 
                 //Set to turn abilities in battle manager if player

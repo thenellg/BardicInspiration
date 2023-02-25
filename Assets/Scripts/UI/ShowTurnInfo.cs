@@ -16,6 +16,8 @@ public class ShowTurnInfo : MonoBehaviour
     public float newY = 0;
     public float newSize;
     public float currentSize;
+    public GameObject spellSlots;
+    public GameObject spellSlotsPrefab;
 
     void Start()
     {
@@ -65,5 +67,24 @@ public class ShowTurnInfo : MonoBehaviour
     {
         string temp = health + "/" + maxHealth;
         characterHealth.text = temp;
+    }
+
+    public void setSpellSlots(bool hero, int numSlots)
+    {
+        float location = 0;
+        if (hero)
+        {
+            for (int i = 0; i < numSlots; i++)
+            {
+                GameObject slot = Instantiate(spellSlotsPrefab);
+                slot.transform.parent = spellSlots.transform;
+                slot.GetComponent<RectTransform>().localPosition = new Vector3(location, -5, 0);
+                location += 15;
+            }
+        }
+        else
+        {
+            Destroy(spellSlots.gameObject);
+        }
     }
 }
