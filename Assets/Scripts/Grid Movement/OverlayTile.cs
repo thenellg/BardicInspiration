@@ -44,16 +44,38 @@ public class OverlayTile : MonoBehaviour
             setArrowSprite(ArrowDirections.None);
             Color color = gameObject.GetComponent<SpriteRenderer>().color;
 
-            if (currentChar && currentChar.tag == "Enemy Team")
+
+             if (currentChar && currentChar.tag == "Enemy Team")
                 gameObject.GetComponent<SpriteRenderer>().color = settings.targetHighlight;
-
-
-            if (currentChar && currentChar.tag == "Player Team")
+             if (currentChar && currentChar.tag == "Player Team")
                 gameObject.GetComponent<SpriteRenderer>().color = settings.TeammateHighlight;
-            
+
+
+
         }
 
         // Add and else here that changes colors based on what is blocking (if player, playerBlock, if enemy enemyBlock)
+    }
+
+    public void showRuinTile()
+    {
+        setArrowSprite(ArrowDirections.None);
+        Color color = settings.CanMoveHighlight;
+        if (!isBlocked)
+        {
+            color = settings.ruinHighlight;
+        }
+        else
+        {
+            if (currentChar && currentChar.tag == "Enemy Team")
+                color = settings.targetHighlight;
+            if (currentChar && currentChar.tag == "Player Team")
+                color = settings.TeammateHighlight;
+        }
+
+
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
+
     }
 
     public void HideTile()

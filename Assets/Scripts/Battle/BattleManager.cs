@@ -106,10 +106,8 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void doDamage()
+    public void deathCheck()
     {
-        defender.health -= damageAmount;
-
         if (defender.health <= 0)
         {
             defender.activeTile.isBlocked = false;
@@ -150,6 +148,16 @@ public class BattleManager : MonoBehaviour
 
             //temp.SetActive(false);
         }
+    }
+
+    public void doDamage()
+    {
+        if (!onRuin)
+            damageAmount = attacker.attack;
+
+        defender.health -= damageAmount;
+
+        deathCheck();
 
         if (playerTeam.Count == 0)
         {
@@ -169,7 +177,8 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            attacker = null;
+            if(!onRuin)
+                attacker = null;
             defender = null;
             actionMenu.setUpInfo();
         }
@@ -185,6 +194,7 @@ public class BattleManager : MonoBehaviour
 
     public void attack(CharacterStats m_Attacker, CharacterStats m_Defender)
     {
+        Debug.Log("attack");
         attacker = m_Attacker; defender = m_Defender;
         attacking = true;
         visAttacking = true;
@@ -208,6 +218,20 @@ public class BattleManager : MonoBehaviour
         else
             Invoke("resetDefender", 0.2f);
 
+    }
+
+    public void attackMultiple(CharacterStats m_Attacker, List<CharacterStats> defenders, int damage)
+    {
+        damageAmount = damage;
+        onRuin = true;
+
+        foreach (CharacterStats enemy in defenders)
+        {
+            defender = enemy;
+            doDamage();
+        }
+
+        onRuin = false;
     }
 
     void resetDefender()

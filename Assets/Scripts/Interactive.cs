@@ -23,7 +23,7 @@ public class Interactive : MonoBehaviour
     public float intModifier = 0f;
 
     public BlockGame m_blockGame;
-
+    public List<CharacterStats> targets = new List<CharacterStats>();
     // Start is called before the first frame update
     void Start()
     {
@@ -66,8 +66,7 @@ public class Interactive : MonoBehaviour
     {
         foreach(OverlayTile tile in inRangeTiles)
         {
-            tile.SetColor(battleManager.settings.ruinHighlight);
-            tile.ShowTile(true);
+            tile.showRuinTile();
         }
     }
 
@@ -89,23 +88,25 @@ public class Interactive : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(1f);
+    }
+
     void doDamage()
     {
         Debug.Log("got to damageEnemies()");
-        List<CharacterStats> characters = new List<CharacterStats>();
         foreach (OverlayTile tile in inRangeTiles)
         {
             //tile animation
             if (tile.currentChar != null && tile.currentChar.tag == "Enemy Team")
             {
-                battleManager.damageAmount = damageOrHealInt;
-                Debug.Log("found enemy at " + tile.gridLocation2D);
-                battleManager.onRuin = true;
-                battleManager.attack(cursor.character, tile.currentChar);
-                //battleManager.showDamageNoInvoke();
-                //battleManager.doDamage();
+                targets.Add(tile.currentChar);
             }
         }
+
+        battleManager.attackMultiple(activeTile.currentChar, targets, damageOrHealInt);
+
         activeTile.puzzleSpace = false;
 
         Invoke("endSet", 0.8f);
@@ -114,6 +115,7 @@ public class Interactive : MonoBehaviour
     public void damageEnemies()
     {
         hideTiles();
+        battleManager.attacker = activeTile.currentChar;
         battleManager.actionMenu.visibleActionMenu.SetActive(false);
         battleManager.actionMenu.destroyActionMenu();
         StartCoroutine(damageMinigame());

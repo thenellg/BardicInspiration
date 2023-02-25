@@ -46,5 +46,9 @@ MonoBehaviour:
   CanMoveHighlight: {r: 255, g: 255, b: 255, a: 1}
   directionArrow: {r: 1, g: 0.94694453, b: 0.49411762, a: 1}
   targetHighlight: {r: 0.8679245, g: 0.1514774, b: 0.18798451, a: 1}
+  ruinHighlight: {r: 0.2830189, g: 0.09433963, b: 0, a: 1}
   TeammateHighlight: {r: 0.050980404, g: 0.45251158, b: 0.7490196, a: 1}
   cursor: {r: 0.745283, g: 0.3826726, b: 0.045701336, a: 1}
+  damageColor: {r: 253, g: 45, b: 55, a: 1}
+  healingColor: {r: 114, g: 185, b: 46, a: 1}
+  customCharacterID: 0
