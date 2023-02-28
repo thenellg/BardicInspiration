@@ -74,7 +74,10 @@ public class Interactive : MonoBehaviour
     {
         foreach(OverlayTile tile in inRangeTiles)
         {
-            tile.HideTile();
+            if (battleManager.cursor.inRangeTiles.Contains(tile) && !tile.isBlocked)
+                tile.GetComponent<SpriteRenderer>().color = battleManager.settings.CanMoveHighlight;
+            else
+                tile.HideTile();
         }
     }
 
