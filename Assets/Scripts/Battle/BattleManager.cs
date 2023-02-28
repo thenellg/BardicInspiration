@@ -31,6 +31,7 @@ public class BattleManager : MonoBehaviour
     private TextMeshProUGUI damage;
     public CharacterStats attacker;
     public CharacterStats defender;
+    public Spell currentSpell;
 
     private void Start()
     {

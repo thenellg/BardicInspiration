@@ -21,6 +21,7 @@ public class MouseController : MonoBehaviour
 
     public List<OverlayTile> path = new List<OverlayTile>();
     public List<OverlayTile> inRangeTiles = new List<OverlayTile>();
+    public List<OverlayTile> magicRangeTiles = new List<OverlayTile>();
 
     public bool isMoving = false;
     public bool activeMovement = true;
@@ -56,22 +57,45 @@ public class MouseController : MonoBehaviour
                 cursor.transform.position = tile.transform.position;
                 cursor.gameObject.GetComponent<SpriteRenderer>().sortingOrder = tile.transform.GetComponent<SpriteRenderer>().sortingOrder;
 
+
                 if (inRangeTiles.Contains(tile) && !isMoving && activeMovement)
                 {
-                    path = pathfinder.FindPath(character.activeTile, tile, inRangeTiles);
-
-                    foreach (var item in inRangeTiles)
+                    if (battleManager.magicAttacking)
                     {
-                        MapManager.Instance.colliderMap[item.gridLocation2D].setArrowSprite(ArrowDirections.None);
+                        if(battleManager.currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
+                        {
+                            //get range from tile into magicRangeTiles
+                        }
+                        else if(battleManager.currentSpell.spellType == Spell.spellTypes.Line)
+                        {
+                            //get range in line into magicRangeTiles
+                        }
+                        else if (battleManager.currentSpell.spellType == Spell.spellTypes.Buff)
+                        {
+                            //Check if tile is an ally
+                        }
+                        else
+                        {
+                            //Check if tile is an enemy
+                        }
                     }
-
-                    for (int i = 0; i < path.Count; i++)
+                    else
                     {
-                        var previousTile = i > 0 ? path[i - 1] : character.activeTile;
-                        var futureTile = i < path.Count - 1 ? path[i + 1] : null;
+                        path = pathfinder.FindPath(character.activeTile, tile, inRangeTiles);
 
-                        var arrow = drawArrow.TranslateDirection(previousTile, path[i], futureTile);
-                        path[i].setArrowSprite(arrow);
+                        foreach (var item in inRangeTiles)
+                        {
+                            MapManager.Instance.colliderMap[item.gridLocation2D].setArrowSprite(ArrowDirections.None);
+                        }
+
+                        for (int i = 0; i < path.Count; i++)
+                        {
+                            var previousTile = i > 0 ? path[i - 1] : character.activeTile;
+                            var futureTile = i < path.Count - 1 ? path[i + 1] : null;
+
+                            var arrow = drawArrow.TranslateDirection(previousTile, path[i], futureTile);
+                            path[i].setArrowSprite(arrow);
+                        }
                     }
                 }
 
