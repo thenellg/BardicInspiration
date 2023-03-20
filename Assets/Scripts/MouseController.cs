@@ -64,7 +64,13 @@ public class MouseController : MonoBehaviour
                     {
                         if(battleManager.currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
                         {
-                            //get range from tile into magicRangeTiles
+                            foreach (OverlayTile spellTile in magicRangeTiles)
+                                spellTile.HideTile();
+
+                            magicRangeTiles = rangeFinder.GetTilesinRange(tile, battleManager.currentSpell.maxSpellRange);
+
+                            foreach (OverlayTile spellTile in magicRangeTiles)
+                                spellTile.ShowTile();
                         }
                         else if(battleManager.currentSpell.spellType == Spell.spellTypes.Line)
                         {

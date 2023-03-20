@@ -158,6 +158,11 @@ public class ActionMenu : MonoBehaviour
         visibleActionMenu.transform.position = cam.WorldToScreenPoint(character.returnMenuLocation().position);
     }
 
+    public void spell()
+    {
+
+    }
+
     public void setMagicMenu()
     {
         float y = -23.5f;
@@ -171,7 +176,10 @@ public class ActionMenu : MonoBehaviour
             newButton.transform.localScale = Vector3.one;
 
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = cursor.character.spells[i].spellName;
+
             //set action to spell
+            newButton.GetComponent<Button>().onClick.AddListener(delegate { battleManager.magicAttacking = true; });
+
             y -= 37.2f;
 
             if (i != 0)
