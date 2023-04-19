@@ -30,6 +30,8 @@ public class MouseController : MonoBehaviour
     public bool gameActive = true;
     public bool cursorActive = true;
 
+    private OverlayTile cursorCurrentTile;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +58,7 @@ public class MouseController : MonoBehaviour
                 OverlayTile tile = hit.collider.gameObject.GetComponent<OverlayTile>();
                 cursor.transform.position = tile.transform.position;
                 cursor.gameObject.GetComponent<SpriteRenderer>().sortingOrder = tile.transform.GetComponent<SpriteRenderer>().sortingOrder;
-
+                cursorCurrentTile = tile;
 
                 if (inRangeTiles.Contains(tile) && !isMoving && activeMovement)
                 {
@@ -65,6 +67,12 @@ public class MouseController : MonoBehaviour
                         if(battleManager.currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
                         {
                             //get range from tile into magicRangeTiles
+                            path = pathfinder.FindPath(character.activeTile, tile, inRangeTiles);
+
+                            if (path.Count <= battleManager.currentSpell.maxSpellRange)
+                            {
+                                GetInRangeMagicTiles();
+                            }
                         }
                         else if(battleManager.currentSpell.spellType == Spell.spellTypes.Line)
                         {
@@ -132,6 +140,18 @@ public class MouseController : MonoBehaviour
                     else if (battleManager.magicAttacking)
                     {
                         //Do magic attack stuff here
+                        if (battleManager.currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
+                        {
+                            //get range from tile into magicRangeTiles
+                        }
+                        else if (battleManager.currentSpell.spellType == Spell.spellTypes.Line)
+                        {
+                            //get range in line into magicRangeTiles
+                        }
+                        else if (battleManager.currentSpell.spellType == Spell.spellTypes.Buff)
+                        {
+                            //Check if tile is an ally
+                        }
                     }
                     else if (inRangeTiles.Contains(tile) && (!tile.isBlocked || tile.currentChar == character))
                     {
@@ -225,6 +245,26 @@ public class MouseController : MonoBehaviour
                 item.ShowTile();
             }
             character.activeTile.ShowTile(true);
+        }
+    }
+
+    public void GetInRangeMagicTiles(bool overrideChar = false)
+    {
+        foreach (var item in magicRangeTiles)
+        {
+            if(item.prevColor != null)
+                item.SetColor(battleManager.settings.CanMoveHighlight);
+            item.ShowTile(true);
+        }
+
+        magicRangeTiles = rangeFinder.GetTilesinRange(cursorCurrentTile, battleManager.currentSpell.minSpellRange);
+
+        foreach (var item in magicRangeTiles)
+        {
+            item.prevColor = item.GetComponent<SpriteRenderer>().color;
+            item.SetColor(battleManager.settings.targetHighlight);
+            item.ShowTile(true);
+
         }
     }
 

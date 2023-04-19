@@ -1347,6 +1347,7 @@ MonoBehaviour:
   overlayTile: {fileID: 0}
   path: []
   inRangeTiles: []
+  magicRangeTiles: []
   isMoving: 0
   activeMovement: 1
   gameActive: 1
@@ -3083,6 +3084,7 @@ MonoBehaviour:
   damageNumbers: {fileID: 8184869586627814647, guid: e0fb45cb60badcb4082c86b50be23034, type: 3}
   attacker: {fileID: 0}
   defender: {fileID: 0}
+  currentSpell: {fileID: 0}
 --- !u!4 &811177208957008287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2696457712678485992, guid: 24a02a4b17ca9274cbccff7634e52a7d, type: 3}
@@ -3536,15 +3538,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8768531583899352073, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
       propertyPath: damageColor.b
-      value: 0.16470589
+      value: 0.178753
       objectReference: {fileID: 0}
     - target: {fileID: 8768531583899352073, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
       propertyPath: damageColor.g
-      value: 0.13333334
+      value: 0.15566038
       objectReference: {fileID: 0}
     - target: {fileID: 8768531583899352073, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
       propertyPath: damageColor.r
-      value: 0.49019608
+      value: 0.6226415
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768531583899352073, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
+      propertyPath: healingColor.b
+      value: 0.18823527
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768531583899352073, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
+      propertyPath: healingColor.g
+      value: 0.7490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768531583899352073, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
+      propertyPath: healingColor.r
+      value: 0.33470336
       objectReference: {fileID: 0}
     - target: {fileID: 8768531583899352078, guid: 97d4b717cbfa45c4e86092312931af6b, type: 3}
       propertyPath: m_RootOrder
