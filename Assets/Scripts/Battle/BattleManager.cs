@@ -33,6 +33,8 @@ public class BattleManager : MonoBehaviour
     public CharacterStats defender;
     public Spell currentSpell;
 
+    public List<GameObject> magicReactionMinigames = new List<GameObject>();
+
     private void Start()
     {
         MouseController temp = FindObjectOfType<MouseController>();
