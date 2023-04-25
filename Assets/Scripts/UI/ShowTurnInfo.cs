@@ -18,6 +18,7 @@ public class ShowTurnInfo : MonoBehaviour
     public float currentSize;
     public GameObject spellSlots;
     public GameObject spellSlotsPrefab;
+    public List<SpellSlot> slots = new List<SpellSlot>();
 
     void Start()
     {
@@ -69,22 +70,35 @@ public class ShowTurnInfo : MonoBehaviour
         characterHealth.text = temp;
     }
 
-    public void setSpellSlots(bool hero, int numSlots)
+    public void setSpellSlots(bool hero, int maxSlots)
     {
-        float location = 0;
-        if (hero)
+        if (slots.Count < maxSlots)
         {
-            for (int i = 0; i < numSlots; i++)
+            float location = 0;
+            if (hero)
             {
-                GameObject slot = Instantiate(spellSlotsPrefab);
-                slot.transform.parent = spellSlots.transform;
-                slot.GetComponent<RectTransform>().localPosition = new Vector3(location, -5, 0);
-                location += 15;
+                for (int i = 0; i < maxSlots; i++)
+                {
+                    GameObject slot = Instantiate(spellSlotsPrefab);
+                    slot.transform.parent = spellSlots.transform;
+                    slot.GetComponent<RectTransform>().localPosition = new Vector3(location, -5, 0);
+                    location += 15;
+                    slots.Add(slot.GetComponent<SpellSlot>());
+                }
+            }
+            else
+            {
+                Destroy(spellSlots.gameObject);
             }
         }
-        else
+    }
+
+    public void updateSpellSlots(int numSlotsLeft)
+    {
+        for (int i = 0; i < slots.Count; i++)
         {
-            Destroy(spellSlots.gameObject);
+            if (i >= numSlotsLeft)
+                slots[i].GetComponent<SpellSlot>().setUsed();
         }
     }
 }

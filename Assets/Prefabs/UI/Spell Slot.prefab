@@ -88,3 +88,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6adfeaf6fbf2e47aa5bb7d42998740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unused: {r: 0.32941177, g: 0.3254902, b: 0.3254902, a: 0}
+  used: {r: 0.32941177, g: 0.3254902, b: 0.3254902, a: 1}
+  visibleSpellSlot: {fileID: 0}

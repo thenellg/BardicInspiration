@@ -305,6 +305,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
+      propertyPath: spellSlots
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: attackRangeMax
       value: 2
       objectReference: {fileID: 0}
@@ -713,6 +717,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: spellSlots
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955583946479312229, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
+      propertyPath: maxSpellSlots
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}

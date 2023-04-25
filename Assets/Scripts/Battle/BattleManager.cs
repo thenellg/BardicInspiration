@@ -249,8 +249,11 @@ public class BattleManager : MonoBehaviour
         foreach (OverlayTile tile in cursor.inRangeTiles)
             tile.HideTile();
         foreach (OverlayTile tile in cursor.magicRangeTiles)
-            tile.HideTile();
+            tile.HideTile(); 
 
+
+        actionMenu.visibleTurns[turnNumber].updateSpellSlots(cursor.character.spellSlots);
+        
         actionMenu.actionButtonHolder.SetActive(true);
         actionMenu.setActionMenu();
     }
@@ -272,11 +275,14 @@ public class BattleManager : MonoBehaviour
 
     public void beginSpellAttack()
     {
-        if (attackedOnTurnMagic == false)
+        if (attackedOnTurnMagic == false && cursor.character.spellSlots > 0)
         {
             actionMenu.destroyMagicMenu();
             actionMenu.visibleMagicMenu.SetActive(false);
             actionMenu.visibleActionMenu.SetActive(false);
+            
+            cursor.character.spellSlots--;
+
 
             List<OverlayTile> range = new List<OverlayTile>();
 

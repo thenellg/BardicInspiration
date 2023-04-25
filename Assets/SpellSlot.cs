@@ -17,7 +17,7 @@ public class SpellSlot : MonoBehaviour
 
     public void setUsed()
     {
-        visibleSpellSlot.color = used;
+        GetComponent<Image>().color = used;
     }
 
 
