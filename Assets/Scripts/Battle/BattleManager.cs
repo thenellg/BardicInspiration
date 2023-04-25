@@ -21,7 +21,7 @@ public class BattleManager : MonoBehaviour
     public bool magicAttacking = false;
     public bool visAttacking = false;
     private bool attackedOnTurn = false;
-
+    private bool attackedOnTurnMagic = false;
 
     public List<OverlayTile> playerLocations;
     public GameSettings settings;
@@ -223,6 +223,36 @@ public class BattleManager : MonoBehaviour
 
     }
 
+    public void magicAttack(List<OverlayTile> range)
+    {
+        attacker = cursor.character;
+        onRuin = true;
+
+        if (currentSpell.spellType != Spell.spellTypes.Buff)
+        {
+            damageAmount = currentSpell.attackDamage;
+
+            foreach (OverlayTile tile in range)
+            {
+                if (tile.currentChar != null && tile.currentChar.tag == "Enemy Team")
+                {
+                    defender = tile.currentChar;
+
+                    showDamageNoInvoke();
+                    doDamage();
+                }
+            }
+        }
+
+        foreach (OverlayTile tile in cursor.inRangeTiles)
+            tile.HideTile();
+        foreach (OverlayTile tile in cursor.magicRangeTiles)
+            tile.HideTile();
+
+        actionMenu.actionButtonHolder.SetActive(true);
+        actionMenu.setActionMenu();
+    }
+
     public void attackMultiple(CharacterStats m_Attacker, List<CharacterStats> defenders, int damage)
     {
         damageAmount = damage;
@@ -232,8 +262,7 @@ public class BattleManager : MonoBehaviour
         {
             defender = enemy;
 
-            showDamageNoInvoke();
-            doDamage();
+            showDamage();
         }
 
         onRuin = false;
@@ -241,33 +270,42 @@ public class BattleManager : MonoBehaviour
 
     public void beginSpellAttack()
     {
-        actionMenu.destroyMagicMenu();
-        actionMenu.gameObject.SetActive(false);
-
-        List<OverlayTile> range = new List<OverlayTile>();
-
-        if (currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
+        if (attackedOnTurnMagic == false)
         {
-            range = cursor.rangeFinder.GetTilesinRange(cursor.character.activeTile, currentSpell.maxSpellRange);
-            foreach (OverlayTile tile in range)
-                tile.ShowTile(true);
+            actionMenu.destroyMagicMenu();
+            actionMenu.visibleMagicMenu.SetActive(false);
+            actionMenu.visibleActionMenu.SetActive(false);
+
+            List<OverlayTile> range = new List<OverlayTile>();
+
+            if (currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
+            {
+                range = cursor.rangeFinder.GetTilesinRange(cursor.character.activeTile, currentSpell.maxSpellRange);
+                foreach (OverlayTile tile in range)
+                    tile.ShowTile(true);
+                cursor.inRangeTiles = range;
+            }
+            else if (currentSpell.spellType == Spell.spellTypes.Line)
+            {
+
+            }
+            else if (currentSpell.spellType == Spell.spellTypes.Single)
+            {
+
+            }
+            else if (currentSpell.spellType == Spell.spellTypes.Buff)
+            {
+
+            }
+
+            magicAttacking = true;
+            cursor.activeMovement = true;
+            cursor.cursorActive = true;
         }
-        else if (currentSpell.spellType == Spell.spellTypes.Line)
+        else
         {
-
+            endTurn();
         }
-        else if (currentSpell.spellType == Spell.spellTypes.Single)
-        {
-
-        }
-        else if (currentSpell.spellType == Spell.spellTypes.Buff)
-        {
-
-        }
-
-        magicAttacking = true;
-        cursor.activeMovement = true;
-        cursor.cursorActive = true;
     }
 
     void resetDefender()
@@ -319,6 +357,7 @@ public class BattleManager : MonoBehaviour
 
         cursor.character = turnOrder[turnNumber].GetComponent<CharacterStats>();
         attackedOnTurn = false;
+        attackedOnTurnMagic = false;
 
         Debug.Log(cursor.character);
         onTurnSwap();

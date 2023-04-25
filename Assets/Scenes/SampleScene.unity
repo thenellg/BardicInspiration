@@ -661,11 +661,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312228, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25531578
+      value: 0.064
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312228, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7266326
+      value: -0.404
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312228, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -741,11 +741,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8577116171866360218, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: startingLocation.x
-      value: -6
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8577116171866360218, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: startingLocation.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
@@ -3085,6 +3085,7 @@ MonoBehaviour:
   attacker: {fileID: 0}
   defender: {fileID: 0}
   currentSpell: {fileID: 0}
+  magicReactionMinigames: []
 --- !u!4 &811177208957008287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2696457712678485992, guid: 24a02a4b17ca9274cbccff7634e52a7d, type: 3}

@@ -67,9 +67,7 @@ public class MouseController : MonoBehaviour
                         if(battleManager.currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
                         {
                             //get range from tile into magicRangeTiles
-                            path = pathfinder.FindPath(character.activeTile, tile, inRangeTiles);
-
-                            if (path.Count <= battleManager.currentSpell.maxSpellRange)
+                            if (inRangeTiles.Contains(tile))
                             {
                                 GetInRangeMagicTiles();
                             }
@@ -139,19 +137,13 @@ public class MouseController : MonoBehaviour
                     }
                     else if (battleManager.magicAttacking)
                     {
-                        //Do magic attack stuff here
-                        if (battleManager.currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
-                        {
-                            //get range from tile into magicRangeTiles
-                        }
-                        else if (battleManager.currentSpell.spellType == Spell.spellTypes.Line)
-                        {
-                            //get range in line into magicRangeTiles
-                        }
-                        else if (battleManager.currentSpell.spellType == Spell.spellTypes.Buff)
-                        {
-                            //Check if tile is an ally
-                        }
+                        battleManager.magicAttack(magicRangeTiles);
+
+                        battleManager.attacking = false;
+                        battleManager.magicAttacking = false;
+                        isMoving = true;
+                        cursorActive = false;
+                        path.Clear();
                     }
                     else if (inRangeTiles.Contains(tile) && (!tile.isBlocked || tile.currentChar == character))
                     {
