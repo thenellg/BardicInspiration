@@ -21,7 +21,6 @@ public class BattleManager : MonoBehaviour
     public bool magicAttacking = false;
     public bool visAttacking = false;
     private bool attackedOnTurn = false;
-    private bool attackedOnTurnMagic = false;
 
     public List<OverlayTile> playerLocations;
     public GameSettings settings;
@@ -65,6 +64,16 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    public void updatePlayerLocations()
+    {
+        playerLocations.Clear();
+        foreach(var character in playerTeam)
+        {
+            if (character.activeSelf)
+                playerLocations.Add(character.GetComponent<CharacterStats>().activeTile);
+        }
+    }
+
     public bool isRoundOver()
     {
         if (enemyTeam.Count == 0)
@@ -87,7 +96,6 @@ public class BattleManager : MonoBehaviour
         {
             cursor.cursorActive = true;
             attacking = cursor.character.GetComponent<Attacks>().attackCheck();
-            attackedOnTurn = true;
         }
         else
         {
@@ -101,7 +109,7 @@ public class BattleManager : MonoBehaviour
         {
             //Will have to adjust this for magic checks
             magicAttacking = cursor.character.GetComponent<Attacks>().attackCheck();
-            attackedOnTurn = true;
+            //attackedOnTurn = true;
         }
         else
         {
@@ -125,8 +133,10 @@ public class BattleManager : MonoBehaviour
 
             turnNumber = turnOrder.IndexOf(attacker.gameObject);
 
-            defender.gameObject.SetActive(false);
 
+            defender.gameObject.SetActive(false);
+            if (defender.tag == "Player Team")
+                updatePlayerLocations();
 
             int index = 0;
             float height = 0;
@@ -198,6 +208,8 @@ public class BattleManager : MonoBehaviour
     public void attack(CharacterStats m_Attacker, CharacterStats m_Defender)
     {
         Debug.Log("attack");
+        attackedOnTurn = true;
+        
         attacker = m_Attacker; defender = m_Defender;
         attacking = true;
         visAttacking = true;
@@ -244,7 +256,7 @@ public class BattleManager : MonoBehaviour
             }
         }
 
-        attackedOnTurnMagic = true;
+        attackedOnTurn = true;
 
         foreach (OverlayTile tile in cursor.inRangeTiles)
             tile.HideTile();
@@ -275,7 +287,7 @@ public class BattleManager : MonoBehaviour
 
     public void beginSpellAttack()
     {
-        if (attackedOnTurnMagic == false && cursor.character.spellSlots > 0)
+        if (attackedOnTurn == false && cursor.character.spellSlots > 0)
         {
             actionMenu.destroyMagicMenu();
             actionMenu.visibleMagicMenu.SetActive(false);
@@ -365,7 +377,6 @@ public class BattleManager : MonoBehaviour
 
         cursor.character = turnOrder[turnNumber].GetComponent<CharacterStats>();
         attackedOnTurn = false;
-        attackedOnTurnMagic = false;
 
         Debug.Log(cursor.character);
         onTurnSwap();

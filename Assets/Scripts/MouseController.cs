@@ -245,8 +245,12 @@ public class MouseController : MonoBehaviour
         foreach (var item in magicRangeTiles)
         {
             if(item.prevColor != null)
-                item.SetColor(battleManager.settings.CanMoveHighlight);
-            item.ShowTile(true);
+                item.SetColor(item.prevColor);
+
+            if (inRangeTiles.Contains(item))
+                item.ShowTile(true);
+            else
+                item.HideTile();
         }
 
         magicRangeTiles = rangeFinder.GetTilesinRange(cursorCurrentTile, battleManager.currentSpell.minSpellRange);
