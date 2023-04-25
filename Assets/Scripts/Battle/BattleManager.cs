@@ -244,6 +244,8 @@ public class BattleManager : MonoBehaviour
             }
         }
 
+        attackedOnTurnMagic = true;
+
         foreach (OverlayTile tile in cursor.inRangeTiles)
             tile.HideTile();
         foreach (OverlayTile tile in cursor.magicRangeTiles)
