@@ -175,10 +175,13 @@ public class ActionMenu : MonoBehaviour
             newButton.transform.localPosition = new Vector3(95.2f, y, 0f);
             newButton.transform.localScale = Vector3.one;
 
+            newButton.GetComponent<SpellButton>().spellNum = i;
+            newButton.GetComponent<SpellButton>().battleManager = battleManager;
+
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = cursor.character.spells[i].spellName;
 
             //set action to spell
-            newButton.GetComponent<Button>().onClick.AddListener(delegate { battleManager.magicAttacking = true; });
+            newButton.GetComponent<Button>().onClick.AddListener(delegate { newButton.GetComponent<SpellButton>().startSpell(); });
 
             y -= 37.2f;
 

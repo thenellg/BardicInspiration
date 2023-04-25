@@ -239,6 +239,37 @@ public class BattleManager : MonoBehaviour
         onRuin = false;
     }
 
+    public void beginSpellAttack()
+    {
+        actionMenu.destroyMagicMenu();
+        actionMenu.gameObject.SetActive(false);
+
+        List<OverlayTile> range = new List<OverlayTile>();
+
+        if (currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
+        {
+            range = cursor.rangeFinder.GetTilesinRange(cursor.character.activeTile, currentSpell.maxSpellRange);
+            foreach (OverlayTile tile in range)
+                tile.ShowTile(true);
+        }
+        else if (currentSpell.spellType == Spell.spellTypes.Line)
+        {
+
+        }
+        else if (currentSpell.spellType == Spell.spellTypes.Single)
+        {
+
+        }
+        else if (currentSpell.spellType == Spell.spellTypes.Buff)
+        {
+
+        }
+
+        magicAttacking = true;
+        cursor.activeMovement = true;
+        cursor.cursorActive = true;
+    }
+
     void resetDefender()
     {
         if (defender.health - damageAmount > 0)
