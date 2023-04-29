@@ -75,14 +75,23 @@ public class MouseController : MonoBehaviour
                         else if(battleManager.currentSpell.spellType == Spell.spellTypes.Line)
                         {
                             //get range in line into magicRangeTiles
+                            //get screen position of character and screen position of tile based on direction, get all tiles in line
+                        }
+                        else if (battleManager.currentSpell.spellType == Spell.spellTypes.Single)
+                        {
+                            if(tile.currentChar && tile.currentChar.tag == "Enemy Team")
+                            {
+                                magicRangeTiles.Clear();
+                                magicRangeTiles.Add(tile);
+                            }
                         }
                         else if (battleManager.currentSpell.spellType == Spell.spellTypes.Buff)
                         {
-                            //Check if tile is an ally
-                        }
-                        else
-                        {
-                            //Check if tile is an enemy
+                            if (tile.currentChar && tile.currentChar.tag == "Player Team")
+                            {
+                                magicRangeTiles.Clear();
+                                magicRangeTiles.Add(tile);
+                            }
                         }
                     }
                     else
@@ -137,8 +146,14 @@ public class MouseController : MonoBehaviour
                     }
                     else if (battleManager.magicAttacking)
                     {
-                        battleManager.magicAttack(magicRangeTiles);
-
+                        if (battleManager.currentSpell.spellType != Spell.spellTypes.Buff)
+                        {
+                            battleManager.magicAttack(magicRangeTiles);
+                        }
+                        else
+                        {
+                            //heal
+                        }
                         battleManager.attacking = false;
                         battleManager.magicAttacking = false;
                         isMoving = true;
@@ -260,7 +275,6 @@ public class MouseController : MonoBehaviour
             item.prevColor = item.GetComponent<SpriteRenderer>().color;
             item.SetColor(battleManager.settings.targetHighlight);
             item.ShowTile(true);
-
         }
     }
 

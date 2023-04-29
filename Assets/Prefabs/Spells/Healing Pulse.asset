@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6523fb40be062a048942584fa42b7dfe, type: 3}
-  m_Name: Discordant Sound
+  m_Name: Healing Pulse
   m_EditorClassIdentifier: 
-  spellName: Discordant Sound
-  spellDescription: Life is Stange True Colors Rep
+  spellName: Healing Pulse
+  spellDescription: You heal one of your friends for 5 health
   spellIcon: {fileID: 0}
-  spellType: 1
+  spellType: 3
   minSpellRange: 0
   maxSpellRange: 0
-  attackDamage: 15
+  attackDamage: 5

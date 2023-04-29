@@ -316,6 +316,14 @@ PrefabInstance:
       propertyPath: attackRangeMin
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
+      propertyPath: spells.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955583946479312229, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
+      propertyPath: spells.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: f583747996292b34b98ed640d7d71408, type: 2}
     - target: {fileID: 1955583946479312231, guid: 1ee8e5a9383b57940bb9050a8afdc0e8, type: 3}
       propertyPath: m_Name
       value: Eliwood
@@ -733,12 +741,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: spells.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1955583946479312229, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: spells.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: e0dec7db569aa744c9b1552fec64ded3, type: 2}
+    - target: {fileID: 1955583946479312229, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
+      propertyPath: spells.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: c78e01c23bc272747bb540de7be88f95, type: 2}
     - target: {fileID: 1955583946479312231, guid: 8c79c6e3a6aac7d46a3d000ef59dd8fb, type: 3}
       propertyPath: m_Name
       value: Lyn

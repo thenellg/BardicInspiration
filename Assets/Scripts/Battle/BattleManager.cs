@@ -311,11 +311,23 @@ public class BattleManager : MonoBehaviour
             }
             else if (currentSpell.spellType == Spell.spellTypes.Single)
             {
-
+                foreach(GameObject character in enemyTeam)
+                {
+                    if(character.GetComponent<CharacterStats>().health > 0)
+                    {
+                        range.Add(character.GetComponent<CharacterStats>().activeTile);
+                    }
+                }
             }
             else if (currentSpell.spellType == Spell.spellTypes.Buff)
             {
-
+                foreach (GameObject character in playerTeam)
+                {
+                    if (character.GetComponent<CharacterStats>().health > 0)
+                    {
+                        range.Add(character.GetComponent<CharacterStats>().activeTile);
+                    }
+                }
             }
 
             magicAttacking = true;
