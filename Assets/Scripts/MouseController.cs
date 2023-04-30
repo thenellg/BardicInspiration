@@ -64,7 +64,7 @@ public class MouseController : MonoBehaviour
                 {
                     if (battleManager.magicAttacking)
                     {
-                        if(battleManager.currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
+                        if (battleManager.currentSpell.spellType == Spell.spellTypes.AreaOfEffect)
                         {
                             //get range from tile into magicRangeTiles
                             if (inRangeTiles.Contains(tile))
@@ -72,22 +72,14 @@ public class MouseController : MonoBehaviour
                                 GetInRangeMagicTiles();
                             }
                         }
-                        else if(battleManager.currentSpell.spellType == Spell.spellTypes.Line)
+                        else if (battleManager.currentSpell.spellType == Spell.spellTypes.Line)
                         {
                             //get range in line into magicRangeTiles
                             //get screen position of character and screen position of tile based on direction, get all tiles in line
                         }
-                        else if (battleManager.currentSpell.spellType == Spell.spellTypes.Single)
+                        else
                         {
-                            if(tile.currentChar && tile.currentChar.tag == "Enemy Team")
-                            {
-                                magicRangeTiles.Clear();
-                                magicRangeTiles.Add(tile);
-                            }
-                        }
-                        else if (battleManager.currentSpell.spellType == Spell.spellTypes.Buff)
-                        {
-                            if (tile.currentChar && tile.currentChar.tag == "Player Team")
+                            if (inRangeTiles.Contains(tile))
                             {
                                 magicRangeTiles.Clear();
                                 magicRangeTiles.Add(tile);
@@ -146,14 +138,8 @@ public class MouseController : MonoBehaviour
                     }
                     else if (battleManager.magicAttacking)
                     {
-                        if (battleManager.currentSpell.spellType != Spell.spellTypes.Buff)
-                        {
-                            battleManager.magicAttack(magicRangeTiles);
-                        }
-                        else
-                        {
-                            //heal
-                        }
+                        battleManager.magicAttack(magicRangeTiles);
+
                         battleManager.attacking = false;
                         battleManager.magicAttacking = false;
                         isMoving = true;

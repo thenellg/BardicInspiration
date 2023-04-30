@@ -168,7 +168,10 @@ public class BattleManager : MonoBehaviour
         if (!onRuin)
             damageAmount = attacker.attack;
 
-        defender.health -= damageAmount;
+        if (defender.health - damageAmount > defender.maxHealth)
+            defender.health = defender.maxHealth;
+        else
+            defender.health -= damageAmount;
 
         deathCheck();
 
@@ -240,19 +243,24 @@ public class BattleManager : MonoBehaviour
         attacker = cursor.character;
         onRuin = true;
 
-        if (currentSpell.spellType != Spell.spellTypes.Buff)
+        damageAmount = currentSpell.attackDamage;
+
+        foreach (OverlayTile tile in range)
         {
-            damageAmount = currentSpell.attackDamage;
-
-            foreach (OverlayTile tile in range)
+            if (tile.currentChar != null && tile.currentChar.tag == "Enemy Team")
             {
-                if (tile.currentChar != null && tile.currentChar.tag == "Enemy Team")
-                {
-                    defender = tile.currentChar;
+                defender = tile.currentChar;
 
-                    showDamageNoInvoke();
-                    doDamage();
-                }
+                showDamageNoInvoke();
+                doDamage();
+            }
+            else if(tile.currentChar != null && tile.currentChar.tag == "Player Team")
+            {
+                defender = tile.currentChar;
+                damageAmount *= -1;
+
+                showDamageNoInvoke();
+                doDamage();
             }
         }
 
@@ -318,16 +326,16 @@ public class BattleManager : MonoBehaviour
                         range.Add(character.GetComponent<CharacterStats>().activeTile);
                     }
                 }
+                foreach (OverlayTile tile in range)
+                    tile.ShowTile(true);
+                cursor.inRangeTiles = range;
             }
             else if (currentSpell.spellType == Spell.spellTypes.Buff)
             {
-                foreach (GameObject character in playerTeam)
-                {
-                    if (character.GetComponent<CharacterStats>().health > 0)
-                    {
-                        range.Add(character.GetComponent<CharacterStats>().activeTile);
-                    }
-                }
+                cursor.inRangeTiles = playerLocations;
+                foreach (OverlayTile tile in playerLocations)
+                    tile.ShowTile(true);
+
             }
 
             magicAttacking = true;
@@ -364,15 +372,29 @@ public class BattleManager : MonoBehaviour
 
     public void showDamageNoInvoke()
     {
-        string info = "-" + damageAmount.ToString();
-        damage = Instantiate(damageNumbers).GetComponent<TextMeshProUGUI>();
-        //Set info
-        damage.enabled = false;
-        damage.gameObject.transform.parent = gameUI.transform;
-        damage.text = info;
-        damage.color = settings.damageColor;
-        damage.gameObject.transform.position = actionMenu.cam.WorldToScreenPoint(defender.damageLocation.position);
+        if (damageAmount > 0)
+        {
+            string info = "-" + damageAmount.ToString();
+            damage = Instantiate(damageNumbers).GetComponent<TextMeshProUGUI>();
+            //Set info
+            damage.enabled = false;
+            damage.gameObject.transform.parent = gameUI.transform;
+            damage.text = info;
+            damage.color = settings.damageColor;
+            damage.gameObject.transform.position = actionMenu.cam.WorldToScreenPoint(defender.damageLocation.position);
+        }
+        else
+        {
+            string info = "-" + (damageAmount * -1).ToString();
+            damage = Instantiate(damageNumbers).GetComponent<TextMeshProUGUI>();
+            //Set info
+            damage.enabled = false;
+            damage.gameObject.transform.parent = gameUI.transform;
+            damage.text = info;
+            damage.color = settings.healingColor;
+            damage.gameObject.transform.position = actionMenu.cam.WorldToScreenPoint(defender.damageLocation.position);
 
+        }
         //Show and animate
         damage.enabled = true;
         damage.GetComponent<damageNumbers>().move = true;
