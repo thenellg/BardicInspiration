@@ -26,8 +26,6 @@ public class OverlayTile : MonoBehaviour
     public GameSettings settings { get { return FindObjectOfType<GameSettings>(); } }
     public bool puzzleSpace = false;
 
-    public Color prevColor;
-
     public void SetColor(Color color)
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 0);

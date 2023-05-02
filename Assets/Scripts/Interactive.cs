@@ -76,7 +76,7 @@ public class Interactive : MonoBehaviour
         {
             if (battleManager.cursor.inRangeTiles.Contains(tile) && !tile.isBlocked)
                 tile.GetComponent<SpriteRenderer>().color = battleManager.settings.CanMoveHighlight;
-            else
+            else 
                 tile.HideTile();
         }
     }

@@ -29,8 +29,10 @@ public class MouseController : MonoBehaviour
 
     public bool gameActive = true;
     public bool cursorActive = true;
+    
 
     private OverlayTile cursorCurrentTile;
+    private bool showingPuzzleSpots = false;
 
     // Start is called before the first frame update
     void Start()
@@ -106,22 +108,29 @@ public class MouseController : MonoBehaviour
                     }
                 }
 
-                if(tile.puzzleSpace == true)
+                if (!battleManager.attacking)
                 {
-                    foreach (GameObject ruin in battleManager.interactives)
+                    if (tile.puzzleSpace == true)
                     {
-                        if(ruin.GetComponent<Interactive>().activeTile == tile)
+                        foreach (GameObject ruin in battleManager.interactives)
                         {
-                            ruin.GetComponent<Interactive>().showTiles();
+                            if (ruin.GetComponent<Interactive>().activeTile == tile)
+                            {
+                                ruin.GetComponent<Interactive>().showTiles();
+                            }
+                            showingPuzzleSpots = true;
                         }
-
                     }
-                }
-                else
-                {
-                    foreach(GameObject ruin in battleManager.interactives)
+                    else
                     {
-                        ruin.GetComponent<Interactive>().hideTiles();
+                        if (showingPuzzleSpots)
+                        {
+                            foreach (GameObject ruin in battleManager.interactives)
+                            {
+                                ruin.GetComponent<Interactive>().hideTiles();
+                            }
+                            showingPuzzleSpots = false;
+                        }
                     }
                 }
 

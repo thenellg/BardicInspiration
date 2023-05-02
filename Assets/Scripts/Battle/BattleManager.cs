@@ -254,7 +254,7 @@ public class BattleManager : MonoBehaviour
                 showDamageNoInvoke();
                 doDamage();
             }
-            else if(tile.currentChar != null && tile.currentChar.tag == "Player Team")
+            else if(tile.currentChar != null && tile.currentChar.tag == "Player Team" && currentSpell.spellType == Spell.spellTypes.Buff)
             {
                 defender = tile.currentChar;
                 damageAmount *= -1;
@@ -327,11 +327,15 @@ public class BattleManager : MonoBehaviour
                     }
                 }
                 cursor.inRangeTiles = range;
+                
+                int i = 0;
                 foreach (OverlayTile tile in cursor.inRangeTiles)
                 {
                     tile.SetColor(settings.targetHighlight);
                     tile.ShowTile(true);
+                    i++;
                 }
+                Debug.Log(i + " tiles should be showing");
             }
             else if (currentSpell.spellType == Spell.spellTypes.Buff)
             {
