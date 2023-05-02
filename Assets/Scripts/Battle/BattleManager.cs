@@ -326,9 +326,12 @@ public class BattleManager : MonoBehaviour
                         range.Add(character.GetComponent<CharacterStats>().activeTile);
                     }
                 }
-                foreach (OverlayTile tile in range)
-                    tile.ShowTile(true);
                 cursor.inRangeTiles = range;
+                foreach (OverlayTile tile in cursor.inRangeTiles)
+                {
+                    tile.SetColor(settings.targetHighlight);
+                    tile.ShowTile(true);
+                }
             }
             else if (currentSpell.spellType == Spell.spellTypes.Buff)
             {

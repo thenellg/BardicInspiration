@@ -127,7 +127,7 @@ public class MouseController : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (battleManager.attacking)
+                    if (battleManager.attacking && inRangeTiles.Contains(tile))
                     {
                         //charcter attacks
                         battleManager.attack(character, tile.currentChar);
@@ -136,7 +136,7 @@ public class MouseController : MonoBehaviour
                         isMoving = true;
                         cursorActive = false;
                     }
-                    else if (battleManager.magicAttacking)
+                    else if (battleManager.magicAttacking && inRangeTiles.Contains(tile))
                     {
                         battleManager.magicAttack(magicRangeTiles);
 
@@ -245,9 +245,6 @@ public class MouseController : MonoBehaviour
     {
         foreach (var item in magicRangeTiles)
         {
-            if(item.prevColor != null)
-                item.SetColor(item.prevColor);
-
             if (inRangeTiles.Contains(item))
                 item.ShowTile(true);
             else
@@ -258,7 +255,6 @@ public class MouseController : MonoBehaviour
 
         foreach (var item in magicRangeTiles)
         {
-            item.prevColor = item.GetComponent<SpriteRenderer>().color;
             item.SetColor(battleManager.settings.targetHighlight);
             item.ShowTile(true);
         }
