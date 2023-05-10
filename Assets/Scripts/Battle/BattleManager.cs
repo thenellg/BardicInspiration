@@ -16,6 +16,7 @@ public class BattleManager : MonoBehaviour
     public TextMeshProUGUI resultsText;
     public int damageAmount = 0;
     public bool onRuin = false;
+    public GameObject tileContainer;
 
     public bool attacking = false;
     public bool magicAttacking = false;
@@ -315,7 +316,21 @@ public class BattleManager : MonoBehaviour
             }
             else if (currentSpell.spellType == Spell.spellTypes.Line)
             {
-
+                Vector2 baseTile = cursor.character.activeTile.gridLocation2D;
+                foreach(OverlayTile tile in tileContainer.GetComponentsInChildren<OverlayTile>())
+                {
+                    if ( (tile.gridLocation2D.x <= (baseTile.x + currentSpell.minSpellRange/2)) && (tile.gridLocation2D.x >= (baseTile.x - currentSpell.minSpellRange/2)) ) 
+                    {
+                        range.Add(tile);
+                        tile.ShowTile(true);
+                    }
+                    else if ((tile.gridLocation2D.y <= (baseTile.y + currentSpell.minSpellRange / 2)) && (tile.gridLocation2D.y >= (baseTile.y - currentSpell.minSpellRange / 2)))
+                    {
+                        range.Add(tile);
+                        tile.ShowTile(true);
+                    }
+                }
+                cursor.inRangeTiles = range;
             }
             else if (currentSpell.spellType == Spell.spellTypes.Single)
             {
