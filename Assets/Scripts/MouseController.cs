@@ -81,11 +81,9 @@ public class MouseController : MonoBehaviour
                             if (inRangeTiles.Contains(tile))
                             {
                                 Vector2 direction = new Vector2(tile.gridLocation.x, tile.gridLocation.y) - new Vector2(character.activeTile.gridLocation.x, character.activeTile.gridLocation.y);
-                                direction = new Vector2Int((int)direction.x, (int)direction.y);
                                 direction = direction.normalized;
+                                direction = new Vector2(Mathf.Round(direction.x), Mathf.Round(direction.y));
 
-
-                                Debug.Log(direction);
                                 GetInRangeMagicTiles(true, direction);
                             }
                             else
@@ -306,22 +304,21 @@ public class MouseController : MonoBehaviour
         {
             List<OverlayTile> temp = new List<OverlayTile>();
             Vector2 baseTile = character.activeTile.gridLocation2D;
+
             foreach (OverlayTile tile in inRangeTiles)
             {
-                if (direction.x == 0 && direction.y > 0 && (tile.gridLocation2D.x <= (baseTile.x + battleManager.currentSpell.minSpellRange / 2)) && (tile.gridLocation2D.x >= (baseTile.x - battleManager.currentSpell.minSpellRange / 2)) && tile.gridLocation2D.y > baseTile.y)
-                    temp.Add(tile);
-                else if (direction.x == 0 && direction.y < 0 && (tile.gridLocation2D.x <= (baseTile.x + battleManager.currentSpell.minSpellRange / 2)) && (tile.gridLocation2D.x >= (baseTile.x - battleManager.currentSpell.minSpellRange / 2)) && tile.gridLocation2D.y < baseTile.y)
-                    temp.Add(tile);
-                else if (direction.x > 0 && direction.y == 0 && (tile.gridLocation2D.y <= (baseTile.y + battleManager.currentSpell.minSpellRange / 2)) && (tile.gridLocation2D.y >= (baseTile.y - battleManager.currentSpell.minSpellRange / 2)) && tile.gridLocation2D.x > baseTile.x)
-                    temp.Add(tile);
-                else if (direction.x < 0 && direction.y == 0 && (tile.gridLocation2D.y <= (baseTile.y + battleManager.currentSpell.minSpellRange / 2)) && (tile.gridLocation2D.y >= (baseTile.y - battleManager.currentSpell.minSpellRange / 2)) && tile.gridLocation2D.x < baseTile.x)
-                    temp.Add(tile);
+                Vector2 newDirection = new Vector2(baseTile.x, baseTile.y) - new Vector2(tile.gridLocation.x, tile.gridLocation.y);
+                newDirection = newDirection.normalized;
+                newDirection = new Vector2(Mathf.Round(newDirection.x), Mathf.Round(newDirection.y)) * -1;
 
-                if (temp != null)
-                    magicRangeTiles = temp;
-
-                temp.Clear();
+                Debug.Log("Direction = " + direction + " ------ New Direction = " + newDirection);
+                Debug.Log(direction.Equals(newDirection));
+                if (direction.Equals(newDirection))
+                    temp.Add(tile);
             }
+
+            Debug.Log(temp);
+            magicRangeTiles = temp;
         }
         else
         {
