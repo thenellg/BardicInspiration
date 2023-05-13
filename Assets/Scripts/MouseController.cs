@@ -33,7 +33,6 @@ public class MouseController : MonoBehaviour
 
     private OverlayTile cursorCurrentTile;
     private bool showingPuzzleSpots = false;
-    private Camera camera;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +40,6 @@ public class MouseController : MonoBehaviour
         pathfinder = new Pathfinder();
         rangeFinder = new RangeFinder();
         drawArrow = new DrawArrow();
-        camera = FindObjectOfType<Camera>();
     }
 
     void beginRound()
@@ -75,16 +73,7 @@ public class MouseController : MonoBehaviour
                             {
                                 GetInRangeMagicTiles(false, Vector2.zero);
                             }
-                            else
-                            {
-                                foreach (OverlayTile item in magicRangeTiles)
-                                {
-                                    item.HideTile();
-                                    if (inRangeTiles.Contains(item))
-                                        item.ShowTile();
-                                }
-                                magicRangeTiles.Clear();
-                            }
+
                         }
                         else if (battleManager.currentSpell.spellType == Spell.spellTypes.Line)
                         {
@@ -136,6 +125,23 @@ public class MouseController : MonoBehaviour
                             var arrow = drawArrow.TranslateDirection(previousTile, path[i], futureTile);
                             path[i].setArrowSprite(arrow);
                         }
+                    }
+                }
+                else
+                {
+                    if (battleManager.magicAttacking)
+                    {
+                        foreach(OverlayTile item in magicRangeTiles)
+                        {
+                            if (inRangeTiles.Contains(item))
+                            {
+                                item.SetColor(item.settings.CanMoveHighlight);
+                                item.ShowTile(true);
+                            }
+                            else
+                                item.HideTile();
+                        }
+                        magicRangeTiles.Clear();
                     }
                 }
 
@@ -285,28 +291,36 @@ public class MouseController : MonoBehaviour
 
     public void GetInRangeMagicTiles(bool line, Vector2 direction)
     {
-        foreach (var item in magicRangeTiles)
+        foreach (OverlayTile item in magicRangeTiles)
         {
             if (inRangeTiles.Contains(item))
-                item.ShowTile();
+            {
+                item.SetColor(item.settings.CanMoveHighlight);
+                item.ShowTile(true);
+            }
             else
                 item.HideTile();
         }
 
         if (line)
         {
-            magicRangeTiles.Clear();
+            List<OverlayTile> temp = new List<OverlayTile>();
             Vector2 baseTile = character.activeTile.gridLocation2D;
             foreach (OverlayTile tile in inRangeTiles)
             {
                 if (direction.x == 0 && direction.y > 0 && (tile.gridLocation2D.x <= (baseTile.x + battleManager.currentSpell.minSpellRange / 2)) && (tile.gridLocation2D.x >= (baseTile.x - battleManager.currentSpell.minSpellRange / 2)) && tile.gridLocation2D.y > baseTile.y)
-                    magicRangeTiles.Add(tile);
+                    temp.Add(tile);
                 else if (direction.x == 0 && direction.y < 0 && (tile.gridLocation2D.x <= (baseTile.x + battleManager.currentSpell.minSpellRange / 2)) && (tile.gridLocation2D.x >= (baseTile.x - battleManager.currentSpell.minSpellRange / 2)) && tile.gridLocation2D.y < baseTile.y)
-                    magicRangeTiles.Add(tile);
+                    temp.Add(tile);
                 else if (direction.x > 0 && direction.y == 0 && (tile.gridLocation2D.y <= (baseTile.y + battleManager.currentSpell.minSpellRange / 2)) && (tile.gridLocation2D.y >= (baseTile.y - battleManager.currentSpell.minSpellRange / 2)) && tile.gridLocation2D.x > baseTile.x)
-                    magicRangeTiles.Add(tile);
+                    temp.Add(tile);
                 else if (direction.x < 0 && direction.y == 0 && (tile.gridLocation2D.y <= (baseTile.y + battleManager.currentSpell.minSpellRange / 2)) && (tile.gridLocation2D.y >= (baseTile.y - battleManager.currentSpell.minSpellRange / 2)) && tile.gridLocation2D.x < baseTile.x)
-                    magicRangeTiles.Add(tile);
+                    temp.Add(tile);
+
+                if (temp != null)
+                    magicRangeTiles = temp;
+
+                temp.Clear();
             }
         }
         else

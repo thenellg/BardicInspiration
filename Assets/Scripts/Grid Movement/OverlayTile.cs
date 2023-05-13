@@ -38,6 +38,7 @@ public class OverlayTile : MonoBehaviour
             setArrowSprite(ArrowDirections.None);
             Color color = gameObject.GetComponent<SpriteRenderer>().color;
             gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
+            //gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
         }
         else if (attacking)
         {
@@ -45,13 +46,12 @@ public class OverlayTile : MonoBehaviour
             Color color = gameObject.GetComponent<SpriteRenderer>().color;
 
 
-             if (currentChar && currentChar.tag == "Enemy Team")
+            if (currentChar && currentChar.tag == "Enemy Team")
                 gameObject.GetComponent<SpriteRenderer>().color = settings.targetHighlight;
-             if (currentChar && currentChar.tag == "Player Team")
+            else if (currentChar && currentChar.tag == "Player Team")
                 gameObject.GetComponent<SpriteRenderer>().color = settings.TeammateHighlight;
-
-
-
+            else
+                gameObject.GetComponent<SpriteRenderer>().color = settings.CanMoveHighlight;
         }
 
         // Add and else here that changes colors based on what is blocking (if player, playerBlock, if enemy enemyBlock)
