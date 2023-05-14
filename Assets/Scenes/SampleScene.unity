@@ -1372,6 +1372,7 @@ MonoBehaviour:
   activeMovement: 1
   gameActive: 1
   cursorActive: 1
+  minigameHandler: {fileID: 2138875659}
 --- !u!1 &1988990443
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,6 +3053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2138875657}
   - component: {fileID: 2138875658}
+  - component: {fileID: 2138875659}
   m_Layer: 0
   m_Name: Battle Manager
   m_TagString: Untagged
@@ -3106,9 +3108,24 @@ MonoBehaviour:
   attacker: {fileID: 0}
   defender: {fileID: 0}
   currentSpell: {fileID: 0}
-  magicReactionMinigames:
+  magicMiniGameSuccess: 0
+--- !u!114 &2138875659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138875656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d11e4a70ccab9479880a544a98dbe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minigames:
   - {fileID: 562851713569338295, guid: a3be4ab5ecea0af429a7f86d186d2dfe, type: 3}
   - {fileID: 9003423535261937441, guid: 90e7e9f81912426469736a67d5e8f983, type: 3}
+  battleManager: {fileID: 0}
+  cursor: {fileID: 1924265899}
 --- !u!4 &811177208957008287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2696457712678485992, guid: 24a02a4b17ca9274cbccff7634e52a7d, type: 3}

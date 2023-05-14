@@ -33,6 +33,7 @@ public class MouseController : MonoBehaviour
 
     private OverlayTile cursorCurrentTile;
     private bool showingPuzzleSpots = false;
+    public MagicMinigameHandler minigameHandler;
 
     // Start is called before the first frame update
     void Start()
@@ -188,15 +189,7 @@ public class MouseController : MonoBehaviour
                     }
                     else if (battleManager.magicAttacking && inRangeTiles.Contains(tile))
                     {
-                        battleManager.magicAttack(magicRangeTiles);
-
-                        battleManager.attacking = false;
-                        battleManager.magicAttacking = false;
-                        isMoving = true;
-                        cursorActive = false;
-                        path.Clear();
-
-                        magicRangeTiles.Clear();
+                        minigameHandler.startGame();
                     }
                     else if (inRangeTiles.Contains(tile) && (!tile.isBlocked || tile.currentChar == character))
                     {
@@ -271,6 +264,22 @@ public class MouseController : MonoBehaviour
         }
     }
 
+    public void postMagicReset()
+    {
+        battleManager.attacking = false;
+        battleManager.magicAttacking = false;
+        isMoving = true;
+        cursorActive = false;
+        path.Clear();
+
+        magicRangeTiles.Clear();
+
+        battleManager.actionMenu.visibleTurns[battleManager.turnNumber].updateSpellSlots(character.spellSlots);
+
+        battleManager.actionMenu.actionButtonHolder.SetActive(true);
+        battleManager.actionMenu.setActionMenu();
+
+    }
     public void GetInRangeTiles(bool overrideChar = false)
     {
         foreach (var item in inRangeTiles)

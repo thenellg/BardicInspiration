@@ -249,6 +249,7 @@ public class BattleManager : MonoBehaviour
         if (magicMiniGameSuccess == true) {
             int rand = UnityEngine.Random.Range(2, 4);
             damageAmount += rand;
+            magicMiniGameSuccess = false;
         }
 
         foreach (OverlayTile tile in range)
@@ -275,13 +276,16 @@ public class BattleManager : MonoBehaviour
         foreach (OverlayTile tile in cursor.inRangeTiles)
             tile.HideTile();
         foreach (OverlayTile tile in cursor.magicRangeTiles)
-            tile.HideTile(); 
+            tile.HideTile();
 
 
         actionMenu.visibleTurns[turnNumber].updateSpellSlots(cursor.character.spellSlots);
-        
+
         actionMenu.actionButtonHolder.SetActive(true);
         actionMenu.setActionMenu();
+
+        cursor.postMagicReset();
+        endTurn();
     }
 
     public void attackMultiple(CharacterStats m_Attacker, List<CharacterStats> defenders, int damage)

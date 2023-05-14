@@ -15,10 +15,13 @@ public class CircleMagic : MonoBehaviour
 
     public bool end = false;
     public int succeeded = 0;
-    
+
+    public MagicMinigameHandler minigameHandler;
+
     // Start is called before the first frame update
     void Start()
     {
+        minigameHandler = FindObjectOfType<MagicMinigameHandler>();
         setCircle();
     }
 
@@ -48,7 +51,6 @@ public class CircleMagic : MonoBehaviour
             {
                 end = true;
                 shrinking = false;
-                Destroy(gameObject);
             }
         }
 
@@ -61,7 +63,6 @@ public class CircleMagic : MonoBehaviour
                 if (succeeded >= 3)
                 {
                     end = true;
-                    Destroy(gameObject);
                 }
                 else
                 {
@@ -78,7 +79,13 @@ public class CircleMagic : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("Success");
+        if(succeeded >= 3)
+            minigameHandler.triggerAttackSuccess();
+        else
+            minigameHandler.triggerAttackFail();
+
+        Destroy(gameObject);
+        Debug.Log("end");
     }
 
     public int playCircleReact()
