@@ -330,6 +330,9 @@ public class BattleManager : MonoBehaviour
                         tile.ShowTile(true);
                     }
                 }
+
+
+
                 cursor.inRangeTiles = range;
             }
             else if (currentSpell.spellType == Spell.spellTypes.Single)

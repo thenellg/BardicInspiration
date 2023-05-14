@@ -81,10 +81,16 @@ public class MouseController : MonoBehaviour
                             if (inRangeTiles.Contains(tile))
                             {
                                 Vector2 direction = new Vector2(tile.gridLocation.x, tile.gridLocation.y) - new Vector2(character.activeTile.gridLocation.x, character.activeTile.gridLocation.y);
-                                direction = direction.normalized;
-                                direction = new Vector2(Mathf.Round(direction.x), Mathf.Round(direction.y));
 
-                                GetInRangeMagicTiles(true, direction);
+                                if (new Vector2(Mathf.Abs(direction.x), Mathf.Abs(direction.y)) != Vector2.one)
+                                {
+                                    direction = direction.normalized;
+                                    direction = new Vector2(Mathf.Round(direction.x), Mathf.Round(direction.y));
+
+                                    Debug.Log(direction);
+
+                                    GetInRangeMagicTiles(true, direction);
+                                }
                             }
                             else
                             {
@@ -307,17 +313,36 @@ public class MouseController : MonoBehaviour
 
             foreach (OverlayTile tile in inRangeTiles)
             {
+
                 Vector2 newDirection = new Vector2(baseTile.x, baseTile.y) - new Vector2(tile.gridLocation.x, tile.gridLocation.y);
+
+                Debug.Log("Direction: " + newDirection);
+                if (direction == Vector2.up && newDirection.y == 1f)
+                {
+                    direction = Vector2.up;
+                }
+                else if (direction == Vector2.right && newDirection.x == 1f)
+                {
+                    direction = Vector2.right;
+                }
+                else if (direction == Vector2.down && newDirection.y == -1f)
+                {
+                    direction = Vector2.down;
+                }
+                else if (direction == Vector2.left && newDirection.x == -1f)
+                {
+                    direction = Vector2.left;
+                }
+                
                 newDirection = newDirection.normalized;
                 newDirection = new Vector2(Mathf.Round(newDirection.x), Mathf.Round(newDirection.y)) * -1;
 
-                Debug.Log("Direction = " + direction + " ------ New Direction = " + newDirection);
-                Debug.Log(direction.Equals(newDirection));
+                //Debug.Log("Direction = " + direction + " ------ New Direction = " + newDirection);
                 if (direction.Equals(newDirection))
                     temp.Add(tile);
             }
 
-            Debug.Log(temp);
+            //.Log(temp);
             magicRangeTiles = temp;
         }
         else
