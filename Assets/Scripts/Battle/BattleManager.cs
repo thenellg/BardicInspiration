@@ -285,7 +285,7 @@ public class BattleManager : MonoBehaviour
         actionMenu.setActionMenu();
 
         cursor.postMagicReset();
-        endTurn();
+        Invoke("endTurn", 1f);
     }
 
     public void attackMultiple(CharacterStats m_Attacker, List<CharacterStats> defenders, int damage)
