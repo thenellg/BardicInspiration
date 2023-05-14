@@ -158,11 +158,6 @@ public class ActionMenu : MonoBehaviour
         visibleActionMenu.transform.position = cam.WorldToScreenPoint(character.returnMenuLocation().position);
     }
 
-    public void spell()
-    {
-
-    }
-
     public void setMagicMenu()
     {
         float y = -23.5f;

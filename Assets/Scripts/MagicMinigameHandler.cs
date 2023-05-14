@@ -7,6 +7,7 @@ public class MagicMinigameHandler : MonoBehaviour
     public List<GameObject> minigames;
     public BattleManager battleManager;
     public MouseController cursor;
+    public Camera cam;
 
     GameObject currentMinigame;
 
@@ -14,6 +15,7 @@ public class MagicMinigameHandler : MonoBehaviour
     void Start()
     {
         battleManager = GetComponent<BattleManager>();
+        cam = FindObjectOfType<Camera>();
     }
 
     // Update is called once per frame
@@ -28,7 +30,8 @@ public class MagicMinigameHandler : MonoBehaviour
         {
             currentMinigame = Instantiate(minigames[0]);
             currentMinigame.transform.parent = battleManager.gameUI.transform;
-            currentMinigame.transform.localScale = Vector3.one;
+            currentMinigame.transform.localScale = Vector3.one * 0.5f;
+            currentMinigame.transform.position = cam.WorldToScreenPoint(cursor.character.returnMenuLocation().position);
             currentMinigame.GetComponent<DirectionRepeat>().playDirectionReact();
         }
         else if (battleManager.currentSpell.minigameType == Spell.minigameTypes.Circle)
@@ -36,6 +39,7 @@ public class MagicMinigameHandler : MonoBehaviour
             currentMinigame = Instantiate(minigames[1]);
             currentMinigame.transform.parent = battleManager.gameUI.transform;
             currentMinigame.transform.localScale = Vector3.one;
+            currentMinigame.transform.position = cam.WorldToScreenPoint(cursor.character.returnMenuLocation().position);
             currentMinigame.GetComponent<CircleMagic>().playCircleReact();
         }
 

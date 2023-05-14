@@ -26,14 +26,23 @@ public class DirectionRepeat : MonoBehaviour
     public float horizontal;
     public Directions playerInput = Directions.None;
 
+    public MagicMinigameHandler minigameHandler;
+
     // Start is called before the first frame update
     void Start()
     {
+        minigameHandler = FindObjectOfType<MagicMinigameHandler>();
         resetDirections();
     }
 
     void Update()
-    {     
+    {   
+        if(action >= 4)
+        {
+            end = true;
+            selection = false;
+        }
+
         if (selection)
         {
             horizontal = Input.GetAxis("Horizontal");
@@ -108,6 +117,13 @@ public class DirectionRepeat : MonoBehaviour
         {
             yield return null;
         }
+
+        if (action >= 4)
+            minigameHandler.triggerAttackSuccess();
+        else
+            minigameHandler.triggerAttackFail();
+
+        Destroy(gameObject);
 
         Debug.Log("Success");
     }
