@@ -3106,7 +3106,9 @@ MonoBehaviour:
   attacker: {fileID: 0}
   defender: {fileID: 0}
   currentSpell: {fileID: 0}
-  magicReactionMinigames: []
+  magicReactionMinigames:
+  - {fileID: 562851713569338295, guid: a3be4ab5ecea0af429a7f86d186d2dfe, type: 3}
+  - {fileID: 9003423535261937441, guid: 90e7e9f81912426469736a67d5e8f983, type: 3}
 --- !u!4 &811177208957008287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2696457712678485992, guid: 24a02a4b17ca9274cbccff7634e52a7d, type: 3}

@@ -12,12 +12,19 @@ public class Spell : ScriptableObject
         Single,
         Buff
     }
+    public enum minigameTypes
+    {
+        Direction,
+        Circle,
+        None
+    }
 
     public string spellName;
     public string spellDescription;
 
     public Sprite spellIcon;
     public spellTypes spellType;
+    public minigameTypes minigameType;
     public int minSpellRange;
     public int maxSpellRange;
 

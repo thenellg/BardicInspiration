@@ -16,6 +16,7 @@ MonoBehaviour:
   spellDescription: A ball of fire... Dope.
   spellIcon: {fileID: 0}
   spellType: 0
+  minigameType: 1
   minSpellRange: 2
   maxSpellRange: 3
-  attackDamage: 5
+  attackDamage: 4

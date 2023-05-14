@@ -16,6 +16,7 @@ MonoBehaviour:
   spellDescription: You heal one of your friends for 5 health
   spellIcon: {fileID: 0}
   spellType: 3
+  minigameType: 2
   minSpellRange: 0
   maxSpellRange: 0
   attackDamage: 5

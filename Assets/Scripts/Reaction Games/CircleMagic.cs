@@ -48,6 +48,7 @@ public class CircleMagic : MonoBehaviour
             {
                 end = true;
                 shrinking = false;
+                Destroy(gameObject);
             }
         }
 

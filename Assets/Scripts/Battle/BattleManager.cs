@@ -33,7 +33,7 @@ public class BattleManager : MonoBehaviour
     public CharacterStats defender;
     public Spell currentSpell;
 
-    public List<GameObject> magicReactionMinigames = new List<GameObject>();
+    public bool magicMiniGameSuccess = false;
 
     private void Start()
     {
@@ -245,6 +245,11 @@ public class BattleManager : MonoBehaviour
         onRuin = true;
 
         damageAmount = currentSpell.attackDamage;
+
+        if (magicMiniGameSuccess == true) {
+            int rand = UnityEngine.Random.Range(2, 4);
+            damageAmount += rand;
+        }
 
         foreach (OverlayTile tile in range)
         {
