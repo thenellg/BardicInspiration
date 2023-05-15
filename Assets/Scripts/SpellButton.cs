@@ -9,10 +9,14 @@ public class SpellButton : MonoBehaviour
 
     public void startSpell()
     {
-        if (battleManager.cursor.character.spells[spellNum] != null)
+        if (battleManager.cursor.character.spells[spellNum] != null && battleManager.cursor.character.spellSlots >= battleManager.cursor.character.spells[spellNum].cost)
         {
             battleManager.currentSpell = battleManager.cursor.character.spells[spellNum];
             battleManager.beginSpellAttack();
+        }
+        else
+        {
+            Debug.Log("Not enough Spell Slots");
         }
     }
 

@@ -16,6 +16,8 @@ MonoBehaviour:
   spellDescription: Strike a foe with a powerful bolt of lightning
   spellIcon: {fileID: 0}
   spellType: 2
+  minigameType: 0
   minSpellRange: 0
   maxSpellRange: 0
+  cost: 1
   attackDamage: 10

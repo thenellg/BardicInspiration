@@ -311,7 +311,7 @@ public class BattleManager : MonoBehaviour
             actionMenu.visibleMagicMenu.SetActive(false);
             actionMenu.visibleActionMenu.SetActive(false);
             
-            cursor.character.spellSlots--;
+            cursor.character.spellSlots -= currentSpell.cost;
 
 
             List<OverlayTile> range = new List<OverlayTile>();

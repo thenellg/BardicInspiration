@@ -16,6 +16,8 @@ MonoBehaviour:
   spellDescription: Life is Stange True Colors Rep
   spellIcon: {fileID: 0}
   spellType: 1
+  minigameType: 0
   minSpellRange: 3
   maxSpellRange: 0
+  cost: 2
   attackDamage: 15

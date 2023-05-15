@@ -27,6 +27,7 @@ public class Spell : ScriptableObject
     public minigameTypes minigameType;
     public int minSpellRange;
     public int maxSpellRange;
+    public int cost;
 
     public int attackDamage;
 }

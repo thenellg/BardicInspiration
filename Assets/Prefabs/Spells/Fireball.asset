@@ -19,4 +19,5 @@ MonoBehaviour:
   minigameType: 1
   minSpellRange: 2
   maxSpellRange: 3
+  cost: 1
   attackDamage: 4
