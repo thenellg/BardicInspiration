@@ -6,6 +6,9 @@ using System;
 
 public class BattleManager : MonoBehaviour
 {
+    public enum winConditions { defeatEnemies, defeatSingleEnemy, position }
+
+
     public List<GameObject> turnOrder;
     public List<GameObject> playerTeam;
     public List<GameObject> enemyTeam;
@@ -17,6 +20,7 @@ public class BattleManager : MonoBehaviour
     public int damageAmount = 0;
     public bool onRuin = false;
     public GameObject tileContainer;
+    public winConditions m_winConditions;
 
     public bool attacking = false;
     public bool magicAttacking = false;
@@ -34,6 +38,9 @@ public class BattleManager : MonoBehaviour
     public Spell currentSpell;
 
     public bool magicMiniGameSuccess = false;
+
+    public CharacterStats winEnemy;
+    public List<Vector2> winTiles;
 
     private void Start()
     {
