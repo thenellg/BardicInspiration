@@ -241,11 +241,24 @@ public class MouseController : MonoBehaviour
                 //Run enemy idea if an enemy
                 if (character.tag == "Player Team")// && !battleManager.attacking)
                 {
-                    activeMovement = false;
-                    battleManager.actionMenu.setActionMenuLocation(character);
-                    battleManager.actionMenu.visibleActionMenu.SetActive(true);
-                    battleManager.actionMenu.setActionMenu();
-                    cursorActive = false;
+                    if (battleManager.m_winConditions == BattleManager.winConditions.position)
+                    {
+                        foreach (Vector2 var in battleManager.winTiles)
+                            if (var == character.activeTile.gridLocation2D)
+                            {
+                                battleManager.won = true;
+                                battleManager.endGame();
+                            }
+                    }
+
+                    if (!battleManager.won)
+                    {
+                        activeMovement = false;
+                        battleManager.actionMenu.setActionMenuLocation(character);
+                        battleManager.actionMenu.visibleActionMenu.SetActive(true);
+                        battleManager.actionMenu.setActionMenu();
+                        cursorActive = false;
+                    }
                 }
                 else if (character.tag == "Enemy Team")
                 {

@@ -6,6 +6,9 @@ using System;
 
 public class BattleManager : MonoBehaviour
 {
+    public enum winConditions { defeatEnemies, defeatSingleEnemy, position }
+
+
     public List<GameObject> turnOrder;
     public List<GameObject> playerTeam;
     public List<GameObject> enemyTeam;
@@ -17,6 +20,7 @@ public class BattleManager : MonoBehaviour
     public int damageAmount = 0;
     public bool onRuin = false;
     public GameObject tileContainer;
+    public winConditions m_winConditions;
 
     public bool attacking = false;
     public bool magicAttacking = false;
@@ -34,6 +38,10 @@ public class BattleManager : MonoBehaviour
     public Spell currentSpell;
 
     public bool magicMiniGameSuccess = false;
+
+    public CharacterStats winEnemy;
+    public List<Vector2> winTiles;
+    public bool won = false;
 
     private void Start()
     {
@@ -156,6 +164,11 @@ public class BattleManager : MonoBehaviour
 
             actionMenu.updateTurnsDeath(height);
 
+            if(m_winConditions == winConditions.defeatSingleEnemy && defender == winEnemy)
+            {
+                won = true;
+            }
+
             //Get Player Turn UI element
             //Delete it
             //Move all showing below it
@@ -184,13 +197,9 @@ public class BattleManager : MonoBehaviour
             gameUI.SetActive(false);
             actionMenu.enabled = false;
         }
-        else if (enemyTeam.Count == 0)
+        else if (enemyTeam.Count == 0 && m_winConditions == winConditions.defeatEnemies || won == true)
         {
-            resultsText.color = settings.TeammateHighlight;
-            resultsText.text = "YOU WIN";
-            cursor.gameActive = false;
-            gameUI.SetActive(false);
-            actionMenu.enabled = false;
+            endGame();
         }
         else
         {
@@ -198,10 +207,19 @@ public class BattleManager : MonoBehaviour
                 attacker = null;
             defender = null;
             actionMenu.setUpInfo();
-        }
 
-        attacking = false;
-        Invoke("setAttacking", 3);
+            attacking = false;
+            Invoke("setAttacking", 3);
+        }
+    }
+
+    public void endGame()
+    {
+        resultsText.color = settings.TeammateHighlight;
+        resultsText.text = "YOU WIN";
+        cursor.gameActive = false;
+        gameUI.SetActive(false);
+        actionMenu.enabled = false;
     }
 
     void setAttacking()
