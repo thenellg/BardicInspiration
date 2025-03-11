@@ -272,20 +272,41 @@ public class BattleManager : MonoBehaviour
 
         foreach (OverlayTile tile in range)
         {
-            if (tile.currentChar != null && tile.currentChar.tag == "Enemy Team")
+            if (playerTeam.Contains(attacker.gameObject))
             {
-                defender = tile.currentChar;
+                if (tile.currentChar != null && tile.currentChar.tag == "Enemy Team")
+                {
+                    defender = tile.currentChar;
 
-                showDamageNoInvoke();
-                doDamage();
+                    showDamageNoInvoke();
+                    doDamage();
+                }
+                else if (tile.currentChar != null && tile.currentChar.tag == "Player Team" && currentSpell.spellType == Spell.spellTypes.Buff)
+                {
+                    defender = tile.currentChar;
+                    damageAmount *= -1;
+
+                    showDamageNoInvoke();
+                    doDamage();
+                }
             }
-            else if(tile.currentChar != null && tile.currentChar.tag == "Player Team" && currentSpell.spellType == Spell.spellTypes.Buff)
+            else if (enemyTeam.Contains(attacker.gameObject))
             {
-                defender = tile.currentChar;
-                damageAmount *= -1;
+                if (tile.currentChar != null && tile.currentChar.tag == "Player Team")
+                {
+                    defender = tile.currentChar;
 
-                showDamageNoInvoke();
-                doDamage();
+                    showDamageNoInvoke();
+                    doDamage();
+                }
+                else if (tile.currentChar != null && tile.currentChar.tag == "Enemy Team" && currentSpell.spellType == Spell.spellTypes.Buff)
+                {
+                    defender = tile.currentChar;
+                    damageAmount *= -1;
+
+                    showDamageNoInvoke();
+                    doDamage();
+                }
             }
         }
 

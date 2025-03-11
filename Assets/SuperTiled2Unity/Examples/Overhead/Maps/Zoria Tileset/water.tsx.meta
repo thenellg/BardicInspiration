@@ -1385,8 +1385,10 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: cc34d0f3dc257a442819830b408c5322, type: 3}
-  missingFiles: []
-  errors: []
+  missingFiles:
+  - Assets/SuperTiled2Unity/Examples/Overhead/Maps/Zoria Tileset/water.png
+  errors:
+  - 'Missing texture asset: water.png'
   warnings: []
   missingSortingLayers: []
   missingLayers: []
@@ -1394,7 +1396,7 @@ ScriptedImporter:
   importerVersion: 11
   pixelsPerUnit: 1
   edgesPerEllipse: 32
-  numberOfObjectsImported: 459
+  numberOfObjectsImported: 2
   useSpriteAtlas: 1
   atlasWidth: 512
   atlasHeight: 512

@@ -11,6 +11,8 @@ public class CharacterStats : MonoBehaviour
     [Header("Vitals")]
     public string characterName;
     public OverlayTile activeTile;
+    public bool multiTileNeeded;
+    public List<OverlayTile> extraTiles = new List<OverlayTile>();
     public int health;
     public int maxHealth;
 

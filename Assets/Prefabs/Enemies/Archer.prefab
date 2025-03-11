@@ -23,12 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4058685532997263196}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.465, y: 0.473, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8886872343236361357}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5872160222869154393
 GameObject:
@@ -54,12 +55,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5872160222869154393}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.018, y: 0.176, z: 0.77060705}
   m_LocalScale: {x: -0.8993, y: 0.8993, z: 0.8993}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8886872343236361357}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3433856182817198714
 SpriteRenderer:
@@ -72,6 +74,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -135,12 +138,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6278296150559914979}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.014999986, y: 0.216, z: 1.7916979}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8886872343236361357}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8886872343236361358
 GameObject:
@@ -169,15 +173,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8886872343236361358}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.821, y: 0.158, z: -0.79169786}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5575136079434411838}
   - {fileID: 6403256628031510014}
   - {fileID: 3808132624866279503}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8886872343236361356
 MonoBehaviour:
@@ -207,6 +212,9 @@ MonoBehaviour:
   attack: 2
   defense: 5
   special: 0
+  maxSpellSlots: 0
+  spellSlots: 0
+  spells: []
 --- !u!114 &1693120113141213299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
   character: {fileID: 8886872343236361356}
-  m_enemyType: 0
+  m_enemyType: 1
   attackRange: []
 --- !u!114 &6964365579511556698
 MonoBehaviour:

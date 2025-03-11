@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BasicEnemy : MonoBehaviour
 {
-    public enum enemyType { Soldier, Archer, Thief, Assassin };
+    public enum enemyType { Soldier, Archer, Thief, Assassin, FireMage };
 
     public MouseController cursor;
     private BattleManager battleManager;
@@ -32,7 +32,7 @@ public class BasicEnemy : MonoBehaviour
         {
             moveTowardsClosestPlayer();
         }
-        else if (m_enemyType == enemyType.Assassin || m_enemyType == enemyType.Thief)
+        else if (m_enemyType == enemyType.Assassin || m_enemyType == enemyType.Thief || m_enemyType == enemyType.FireMage)
         {
             moveTowardsWeakestPlayer();
         }

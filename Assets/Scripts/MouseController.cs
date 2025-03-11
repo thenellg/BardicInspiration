@@ -262,14 +262,26 @@ public class MouseController : MonoBehaviour
                 }
                 else if (character.tag == "Enemy Team")
                 {
-                    OverlayTile defender = character.GetComponent<BasicEnemy>().enemyAttackCheck();
+                    BasicEnemy enemy = character.GetComponent<BasicEnemy>();
+                    OverlayTile defender = enemy.enemyAttackCheck();
                     if (defender)
                     {
+                        battleManager.onRuin = false;
                         Debug.Log("Player is in range");
                         //Eventually adjust this for possible special attacks?
-                        battleManager.onRuin = false;
-                        battleManager.damageAmount = character.attack;
-                        battleManager.attack(character, defender.currentChar);
+                         battleManager.onRuin = false;
+                       if(enemy.m_enemyType == BasicEnemy.enemyType.FireMage)
+                       {
+                            battleManager.currentSpell = enemy.character.spells[0];
+                            magicRangeTiles = rangeFinder.GetTilesinRange(defender, battleManager.currentSpell.minSpellRange);
+                            battleManager.magicMiniGameSuccess = false;
+                            battleManager.magicAttack(magicRangeTiles);
+                        }
+                       else
+                       {
+                           battleManager.damageAmount = character.attack;
+                           battleManager.attack(character, defender.currentChar);
+                       }
                     }
                 }
 

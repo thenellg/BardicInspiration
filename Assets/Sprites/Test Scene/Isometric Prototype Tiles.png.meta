@@ -66,7 +66,7 @@ TextureImporter:
       213: -4043984235114443220
     second: Isometric Prototype Tiles_20
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -83,10 +83,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -125,6 +127,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -136,6 +140,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -148,6 +153,46 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -604,9 +649,30 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Isometric Prototype Tiles_0: 2379673895242343407
+      Isometric Prototype Tiles_1: 3718025790791485212
+      Isometric Prototype Tiles_10: -6616666338785977356
+      Isometric Prototype Tiles_11: 2578645596494376462
+      Isometric Prototype Tiles_12: -1868749697945892258
+      Isometric Prototype Tiles_13: -1922493402623899649
+      Isometric Prototype Tiles_14: -5537854860389603597
+      Isometric Prototype Tiles_15: -4380819059773148577
+      Isometric Prototype Tiles_16: 8211413291416559573
+      Isometric Prototype Tiles_17: 6535577664809711687
+      Isometric Prototype Tiles_18: -5828163624697874317
+      Isometric Prototype Tiles_19: 4614721057576474068
+      Isometric Prototype Tiles_2: 5139497730311599023
+      Isometric Prototype Tiles_20: -4043984235114443220
+      Isometric Prototype Tiles_3: -5003356281925118891
+      Isometric Prototype Tiles_4: -6847058932521729115
+      Isometric Prototype Tiles_5: 363082949932868657
+      Isometric Prototype Tiles_6: 7748777017260134310
+      Isometric Prototype Tiles_7: -2335798711348364540
+      Isometric Prototype Tiles_8: -5929934634097944146
+      Isometric Prototype Tiles_9: -2311022411709876275
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

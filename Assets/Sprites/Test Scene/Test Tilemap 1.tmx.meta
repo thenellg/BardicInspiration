@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 46e97e681e7c756459c4bcec82f84243
+guid: 491d1c0edc4baa64ba9499df852ae929
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -8,8 +8,10 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 1fa25d03934ea624a82bf2fcee6f0873, type: 3}
-  missingFiles: []
-  errors: []
+  missingFiles:
+  - Assets/Sprites/Test Scene/Isometric Prototype Tileset.tsx
+  errors:
+  - 'Missing tileset asset: Isometric Prototype Tileset.tsx'
   warnings: []
   missingSortingLayers: []
   missingLayers: []
